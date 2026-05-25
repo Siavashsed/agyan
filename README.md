@@ -1,2 +1,2 @@
 # agyan
-Agyan Academy — breath, language, and cosmos
+Agyan Academy - breath, language, and cosmos
