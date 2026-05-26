@@ -382,45 +382,55 @@
     .hero-rotator .word.in{opacity:1;transform:translateY(0)}
 
     /* =========================================================
-       CHAPTER 2 - The Cosmos (zodiac)
+       CHAPTER 2 - The Cosmos (twelve houses)
        ========================================================= */
     .chapter-2 .cosmos-grid{display:grid;grid-template-columns:1fr;gap:40px}
     .zodiac-ring{
       display:grid;
-      grid-template-columns:repeat(6,1fr);
-      gap:8px;
+      grid-template-columns:repeat(4,1fr);
+      gap:0;
       margin-top:48px;
       border-top:1px solid var(--line);
       padding-top:24px;
     }
     .zodiac-cell{
-      padding:18px 12px;
+      padding:24px 20px;
       border-inline-end:1px solid rgba(201,165,92,.12);
+      border-bottom:1px solid rgba(201,165,92,.06);
       transition:background .25s ease, color .25s ease;
       cursor:default;
       position:relative;
-      min-height:96px;
+      display:flex;flex-direction:column;gap:10px;
+      min-height:170px;
     }
-    .zodiac-cell:last-child{border-inline-end:0}
+    .zodiac-cell:nth-child(4n){border-inline-end:0}
+    .zodiac-cell:nth-last-child(-n+4){border-bottom:0}
     .zodiac-cell:hover{background:rgba(201,165,92,.04)}
     .zodiac-cell.current{background:rgba(201,165,92,.08)}
-    .zodiac-cell.current .z-glyph{color:var(--heritage)}
-    .z-glyph{
-      font-size:24px;color:var(--ink);line-height:1;display:block;margin-bottom:8px;
-      font-family:var(--display-en);
+    .z-num{
+      font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--heritage);display:block;line-height:1;
     }
     .z-name{
+      font-family:var(--display-en-italic);font-style:italic;font-weight:500;
+      font-size:clamp(16px,1.4vw,19px);color:var(--ink);line-height:1.3;
+      display:block;
+    }
+    html[lang="fa"] .z-name, html[lang="ckb"] .z-name{
+      font-family:var(--display-fa);font-style:normal;font-weight:500;
+    }
+    .z-question{
+      font-family:var(--display-en-italic);font-style:italic;
+      font-size:13px;color:var(--ink-muted);line-height:1.55;
+      display:block;margin-top:2px;
+    }
+    html[lang="fa"] .z-question, html[lang="ckb"] .z-question{
+      font-family:var(--body-fa, var(--display-fa));font-style:normal;
+    }
+    .z-link{
       font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--ink-faint);display:block;
+      color:var(--ink-faint);margin-top:auto;display:block;padding-top:6px;
     }
-    .z-tip{
-      position:absolute;inset-inline-start:0;inset-inline-end:0;bottom:calc(100% + 6px);
-      padding:10px 12px;background:var(--bg-elev);border:1px solid rgba(201,165,92,.12);
-      font-size:11px;color:var(--ink);line-height:1.5;
-      opacity:0;pointer-events:none;transition:opacity .25s ease;
-      z-index:5;
-    }
-    .zodiac-cell:hover .z-tip{opacity:1}
 
     /* =========================================================
        CHAPTER 3 - The Four Pillars
@@ -707,7 +717,11 @@
       .site-footer .wrap{grid-template-columns:1fr 1fr;gap:32px}
       .chapter-4 .breath-grid{grid-template-columns:1fr;gap:32px}
       .initiation{grid-template-columns:1fr;gap:48px}
-      .zodiac-ring{grid-template-columns:repeat(3,1fr)}
+      .zodiac-ring{grid-template-columns:repeat(2,1fr)}
+      .zodiac-cell:nth-child(4n){border-inline-end:1px solid rgba(201,165,92,.12)}
+      .zodiac-cell:nth-child(2n){border-inline-end:0}
+      .zodiac-cell:nth-last-child(-n+4){border-bottom:1px solid rgba(201,165,92,.06)}
+      .zodiac-cell:nth-last-child(-n+2){border-bottom:0}
     }@media (max-width: 720px){
       .nav-links{display:none}
       .nav-toggle{display:inline-flex}
@@ -730,7 +744,9 @@
       .site-footer .wrap{grid-template-columns:1fr}
       .hero-meta-row{gap:18px}
       .lesson-list{grid-template-columns:1fr}
-      .zodiac-ring{grid-template-columns:repeat(3,1fr)}
+      .zodiac-ring{grid-template-columns:1fr}
+      .zodiac-cell{border-inline-end:0 !important;border-bottom:1px solid rgba(201,165,92,.06) !important}
+      .zodiac-cell:last-child{border-bottom:0 !important}
     }@media (prefers-reduced-motion: reduce){
       *, *::before, *::after{
         animation-duration:.001ms !important;animation-iteration-count:1 !important;
@@ -875,12 +891,12 @@
          ============================================================ -->
     <section class="chapter chapter-2" id="chapter-2" data-chapter="2" aria-labelledby="c2-title">
       <div class="wrap">
-        <span class="eyebrow lav" data-i18n="cos.eyebrow">02 / COSMOS</span>
+        <span class="eyebrow lav" data-i18n="cos.eyebrow">02 / HOUSES</span>
         <h2 id="c2-title" class="reveal" style="margin-top:var(--s2);">
-          <span data-i18n="cos.title.1">The cosmos</span>
-          <span class="display-em" data-i18n="cos.title.2">as a mirror.</span>
+          <span data-i18n="cos.title.1">The twelve</span>
+          <span class="display-em" data-i18n="cos.title.2">houses.</span>
         </h2>
-        <p class="lead reveal" data-i18n="cos.lede">In the Agyan tradition, astrology is not predictive but contemplative: a mirror for attention. The natal chart is a map of where you live, what you cannot see. From Al-Biruni's Tafhim through Renaissance Latin astrology to contemporary depth psychology, one ancient practice, read by a modern hand.</p>
+        <p class="lead reveal" data-i18n="cos.lede">The astrology track at Agyan does not begin with sun signs. It begins with houses, the twelve domains that map a life: where you stand, what you hold, how you communicate, what you build. Each house is a doorway to a single sustained question. The Agyan astrology curriculum is twelve lessons because the chart is twelve rooms. We walk one room at a time.</p>
 
         <aside class="margin-note" data-reveal-once>
           <span data-i18n="cos.quote">A chart is not a map; it is a language one can listen to.</span>
@@ -888,65 +904,77 @@
         </aside>
 
         <div class="zodiac-ring reveal">
-          <div class="zodiac-cell" data-z="aries">
-            <span class="z-glyph">&#9800;</span>
-            <span class="z-name" data-i18n="z.aries">Aries · Mar 21 - Apr 19</span>
-            <span class="z-tip" data-i18n="z.aries.note">The discipline of beginning. Studied in track AS-04.</span>
+          <div class="zodiac-cell" data-h="1">
+            <span class="z-num">House I</span>
+            <span class="z-name" data-i18n="house.1.title">The Body You Arrived In</span>
+            <span class="z-question" data-i18n="house.1.question">How do you appear before you speak?</span>
+            <span class="z-link" data-i18n="house.1.link">Studied in AS-01</span>
           </div>
-          <div class="zodiac-cell" data-z="taurus">
-            <span class="z-glyph">&#9801;</span>
-            <span class="z-name" data-i18n="z.taurus">Taurus · Apr 20 - May 20</span>
-            <span class="z-tip" data-i18n="z.taurus.note">The discipline of staying. Studied in AS-05.</span>
+          <div class="zodiac-cell" data-h="2">
+            <span class="z-num">House II</span>
+            <span class="z-name" data-i18n="house.2.title">The Things You Carry</span>
+            <span class="z-question" data-i18n="house.2.question">What do you consider yours, and why?</span>
+            <span class="z-link" data-i18n="house.2.link">Studied in AS-02</span>
           </div>
-          <div class="zodiac-cell" data-z="gemini">
-            <span class="z-glyph">&#9802;</span>
-            <span class="z-name" data-i18n="z.gemini">Gemini · May 21 - Jun 20</span>
-            <span class="z-tip" data-i18n="z.gemini.note">Language as inquiry. Studied in AS-06.</span>
+          <div class="zodiac-cell" data-h="3">
+            <span class="z-num">House III</span>
+            <span class="z-name" data-i18n="house.3.title">The Voice in the Room</span>
+            <span class="z-question" data-i18n="house.3.question">What did you learn first, and who taught it?</span>
+            <span class="z-link" data-i18n="house.3.link">Studied in AS-03</span>
           </div>
-          <div class="zodiac-cell" data-z="cancer">
-            <span class="z-glyph">&#9803;</span>
-            <span class="z-name" data-i18n="z.cancer">Cancer · Jun 21 - Jul 22</span>
-            <span class="z-tip" data-i18n="z.cancer.note">Home as boundary. Studied in AS-07.</span>
+          <div class="zodiac-cell" data-h="4">
+            <span class="z-num">House IV</span>
+            <span class="z-name" data-i18n="house.4.title">The Roof Over Your Memory</span>
+            <span class="z-question" data-i18n="house.4.question">Where do you go when you close your eyes and feel safe?</span>
+            <span class="z-link" data-i18n="house.4.link">Studied in AS-04</span>
           </div>
-          <div class="zodiac-cell" data-z="leo">
-            <span class="z-glyph">&#9804;</span>
-            <span class="z-name" data-i18n="z.leo">Leo · Jul 23 - Aug 22</span>
-            <span class="z-tip" data-i18n="z.leo.note">The appearance of self. Studied in AS-08.</span>
+          <div class="zodiac-cell" data-h="5">
+            <span class="z-num">House V</span>
+            <span class="z-name" data-i18n="house.5.title">The Things You Make for Joy</span>
+            <span class="z-question" data-i18n="house.5.question">What do you do that no one is paying you for?</span>
+            <span class="z-link" data-i18n="house.5.link">Studied in AS-05</span>
           </div>
-          <div class="zodiac-cell" data-z="virgo">
-            <span class="z-glyph">&#9805;</span>
-            <span class="z-name" data-i18n="z.virgo">Virgo · Aug 23 - Sep 22</span>
-            <span class="z-tip" data-i18n="z.virgo.note">Precision and service. Studied in AS-09.</span>
+          <div class="zodiac-cell" data-h="6">
+            <span class="z-num">House VI</span>
+            <span class="z-name" data-i18n="house.6.title">The Hands You Use Every Day</span>
+            <span class="z-question" data-i18n="house.6.question">What work makes you a craftsman, not a worker?</span>
+            <span class="z-link" data-i18n="house.6.link">Studied in AS-06</span>
           </div>
-          <div class="zodiac-cell" data-z="libra">
-            <span class="z-glyph">&#9806;</span>
-            <span class="z-name" data-i18n="z.libra">Libra · Sep 23 - Oct 22</span>
-            <span class="z-tip" data-i18n="z.libra.note">The discipline of relation. Studied in AS-10.</span>
+          <div class="zodiac-cell" data-h="7">
+            <span class="z-num">House VII</span>
+            <span class="z-name" data-i18n="house.7.title">The Mirror Across From You</span>
+            <span class="z-question" data-i18n="house.7.question">Who do you become in the presence of another?</span>
+            <span class="z-link" data-i18n="house.7.link">Studied in AS-07</span>
           </div>
-          <div class="zodiac-cell" data-z="scorpio">
-            <span class="z-glyph">&#9807;</span>
-            <span class="z-name" data-i18n="z.scorpio">Scorpio · Oct 23 - Nov 21</span>
-            <span class="z-tip" data-i18n="z.scorpio.note">The courage of depth. Studied in AS-11.</span>
+          <div class="zodiac-cell" data-h="8">
+            <span class="z-num">House VIII</span>
+            <span class="z-name" data-i18n="house.8.title">The Door You Have Not Opened</span>
+            <span class="z-question" data-i18n="house.8.question">What inheritance, debt, or grief are you carrying for someone else?</span>
+            <span class="z-link" data-i18n="house.8.link">Studied in AS-08</span>
           </div>
-          <div class="zodiac-cell" data-z="sagittarius">
-            <span class="z-glyph">&#9808;</span>
-            <span class="z-name" data-i18n="z.sagit">Sagittarius · Nov 22 - Dec 21</span>
-            <span class="z-tip" data-i18n="z.sagit.note">Horizon and philosophy. Studied in AS-12.</span>
+          <div class="zodiac-cell" data-h="9">
+            <span class="z-num">House IX</span>
+            <span class="z-name" data-i18n="house.9.title">The Distance You Travel In Your Mind</span>
+            <span class="z-question" data-i18n="house.9.question">What belief have you held that turned out to be a doorway?</span>
+            <span class="z-link" data-i18n="house.9.link">Studied in AS-09</span>
           </div>
-          <div class="zodiac-cell" data-z="capricorn">
-            <span class="z-glyph">&#9809;</span>
-            <span class="z-name" data-i18n="z.cap">Capricorn · Dec 22 - Jan 19</span>
-            <span class="z-tip" data-i18n="z.cap.note">Building in time. Studied in AS-01.</span>
+          <div class="zodiac-cell" data-h="10">
+            <span class="z-num">House X</span>
+            <span class="z-name" data-i18n="house.10.title">The Name You Are Building</span>
+            <span class="z-question" data-i18n="house.10.question">What would you like written on the door of the room you walk into?</span>
+            <span class="z-link" data-i18n="house.10.link">Studied in AS-10</span>
           </div>
-          <div class="zodiac-cell" data-z="aquarius">
-            <span class="z-glyph">&#9810;</span>
-            <span class="z-name" data-i18n="z.aqua">Aquarius · Jan 20 - Feb 18</span>
-            <span class="z-tip" data-i18n="z.aqua.note">Impersonal belonging. Studied in AS-02.</span>
+          <div class="zodiac-cell" data-h="11">
+            <span class="z-num">House XI</span>
+            <span class="z-name" data-i18n="house.11.title">The Circle You Belong To</span>
+            <span class="z-question" data-i18n="house.11.question">Who would notice if you stopped showing up?</span>
+            <span class="z-link" data-i18n="house.11.link">Studied in AS-11</span>
           </div>
-          <div class="zodiac-cell" data-z="pisces">
-            <span class="z-glyph">&#9811;</span>
-            <span class="z-name" data-i18n="z.pisc">Pisces · Feb 19 - Mar 20</span>
-            <span class="z-tip" data-i18n="z.pisc.note">Release and dream. Studied in AS-03.</span>
+          <div class="zodiac-cell" data-h="12">
+            <span class="z-num">House XII</span>
+            <span class="z-name" data-i18n="house.12.title">The Quiet Behind the Quiet</span>
+            <span class="z-question" data-i18n="house.12.question">What part of you only speaks when you are alone?</span>
+            <span class="z-link" data-i18n="house.12.link">Studied in AS-12</span>
           </div>
         </div>
       </div>
@@ -1332,24 +1360,24 @@
         "hero.meta.lang":"زبان‌های آکادمی",
         "hero.cta.primary":"آغازِ یک درس",
         "hero.cta.secondary":"دربارهٔ آوین",
-        "cos.eyebrow":"۰۲ · کیهان",
-        "cos.title.1":"آسمان",
-        "cos.title.2":"به‌مثابهٔ آینه.",
-        "cos.lede":"در سنتِ آگیان، اخترشناسی پیش‌گویی نیست؛ آینه‌ای است برای تأمل. زایچه نقشهٔ توجه است: کجا سکنا گزیده‌ای، چه چیزی را نمی‌بینی. از «تفهیمِ» بیرونی تا روان‌شناسیِ عمقِ معاصر؛ یک خوانش کهن، خوانده شده با دستِ امروز.",
+        "cos.eyebrow":"۰۲ · خانه‌ها",
+        "cos.title.1":"دوازده",
+        "cos.title.2":"خانه.",
+        "cos.lede":"شاخهٔ اخترشناسیِ آگیان با برج‌های خورشیدی آغاز نمی‌شود؛ با خانه‌ها آغاز می‌کند. دوازده قلمرویی که یک زندگی را نقشه‌برداری می‌کنند: کجا ایستاده‌ای، چه چیزی را در دست داری، چگونه سخن می‌گویی، چه می‌سازی. هر خانه دروازه‌ای است به یک پرسشِ پایدار. برنامهٔ اخترشناسیِ آگیان دوازده درس است، زیرا زایچه دوازده اتاق دارد. ما هر بار یک اتاق را آرام می‌پیماییم.",
         "cos.quote":"«زایچه نقشه نیست؛ زبانی است که می‌توان به آن گوش داد.»",
         "cos.quote.cite":"آوین دباغ‌چی‌مکری · ۱۳۹۹",
-        "z.aries":"حَمَل · ۲۱ فروردین تا ۱۹ اردیبهشت",   "z.aries.note":"دیسیپلینِ آغاز. درس AS-04.",
-        "z.taurus":"ثور · ۲۰ اردیبهشت تا ۲۰ خرداد",     "z.taurus.note":"تمرینِ ماندن. درس AS-05.",
-        "z.gemini":"جوزا · ۲۱ خرداد تا ۲۱ تیر",        "z.gemini.note":"کلام به‌مثابهٔ پرسش. درس AS-06.",
-        "z.cancer":"سرطان · ۲۲ تیر تا ۲۲ مرداد",       "z.cancer.note":"خانه به‌مثابهٔ مرز. درس AS-07.",
-        "z.leo":"اسد · ۲۳ مرداد تا ۲۲ شهریور",          "z.leo.note":"پدیداریِ خود. درس AS-08.",
-        "z.virgo":"سنبله · ۲۳ شهریور تا ۲۲ مهر",        "z.virgo.note":"دقت و خدمت. درس AS-09.",
-        "z.libra":"میزان · ۲۳ مهر تا ۲۱ آبان",         "z.libra.note":"تمرینِ نسبت. درس AS-10.",
-        "z.scorpio":"عقرب · ۲۲ آبان تا ۲۱ آذر",        "z.scorpio.note":"شجاعتِ عمق. درس AS-11.",
-        "z.sagit":"قوس · ۲۲ آذر تا ۲۱ دی",            "z.sagit.note":"افق و فلسفه. درس AS-12.",
-        "z.cap":"جدی · ۲۲ دی تا ۲۰ بهمن",              "z.cap.note":"ساخت در زمان. درس AS-01.",
-        "z.aqua":"دلو · ۲۱ بهمن تا ۱۹ اسفند",         "z.aqua.note":"تعلقِ غیرشخصی. درس AS-02.",
-        "z.pisc":"حوت · ۲۰ اسفند تا ۲۰ فروردین",        "z.pisc.note":"رهاسازی و رویا. درس AS-03.",
+        "house.1.title":"بدنی که با آن آمدی",        "house.1.question":"پیش از آن‌که سخن بگویی، چگونه پدیدار می‌شوی؟",       "house.1.link":"درس AS-01",
+        "house.2.title":"آنچه با خود حمل می‌کنی",     "house.2.question":"چه چیزی را از آنِ خود می‌دانی، و چرا؟",              "house.2.link":"درس AS-02",
+        "house.3.title":"صدا در اتاق",                "house.3.question":"نخست چه آموختی، و چه کسی آموخت؟",                   "house.3.link":"درس AS-03",
+        "house.4.title":"سقفِ بالای خاطرهٔ تو",       "house.4.question":"وقتی چشم می‌بندی و احساسِ ایمنی می‌کنی، کجا می‌روی؟", "house.4.link":"درس AS-04",
+        "house.5.title":"آنچه برای شادی می‌سازی",     "house.5.question":"چه کاری انجام می‌دهی که هیچ‌کس بابتش به تو پولی نمی‌دهد؟", "house.5.link":"درس AS-05",
+        "house.6.title":"دست‌هایی که هر روز به کار می‌بری","house.6.question":"کدام کار تو را پیشه‌ور می‌کند، نه کارگر؟",        "house.6.link":"درس AS-06",
+        "house.7.title":"آینهٔ روبه‌رویِ تو",         "house.7.question":"در حضورِ دیگری، تو چه می‌شوی؟",                       "house.7.link":"درس AS-07",
+        "house.8.title":"دری که هنوز نگشوده‌ای",      "house.8.question":"چه میراث، چه دِین، یا چه سوگی را به دوش می‌کشی که از آنِ دیگری بوده است؟", "house.8.link":"درس AS-08",
+        "house.9.title":"مسافتی که در ذهن می‌پیمایی","house.9.question":"کدام باور را داشتی که سرانجام دروازه‌ای از کار درآمد؟", "house.9.link":"درس AS-09",
+        "house.10.title":"نامی که می‌سازی",           "house.10.question":"دوست داری بر درِ اتاقی که وارد می‌شوی چه نوشته شود؟", "house.10.link":"درس AS-10",
+        "house.11.title":"حلقه‌ای که به آن تعلق داری","house.11.question":"اگر دیگر سر نزنی، چه کسی متوجه می‌شود؟",            "house.11.link":"درس AS-11",
+        "house.12.title":"سکوتِ پشتِ سکوت",           "house.12.question":"کدام بخشِ تو فقط وقتی تنهایی سخن می‌گوید؟",         "house.12.link":"درس AS-12",
         "pil.eyebrow":"۰۳ · چهار ستون",
         "pil.title.1":"چهار",
         "pil.title.2":"دیسیپلینِ تمرین.",
@@ -1471,24 +1499,24 @@
         "hero.meta.lang":"Languages",
         "hero.cta.primary":"Begin a lesson",
         "hero.cta.secondary":"About Avin",
-        "cos.eyebrow":"02 / COSMOS",
-        "cos.title.1":"The cosmos",
-        "cos.title.2":"as a mirror.",
-        "cos.lede":"In the Agyan tradition, astrology is not predictive but contemplative: a mirror for attention. The natal chart is a map of where you live, what you cannot see. From Al-Biruni's Tafhim through Renaissance Latin astrology to contemporary depth psychology, one ancient practice, read by a modern hand.",
+        "cos.eyebrow":"02 / HOUSES",
+        "cos.title.1":"The twelve",
+        "cos.title.2":"houses.",
+        "cos.lede":"The astrology track at Agyan does not begin with sun signs. It begins with houses, the twelve domains that map a life: where you stand, what you hold, how you communicate, what you build. Each house is a doorway to a single sustained question. The Agyan astrology curriculum is twelve lessons because the chart is twelve rooms. We walk one room at a time.",
         "cos.quote":"A chart is not a map; it is a language one can listen to.",
         "cos.quote.cite":"Avin Dabaghchimokri, 2020",
-        "z.aries":"Aries · Mar 21 - Apr 19",         "z.aries.note":"The discipline of beginning. Studied in track AS-04.",
-        "z.taurus":"Taurus · Apr 20 - May 20",       "z.taurus.note":"The discipline of staying. Studied in AS-05.",
-        "z.gemini":"Gemini · May 21 - Jun 20",       "z.gemini.note":"Language as inquiry. Studied in AS-06.",
-        "z.cancer":"Cancer · Jun 21 - Jul 22",       "z.cancer.note":"Home as boundary. Studied in AS-07.",
-        "z.leo":"Leo · Jul 23 - Aug 22",             "z.leo.note":"The appearance of self. Studied in AS-08.",
-        "z.virgo":"Virgo · Aug 23 - Sep 22",         "z.virgo.note":"Precision and service. Studied in AS-09.",
-        "z.libra":"Libra · Sep 23 - Oct 22",         "z.libra.note":"The discipline of relation. Studied in AS-10.",
-        "z.scorpio":"Scorpio · Oct 23 - Nov 21",     "z.scorpio.note":"The courage of depth. Studied in AS-11.",
-        "z.sagit":"Sagittarius · Nov 22 - Dec 21",   "z.sagit.note":"Horizon and philosophy. Studied in AS-12.",
-        "z.cap":"Capricorn · Dec 22 - Jan 19",       "z.cap.note":"Building in time. Studied in AS-01.",
-        "z.aqua":"Aquarius · Jan 20 - Feb 18",       "z.aqua.note":"Impersonal belonging. Studied in AS-02.",
-        "z.pisc":"Pisces · Feb 19 - Mar 20",         "z.pisc.note":"Release and dream. Studied in AS-03.",
+        "house.1.title":"The Body You Arrived In",            "house.1.question":"How do you appear before you speak?",                                              "house.1.link":"Studied in AS-01",
+        "house.2.title":"The Things You Carry",               "house.2.question":"What do you consider yours, and why?",                                            "house.2.link":"Studied in AS-02",
+        "house.3.title":"The Voice in the Room",              "house.3.question":"What did you learn first, and who taught it?",                                    "house.3.link":"Studied in AS-03",
+        "house.4.title":"The Roof Over Your Memory",          "house.4.question":"Where do you go when you close your eyes and feel safe?",                         "house.4.link":"Studied in AS-04",
+        "house.5.title":"The Things You Make for Joy",        "house.5.question":"What do you do that no one is paying you for?",                                   "house.5.link":"Studied in AS-05",
+        "house.6.title":"The Hands You Use Every Day",        "house.6.question":"What work makes you a craftsman, not a worker?",                                  "house.6.link":"Studied in AS-06",
+        "house.7.title":"The Mirror Across From You",         "house.7.question":"Who do you become in the presence of another?",                                   "house.7.link":"Studied in AS-07",
+        "house.8.title":"The Door You Have Not Opened",       "house.8.question":"What inheritance, debt, or grief are you carrying for someone else?",             "house.8.link":"Studied in AS-08",
+        "house.9.title":"The Distance You Travel In Your Mind","house.9.question":"What belief have you held that turned out to be a doorway?",                     "house.9.link":"Studied in AS-09",
+        "house.10.title":"The Name You Are Building",         "house.10.question":"What would you like written on the door of the room you walk into?",             "house.10.link":"Studied in AS-10",
+        "house.11.title":"The Circle You Belong To",          "house.11.question":"Who would notice if you stopped showing up?",                                    "house.11.link":"Studied in AS-11",
+        "house.12.title":"The Quiet Behind the Quiet",        "house.12.question":"What part of you only speaks when you are alone?",                               "house.12.link":"Studied in AS-12",
         "pil.eyebrow":"03 / FOUR DISCIPLINES",
         "pil.title.1":"Four disciplines",
         "pil.title.2":"of practice.",
@@ -1610,24 +1638,24 @@
         "hero.meta.lang":"[KURDISH: Languages]",
         "hero.cta.primary":"[KURDISH: Begin a lesson]",
         "hero.cta.secondary":"[KURDISH: About Avin]",
-        "cos.eyebrow":"٠٢ / [KURDISH: COSMOS]",
-        "cos.title.1":"[KURDISH: The cosmos]",
-        "cos.title.2":"[KURDISH: as a mirror.]",
-        "cos.lede":"[KURDISH: In the Agyan tradition, astrology is not predictive but contemplative: a mirror for attention. The natal chart is a map of where you live. From Al-Biruni's Tafhim through to contemporary depth psychology.]",
+        "cos.eyebrow":"٠٢ / [KURDISH: HOUSES]",
+        "cos.title.1":"[KURDISH: The twelve]",
+        "cos.title.2":"[KURDISH: houses.]",
+        "cos.lede":"[KURDISH: The astrology track at Agyan does not begin with sun signs. It begins with houses, the twelve domains that map a life: where you stand, what you hold, how you communicate, what you build. Each house is a doorway to a single sustained question. The Agyan astrology curriculum is twelve lessons because the chart is twelve rooms. We walk one room at a time.]",
         "cos.quote":"[KURDISH: A chart is not a map; it is a language one can listen to.]",
         "cos.quote.cite":"[KURDISH: Avin Dabaghchimokri, 2020]",
-        "z.aries":"[KURDISH: Aries · Mar 21 - Apr 19]",       "z.aries.note":"[KURDISH: The discipline of beginning. AS-04.]",
-        "z.taurus":"[KURDISH: Taurus · Apr 20 - May 20]",     "z.taurus.note":"[KURDISH: The discipline of staying. AS-05.]",
-        "z.gemini":"[KURDISH: Gemini · May 21 - Jun 20]",     "z.gemini.note":"[KURDISH: Language as inquiry. AS-06.]",
-        "z.cancer":"[KURDISH: Cancer · Jun 21 - Jul 22]",     "z.cancer.note":"[KURDISH: Home as boundary. AS-07.]",
-        "z.leo":"[KURDISH: Leo · Jul 23 - Aug 22]",           "z.leo.note":"[KURDISH: The appearance of self. AS-08.]",
-        "z.virgo":"[KURDISH: Virgo · Aug 23 - Sep 22]",       "z.virgo.note":"[KURDISH: Precision and service. AS-09.]",
-        "z.libra":"[KURDISH: Libra · Sep 23 - Oct 22]",       "z.libra.note":"[KURDISH: The discipline of relation. AS-10.]",
-        "z.scorpio":"[KURDISH: Scorpio · Oct 23 - Nov 21]",   "z.scorpio.note":"[KURDISH: The courage of depth. AS-11.]",
-        "z.sagit":"[KURDISH: Sagittarius · Nov 22 - Dec 21]", "z.sagit.note":"[KURDISH: Horizon and philosophy. AS-12.]",
-        "z.cap":"[KURDISH: Capricorn · Dec 22 - Jan 19]",     "z.cap.note":"[KURDISH: Building in time. AS-01.]",
-        "z.aqua":"[KURDISH: Aquarius · Jan 20 - Feb 18]",     "z.aqua.note":"[KURDISH: Impersonal belonging. AS-02.]",
-        "z.pisc":"[KURDISH: Pisces · Feb 19 - Mar 20]",       "z.pisc.note":"[KURDISH: Release and dream. AS-03.]",
+        "house.1.title":"[KURDISH: The Body You Arrived In]",            "house.1.question":"[KURDISH: How do you appear before you speak?]",                                              "house.1.link":"[KURDISH: Studied in AS-01]",
+        "house.2.title":"[KURDISH: The Things You Carry]",               "house.2.question":"[KURDISH: What do you consider yours, and why?]",                                            "house.2.link":"[KURDISH: Studied in AS-02]",
+        "house.3.title":"[KURDISH: The Voice in the Room]",              "house.3.question":"[KURDISH: What did you learn first, and who taught it?]",                                    "house.3.link":"[KURDISH: Studied in AS-03]",
+        "house.4.title":"[KURDISH: The Roof Over Your Memory]",          "house.4.question":"[KURDISH: Where do you go when you close your eyes and feel safe?]",                         "house.4.link":"[KURDISH: Studied in AS-04]",
+        "house.5.title":"[KURDISH: The Things You Make for Joy]",        "house.5.question":"[KURDISH: What do you do that no one is paying you for?]",                                   "house.5.link":"[KURDISH: Studied in AS-05]",
+        "house.6.title":"[KURDISH: The Hands You Use Every Day]",        "house.6.question":"[KURDISH: What work makes you a craftsman, not a worker?]",                                  "house.6.link":"[KURDISH: Studied in AS-06]",
+        "house.7.title":"[KURDISH: The Mirror Across From You]",         "house.7.question":"[KURDISH: Who do you become in the presence of another?]",                                   "house.7.link":"[KURDISH: Studied in AS-07]",
+        "house.8.title":"[KURDISH: The Door You Have Not Opened]",       "house.8.question":"[KURDISH: What inheritance, debt, or grief are you carrying for someone else?]",             "house.8.link":"[KURDISH: Studied in AS-08]",
+        "house.9.title":"[KURDISH: The Distance You Travel In Your Mind]","house.9.question":"[KURDISH: What belief have you held that turned out to be a doorway?]",                     "house.9.link":"[KURDISH: Studied in AS-09]",
+        "house.10.title":"[KURDISH: The Name You Are Building]",         "house.10.question":"[KURDISH: What would you like written on the door of the room you walk into?]",             "house.10.link":"[KURDISH: Studied in AS-10]",
+        "house.11.title":"[KURDISH: The Circle You Belong To]",          "house.11.question":"[KURDISH: Who would notice if you stopped showing up?]",                                    "house.11.link":"[KURDISH: Studied in AS-11]",
+        "house.12.title":"[KURDISH: The Quiet Behind the Quiet]",        "house.12.question":"[KURDISH: What part of you only speaks when you are alone?]",                               "house.12.link":"[KURDISH: Studied in AS-12]",
         "pil.eyebrow":"٠٣ / [KURDISH: FOUR DISCIPLINES]",
         "pil.title.1":"[KURDISH: Four disciplines]",
         "pil.title.2":"[KURDISH: of practice.]",
@@ -1902,21 +1930,9 @@
     else window.addEventListener('load', startRotator, { once: true });
 
     /* =================================================================
-       7) Zodiac - highlight current month
+       7) Houses - no month-based highlight (houses are domains of inquiry,
+          not seasonal). Reserved for future reader-personalized state.
        ================================================================= */
-    const zMap = ['cap','aqua','pisc','aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagit'];
-    // approximate by month for Western tropical (used by Avin)
-    const mIdx = new Date().getMonth();
-    // shift: Capricorn ~ late Dec to mid Jan; pick based on day too
-    const day = new Date().getDate();
-    let zIdx = mIdx;
-    // crude: after day 20, advance
-    if (day >= 20) zIdx = (zIdx + 1) % 12;
-    const zSlug = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
-    const currentSlug = zSlug[zIdx];
-    document.querySelectorAll('.zodiac-cell').forEach(c => {
-      if (c.dataset.z === currentSlug) c.classList.add('current');
-    });
 
     /* =================================================================
        8) Breath pattern selector + phase label
