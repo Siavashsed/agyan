@@ -237,7 +237,7 @@
     h1, h2, h3, h4{font-weight:500;line-height:1.15;color:var(--ink);letter-spacing:-.015em}
     h1{
       font-family:var(--display-fa);
-      font-size:clamp(40px, 6.5vw, 96px);
+      font-size:clamp(30px, 4.4vw, 60px);
       letter-spacing:-.02em;
       margin:.4em 0 .35em;
     }
@@ -245,7 +245,7 @@
     html[lang="en"] h1{letter-spacing:-.025em}
     h2{
       font-family:var(--display-fa);
-      font-size:clamp(28px, 4.2vw, 56px);
+      font-size:clamp(24px, 3.2vw, 42px);
       letter-spacing:-.015em;
       margin:.4em 0 .3em;
     }
@@ -340,45 +340,55 @@
     .hero-rotator .word.in{opacity:1;transform:translateY(0)}
 
     /* =========================================================
-       CHAPTER 2 - The Cosmos (zodiac)
+       CHAPTER 2 - The Cosmos (twelve houses)
        ========================================================= */
     .chapter-2 .cosmos-grid{display:grid;grid-template-columns:1fr;gap:40px}
     .zodiac-ring{
       display:grid;
-      grid-template-columns:repeat(6,1fr);
-      gap:8px;
+      grid-template-columns:repeat(4,1fr);
+      gap:0;
       margin-top:48px;
       border-top:1px solid var(--line);
       padding-top:24px;
     }
     .zodiac-cell{
-      padding:18px 12px;
+      padding:24px 20px;
       border-inline-end:1px solid rgba(201,165,92,.12);
+      border-bottom:1px solid rgba(201,165,92,.06);
       transition:background .25s ease, color .25s ease;
       cursor:default;
       position:relative;
-      min-height:96px;
+      display:flex;flex-direction:column;gap:10px;
+      min-height:170px;
     }
-    .zodiac-cell:last-child{border-inline-end:0}
+    .zodiac-cell:nth-child(4n){border-inline-end:0}
+    .zodiac-cell:nth-last-child(-n+4){border-bottom:0}
     .zodiac-cell:hover{background:rgba(201,165,92,.04)}
     .zodiac-cell.current{background:rgba(201,165,92,.08)}
-    .zodiac-cell.current .z-glyph{color:var(--heritage)}
-    .z-glyph{
-      font-size:24px;color:var(--ink);line-height:1;display:block;margin-bottom:8px;
-      font-family:var(--display-en);
+    .z-num{
+      font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--heritage);display:block;line-height:1;
     }
     .z-name{
+      font-family:var(--display-en-italic);font-style:italic;font-weight:500;
+      font-size:clamp(16px,1.4vw,19px);color:var(--ink);line-height:1.3;
+      display:block;
+    }
+    html[lang="fa"] .z-name, html[lang="ckb"] .z-name{
+      font-family:var(--display-fa);font-style:normal;font-weight:500;
+    }
+    .z-question{
+      font-family:var(--display-en-italic);font-style:italic;
+      font-size:13px;color:var(--ink-muted);line-height:1.55;
+      display:block;margin-top:2px;
+    }
+    html[lang="fa"] .z-question, html[lang="ckb"] .z-question{
+      font-family:var(--body-fa, var(--display-fa));font-style:normal;
+    }
+    .z-link{
       font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--ink-faint);display:block;
+      color:var(--ink-faint);margin-top:auto;display:block;padding-top:6px;
     }
-    .z-tip{
-      position:absolute;inset-inline-start:0;inset-inline-end:0;bottom:calc(100% + 6px);
-      padding:10px 12px;background:var(--bg-elev);border:1px solid rgba(201,165,92,.12);
-      font-size:11px;color:var(--ink);line-height:1.5;
-      opacity:0;pointer-events:none;transition:opacity .25s ease;
-      z-index:5;
-    }
-    .zodiac-cell:hover .z-tip{opacity:1}
 
     /* =========================================================
        CHAPTER 3 - The Four Pillars
@@ -665,7 +675,11 @@
       .site-footer .wrap{grid-template-columns:1fr 1fr;gap:32px}
       .chapter-4 .breath-grid{grid-template-columns:1fr;gap:32px}
       .initiation{grid-template-columns:1fr;gap:48px}
-      .zodiac-ring{grid-template-columns:repeat(3,1fr)}
+      .zodiac-ring{grid-template-columns:repeat(2,1fr)}
+      .zodiac-cell:nth-child(4n){border-inline-end:1px solid rgba(201,165,92,.12)}
+      .zodiac-cell:nth-child(2n){border-inline-end:0}
+      .zodiac-cell:nth-last-child(-n+4){border-bottom:1px solid rgba(201,165,92,.06)}
+      .zodiac-cell:nth-last-child(-n+2){border-bottom:0}
     }@media (max-width: 720px){
       .nav-links{display:none}
       .nav-toggle{display:inline-flex}
@@ -688,7 +702,9 @@
       .site-footer .wrap{grid-template-columns:1fr}
       .hero-meta-row{gap:18px}
       .lesson-list{grid-template-columns:1fr}
-      .zodiac-ring{grid-template-columns:repeat(3,1fr)}
+      .zodiac-ring{grid-template-columns:1fr}
+      .zodiac-cell{border-inline-end:0 !important;border-bottom:1px solid rgba(201,165,92,.06) !important}
+      .zodiac-cell:last-child{border-bottom:0 !important}
     }@media (prefers-reduced-motion: reduce){
       *, *::before, *::after{
         animation-duration:.001ms !important;animation-iteration-count:1 !important;
@@ -710,7 +726,7 @@
 <body data-page-depth="0">
 <header class="site-header">
     <div class="nav-wrap" id="navWrap">
-      <a href="index.html" class="brand" aria-label="Agyan">
+      <a href="./" class="brand" aria-label="Agyan">
         <span class="brand-mark" aria-hidden="true">
           <!-- Eight-pointed star (Najmeh-ye Hashtgūsh) - Persian-Islamic geometric tradition -->
           <svg viewBox="0 0 32 32" fill="none">
@@ -730,12 +746,12 @@
       </button>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="index.html" aria-current="page" data-i18n="nav.home">Home</a></li>
-          <li><a href="curriculum/index.html" data-i18n="nav.curriculum">Curriculum</a></li>
-          <li><a href="lab/index.html" data-i18n="nav.lab">Lab</a></li>
-          <li><a href="library.html" data-i18n="nav.library">Library</a></li>
-          <li><a href="about.html" data-i18n="nav.about">Founder</a></li>
-          <li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li>
+          <li><a href="./" aria-current="page" data-i18n="nav.home">Home</a></li>
+          <li><a href="curriculum/" data-i18n="nav.curriculum">Curriculum</a></li>
+          <li><a href="lab/" data-i18n="nav.lab">Lab</a></li>
+          <li><a href="library" data-i18n="nav.library">Library</a></li>
+          <li><a href="about" data-i18n="nav.about">Founder</a></li>
+          <li><a href="admissions" data-i18n="nav.admissions">Admissions</a></li>
         </ul>
       </nav>
       <div class="lang-switch" role="group" aria-label="Language">
@@ -820,27 +836,27 @@
       <div>
         <h4 data-i18n="foot.curr.h">Curriculum</h4>
         <ul>
-          <li><a href="curriculum/meditation.html" data-i18n="curr.m.title">Meditation</a></li>
-          <li><a href="curriculum/manifestation.html" data-i18n="curr.ma.title">Manifestation</a></li>
-          <li><a href="curriculum/astrology.html" data-i18n="curr.as.title">Astrology</a></li>
-          <li><a href="curriculum/affirmation.html" data-i18n="curr.af.title">Affirmation</a></li>
+          <li><a href="curriculum/meditation" data-i18n="curr.m.title">Meditation</a></li>
+          <li><a href="curriculum/manifestation" data-i18n="curr.ma.title">Manifestation</a></li>
+          <li><a href="curriculum/astrology" data-i18n="curr.as.title">Astrology</a></li>
+          <li><a href="curriculum/affirmation" data-i18n="curr.af.title">Affirmation</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.lab.h">Lab</h4>
         <ul>
-          <li><a href="lab/breath.html" data-i18n="lab.breath.title">Hanaseh / breath</a></li>
-          <li><a href="lab/chart.html" data-i18n="lab.chart.title">Chart wheel</a></li>
-          <li><a href="lab/journal.html" data-i18n="lab.journal.title">Manifestation journal</a></li>
-          <li><a href="lab/mood.html" data-i18n="lab.mood.pagetitle">Mood log</a></li>
+          <li><a href="lab/breath" data-i18n="lab.breath.title">Hanaseh / breath</a></li>
+          <li><a href="lab/chart" data-i18n="lab.chart.title">Chart wheel</a></li>
+          <li><a href="lab/journal" data-i18n="lab.journal.title">Manifestation journal</a></li>
+          <li><a href="lab/mood" data-i18n="lab.mood.pagetitle">Mood log</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.contact.h">Contact</h4>
         <ul>
-          <li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li>
-          <li><a href="about.html" data-i18n="nav.about">Founder</a></li>
-          <li><a href="library.html" data-i18n="nav.library">Library</a></li>
+          <li><a href="admissions" data-i18n="nav.admissions">Admissions</a></li>
+          <li><a href="about" data-i18n="nav.about">Founder</a></li>
+          <li><a href="library" data-i18n="nav.library">Library</a></li>
           <li class="quiet">hello@agyan.com</li>
         </ul>
       </div>
