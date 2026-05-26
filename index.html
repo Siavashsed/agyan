@@ -160,8 +160,7 @@
     }
     .cursor-dot{width:8px;height:8px;background:var(--ink);border-radius:50%;mix-blend-mode:difference}
     .cursor-ring{width:32px;height:32px;border:1px solid rgba(245,230,211,.55);border-radius:50%;transition:width .2s ease, height .2s ease, border-color .2s ease}
-    .cursor-ring.is-hover{width:54px;height:54px;border-color:var(--heritage)}
-    @media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{display:none} }
+    .cursor-ring.is-hover{width:54px;height:54px;border-color:var(--heritage)}@media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{display:none} }
 
     /* Layout primitives -------------------------------------- */
     .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative;z-index:2}
@@ -364,8 +363,7 @@
       width:8px;height:8px;border-radius:50%;background:var(--heritage);
       box-shadow:0 0 0 0 rgba(201,165,92,.55);
       animation:agpulse 2.4s ease-out infinite;
-    }
-    @keyframes agpulse{
+    }@keyframes agpulse{
       0%{box-shadow:0 0 0 0 rgba(201,165,92,.55)}
       70%{box-shadow:0 0 0 14px rgba(201,165,92,0)}
       100%{box-shadow:0 0 0 0 rgba(201,165,92,0)}
@@ -505,20 +503,17 @@
       background:radial-gradient(circle at 35% 35%, rgba(245,230,211,.4), rgba(201,165,92,.25) 60%, transparent 100%);
       box-shadow:0 0 80px rgba(201,165,92,.25);
       animation:breathInner 19s ease-in-out infinite;
-    }
-    @keyframes breathOuter{
+    }@keyframes breathOuter{
       0%, 100% { transform:translate(-50%,-50%) scale(.85); opacity:.35 }
       20%      { transform:translate(-50%,-50%) scale(1.0);  opacity:.6 }
       55%      { transform:translate(-50%,-50%) scale(1.0);  opacity:.6 }
       85%      { transform:translate(-50%,-50%) scale(.85);  opacity:.35 }
-    }
-    @keyframes breathMid{
+    }@keyframes breathMid{
       0%, 100% { transform:translate(-50%,-50%) scale(.7); opacity:.4 }
       20%      { transform:translate(-50%,-50%) scale(1.0); opacity:.75 }
       55%      { transform:translate(-50%,-50%) scale(1.0); opacity:.75 }
       85%      { transform:translate(-50%,-50%) scale(.7);  opacity:.4 }
-    }
-    @keyframes breathInner{
+    }@keyframes breathInner{
       0%, 100% { transform:translate(-50%,-50%) scale(.6); }
       20%      { transform:translate(-50%,-50%) scale(1.1); }
       55%      { transform:translate(-50%,-50%) scale(1.1); }
@@ -602,8 +597,7 @@
       position:relative;aspect-ratio:1/1;max-width:420px;margin:0 auto;
       display:flex;align-items:center;justify-content:center;
     }
-    .torus-svg{width:100%;height:100%;animation:torusSpin 60s linear infinite}
-    @keyframes torusSpin{
+    .torus-svg{width:100%;height:100%;animation:torusSpin 60s linear infinite}@keyframes torusSpin{
       0%{transform:rotate(0)}
       100%{transform:rotate(360deg)}
     }
@@ -707,20 +701,14 @@
       transition:stroke-dashoffset 2.5s ease;
     }
     .constellation circle{fill:var(--heritage);opacity:.6}
-    .constellation.drawn path{stroke-dashoffset:0}
-
-    /* =========================================================
-       Mobile
-       ========================================================= */
-    @media (max-width: 980px){
+    .constellation.drawn path{stroke-dashoffset:0}@media (max-width: 980px){
       .pillars-grid{grid-template-columns:repeat(2,1fr)}
       .tracks-deck{grid-template-columns:1fr}
       .site-footer .wrap{grid-template-columns:1fr 1fr;gap:32px}
       .chapter-4 .breath-grid{grid-template-columns:1fr;gap:32px}
       .initiation{grid-template-columns:1fr;gap:48px}
       .zodiac-ring{grid-template-columns:repeat(3,1fr)}
-    }
-    @media (max-width: 720px){
+    }@media (max-width: 720px){
       .nav-links{display:none}
       .nav-toggle{display:inline-flex}
       .nav-wrap.is-open .nav-links{
@@ -743,14 +731,12 @@
       .hero-meta-row{gap:18px}
       .lesson-list{grid-template-columns:1fr}
       .zodiac-ring{grid-template-columns:repeat(3,1fr)}
-    }
-    @media (prefers-reduced-motion: reduce){
+    }@media (prefers-reduced-motion: reduce){
       *, *::before, *::after{
         animation-duration:.001ms !important;animation-iteration-count:1 !important;
         transition-duration:.001ms !important;scroll-behavior:auto !important;
       }
-    }
-  </style>
+    }</style>
 </head>
 <body>
 <!--SHELL:ACCENT:#e6b9a6-->
@@ -769,10 +755,6 @@
     <circle cx="220" cy="540" r="1.3"/><circle cx="420" cy="660" r="1.4"/><circle cx="640" cy="580" r="1.2"/>
     <circle cx="820" cy="700" r="1.3"/><circle cx="1000" cy="620" r="1.4"/><circle cx="1200" cy="740" r="1.2"/>
     <path d="M180,120 L360,80 L520,200 L710,140 L900,220"/>
-    <path d="M900,220 L1080,120 L1250,280 L1420,160"/>
-    <path d="M220,540 L420,660 L640,580 L820,700 L1000,620 L1200,740"/>
-    <path d="M520,200 L640,580"/>
-    <path d="M900,220 L1000,620"/>
   </svg>
 
   <!-- progress bar -->
@@ -807,7 +789,6 @@
           <svg viewBox="0 0 32 32" fill="none">
             <g stroke="#c9a55c" stroke-width="1.1" stroke-linejoin="round">
               <path d="M16 2 L18.1 13.9 L30 16 L18.1 18.1 L16 30 L13.9 18.1 L2 16 L13.9 13.9 Z"/>
-              <path d="M16 5 L23 16 L16 27 L9 16 Z" opacity=".75"/>
               <circle cx="16" cy="16" r="1.4" fill="#c9a55c" stroke="none"/>
             </g>
           </svg>
@@ -1272,7 +1253,6 @@
             <svg viewBox="0 0 32 32" fill="none">
               <g stroke="#c9a55c" stroke-width="1.1" stroke-linejoin="round">
                 <path d="M16 2 L18.1 13.9 L30 16 L18.1 18.1 L16 30 L13.9 18.1 L2 16 L13.9 13.9 Z"/>
-                <path d="M16 5 L23 16 L16 27 L9 16 Z" opacity=".75"/>
                 <circle cx="16" cy="16" r="1.4" fill="#c9a55c" stroke="none"/>
               </g>
             </svg>
