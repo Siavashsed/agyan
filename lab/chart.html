@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0a13">
+  <title>Natal Chart Wheel - The Lab</title>
+  <meta name="description" content="A visual rendering of the twelve houses with Sun, Moon, and Ascendant. Demonstration only.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Amiri:wght@400;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23e6b9a6'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Natal Chart Wheel - The Lab",
+  "url": "https://siavashsed.github.io/agyan/lab/chart.html",
+  "inLanguage": [
+    "fa",
+    "en",
+    "ckb"
+  ],
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Agyan Academy",
+    "url": "https://siavashsed.github.io/agyan/"
+  },
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "Agyan Academy",
+    "url": "https://siavashsed.github.io/agyan/"
+  },
+  "description": "A visual rendering of the twelve houses with Sun, Moon, and Ascendant. Demonstration only."
+}
+</script>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to content</a>
+  <canvas id="cosmography" class="cosmography" aria-hidden="true"></canvas>
+  <div class="veil" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a href="../index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-stack"><span><span class="brand-wordmark" data-i18n="brand.full">آگیان</span> <span class="brand-code" data-i18n="brand.code">آ / AG</span></span><span class="brand-tagline" data-i18n="brand.tagline">آکادمی نَفَس، زبان، و کیهان</span></span></a>
+      <button class="nav-toggle" aria-expanded="false" data-i18n-attr="aria-label:nav.menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html" data-i18n="nav.home">خانه</a></li>
+          <li><a href="../curriculum/index.html" data-i18n="nav.curriculum">برنامهٔ آموزشی</a></li>
+          <li><a href="index.html" aria-current="page" data-i18n="nav.lab">آزمایشگاه</a></li>
+          <li><a href="../library.html" data-i18n="nav.library">کتابخانه</a></li>
+          <li><a href="../about.html" data-i18n="nav.about">بنیان‌گذار</a></li>
+          <li><a href="../admissions.html" data-i18n="nav.admissions">پذیرش</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="fa" aria-pressed="true">FA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ckb" aria-pressed="false">CKB</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap" style="padding-top: var(--s6);">
+      <span class="eyebrow lav">LAB-02 / CHART</span>
+      <h1 style="margin-top: var(--s2);" data-i18n="lab.chart.pagetitle">چرخِ زایچه</h1>
+      <p class="lead" data-i18n="lab.chart.lede">این نمایش، چرخی است نمادین.</p>
+    </section>
+
+    <section class="wrap mt-s5">
+      <div class="grid-12">
+        <div style="grid-column: span 5;">
+          <form id="chart-form" autocomplete="off">
+            <div class="field">
+              <label for="ch-name" data-i18n="chart.field.name">نام</label>
+              <input id="ch-name" type="text" name="name" placeholder="optional">
+            </div>
+            <div class="field">
+              <label for="ch-date" data-i18n="chart.field.date">تاریخ تولد</label>
+              <input id="ch-date" type="date" name="date" required>
+            </div>
+            <div class="field">
+              <label for="ch-time" data-i18n="chart.field.time">ساعت تولد (اختیاری)</label>
+              <input id="ch-time" type="time" name="time">
+            </div>
+            <div class="field">
+              <label for="ch-place" data-i18n="chart.field.place">محلِ تولد</label>
+              <input id="ch-place" type="text" name="place" placeholder="e.g. Mahabad, Iran">
+            </div>
+            <button class="btn" type="submit" data-i18n="chart.field.submit">ترسیمِ چرخ</button>
+
+            <p class="muted mt-s4" style="font-size:.82rem;" data-i18n="chart.disclaimer">.</p>
+          </form>
+
+          <div id="chart-result" class="chart-result mt-s4"></div>
+        </div>
+        <div style="grid-column: span 7;" id="chart-frame-wrap">
+          <div class="chart-frame">
+            <svg id="chart-svg" class="chart-svg" viewBox="0 0 600 600" aria-label="Natal chart wheel with twelve houses, Sun, Moon, and Ascendant."></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap mt-s6 reveal">
+      <div class="grid-12">
+        <div style="grid-column: span 6;">
+          <span class="section-num">01.</span>
+          <h2 style="display:inline-block;">What the wheel shows</h2>
+          <p>The outer ring carries the twelve <strong>zodiac signs</strong>, their glyphs visible at the perimeter. The middle ring marks the <strong>twelve houses</strong>, numbered counter-clockwise from the position of the Ascendant. The inner field carries the three <strong>luminaries</strong>: Sun (rose), Moon (lavender), Ascendant (heritage gold).</p>
+          <p>If you have not entered a time of birth, the Ascendant is omitted. Without time, no chart can claim accuracy at the level of houses. This is acknowledged everywhere in traditional practice.</p>
+        </div>
+        <div style="grid-column: span 6;">
+          <span class="section-num">02.</span>
+          <h2 style="display:inline-block;">What it does not show</h2>
+          <p>This is a <strong>visual sketch</strong>, not an ephemeris calculator. Sun position is approximated from day-of-year. Moon is a deterministic pseudo-random placement; the real Moon moves through a sign every two and a half days. Ascendant is a rough two-hour-per-sign window starting at 6am.</p>
+          <p>For a chart you intend to study, use a proper ephemeris tool. We use this widget for the felt sense of the wheel itself, which the AS track returns to repeatedly.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div><h4 data-i18n="foot.about.h">آگیان</h4><p class="muted" style="font-size:.82rem;line-height:1.55;" data-i18n="hero.subtitle">.</p></div>
+      <div><h4 data-i18n="foot.curr.h">برنامه</h4><ul><li><a href="../curriculum/astrology.html" data-i18n="curr.as.title">.</a></li></ul></div>
+      <div><h4 data-i18n="foot.lab.h">آزمایشگاه</h4><ul><li><a href="breath.html" data-i18n="lab.breath.title">.</a></li><li><a href="chart.html" data-i18n="lab.chart.title">.</a></li><li><a href="journal.html" data-i18n="lab.journal.title">.</a></li></ul></div>
+      <div><h4 data-i18n="foot.contact.h">ارتباط</h4><ul><li><a href="../admissions.html" data-i18n="nav.admissions">.</a></li><li class="quiet">[CONTACT EMAIL]</li></ul></div>
+      <div class="colophon"><span data-i18n="foot.colophon.left">.</span><span data-i18n="foot.colophon.right">.</span></div>
+    </div>
+  </footer>
+
+  <script src="../assets/i18n.js"></script>
+  <script src="../assets/i18n-academy.js"></script>
+  <script src="../assets/cosmography.js"></script>
+  <script src="../assets/motion.js"></script>
+  <script src="../assets/chart.js"></script>
+</body>
+</html>
