@@ -1,0 +1,233 @@
+/* ========================================================================
+   Agyan global header partial
+   Used across all pages (index, about, lab/*, curriculum/*, etc.).
+   Mounts via assets/header.js. Designed mobile-first.
+   ====================================================================== */
+
+:root {
+  --ag-hdr-bg: rgba(13, 10, 19, .82);
+  --ag-hdr-bg-solid: #0d0a13;
+  --ag-hdr-fg: #f4ebe1;
+  --ag-hdr-muted: rgba(244, 235, 225, .62);
+  --ag-hdr-accent: #e6b9a6;
+  --ag-hdr-border: rgba(230, 185, 166, .14);
+  --ag-hdr-h: 64px;
+}
+
+.ag-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--ag-hdr-bg);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--ag-hdr-border);
+  color: var(--ag-hdr-fg);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), background .25s ease, box-shadow .25s ease;
+}
+.ag-header.is-hidden { transform: translate3d(0, -110%, 0); }
+.ag-header.is-condensed {
+  background: rgba(13, 10, 19, .94);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .25);
+}
+.ag-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: .65rem 1rem;
+  min-height: var(--ag-hdr-h);
+}
+
+.ag-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  color: var(--ag-hdr-fg);
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+.ag-brand-mark {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: radial-gradient(120% 100% at 30% 20%, #e6b9a6 0%, #b07c69 70%);
+  color: #1a1219;
+  font-family: 'Estedad', 'Newsreader', serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), 0 1px 0 rgba(0,0,0,.4);
+}
+.ag-brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.ag-brand-name {
+  font-family: 'Estedad', 'Vazirmatn', 'Newsreader', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+}
+.ag-brand-tagline {
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ag-hdr-muted);
+}
+
+.ag-nav { display: none; }
+.ag-nav.is-open {
+  display: block;
+  position: fixed;
+  inset: var(--ag-hdr-h) 0 0 0;
+  background: var(--ag-hdr-bg-solid);
+  padding: 1.5rem 1.25rem 5rem;
+  overflow: auto;
+  z-index: 55;
+}
+.ag-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ag-nav-list li + li { border-top: 1px solid var(--ag-hdr-border); }
+.ag-nav-list a {
+  display: block;
+  padding: 1rem .25rem;
+  color: var(--ag-hdr-fg);
+  text-decoration: none;
+  font-size: 1.05rem;
+  letter-spacing: .01em;
+  min-height: 44px;
+}
+.ag-nav-list a:hover,
+.ag-nav-list a:focus-visible {
+  color: var(--ag-hdr-accent);
+}
+
+.ag-nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  padding: 12px 10px;
+  background: transparent;
+  border: 1px solid var(--ag-hdr-border);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-inline-start: auto;
+}
+.ag-nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ag-hdr-fg);
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.ag-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.ag-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.ag-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.ag-lang-switch {
+  display: none;
+  gap: .25rem;
+  border: 1px solid var(--ag-hdr-border);
+  border-radius: 999px;
+  padding: 3px;
+  margin-inline-start: .5rem;
+}
+.ag-lang-switch button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ag-hdr-muted);
+  font-family: 'JetBrains Mono', 'Vazirmatn', system-ui, monospace;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  padding: .35rem .65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 32px;
+  min-width: 36px;
+}
+.ag-lang-switch button:hover { color: var(--ag-hdr-fg); }
+.ag-lang-switch button.is-active {
+  background: var(--ag-hdr-accent);
+  color: #1a1219;
+}
+
+/* mobile lang dock: bottom-anchored thumb-reach */
+.ag-lang-dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  transform: translateX(-50%);
+  display: inline-flex;
+  gap: .2rem;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(13, 10, 19, .92);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border: 1px solid var(--ag-hdr-border);
+  z-index: 70;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+.ag-lang-dock button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ag-hdr-muted);
+  font-family: 'JetBrains Mono', 'Vazirmatn', system-ui, monospace;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  padding: .4rem .75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 40px;
+}
+.ag-lang-dock button:hover { color: var(--ag-hdr-fg); }
+.ag-lang-dock button.is-active {
+  background: var(--ag-hdr-accent);
+  color: #1a1219;
+}
+
+body.ag-nav-open { overflow: hidden; }
+
+/* desktop nav */
+@media (min-width: 820px) {
+  .ag-header-inner { padding: .75rem 1.5rem; }
+  .ag-nav { display: block; }
+  .ag-nav .ag-nav-list {
+    flex-direction: row;
+    gap: .25rem;
+  }
+  .ag-nav-list li + li { border-top: 0; }
+  .ag-nav-list a {
+    padding: .55rem .85rem;
+    font-size: .92rem;
+    border-radius: 8px;
+    min-height: 36px;
+  }
+  .ag-nav-list a:hover { background: rgba(230, 185, 166, .08); color: var(--ag-hdr-fg); }
+  .ag-nav-toggle { display: none; }
+  .ag-lang-switch { display: inline-flex; }
+  .ag-lang-dock { display: none; }
+}
+
+/* RTL: language switch ordering */
+html[dir="rtl"] .ag-nav-list a { text-align: right; }
+html[dir="ltr"] .ag-nav-list a { text-align: left; }
