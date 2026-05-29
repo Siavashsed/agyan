@@ -160,7 +160,8 @@
     }
     .cursor-dot{width:8px;height:8px;background:var(--ink);border-radius:50%;mix-blend-mode:difference}
     .cursor-ring{width:32px;height:32px;border:1px solid rgba(245,230,211,.55);border-radius:50%;transition:width .2s ease, height .2s ease, border-color .2s ease}
-    .cursor-ring.is-hover{width:54px;height:54px;border-color:var(--heritage)}@media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{display:none} }
+    .cursor-ring.is-hover{width:54px;height:54px;border-color:var(--heritage)}
+    @media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{display:none} }
 
     /* Layout primitives -------------------------------------- */
     .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative;z-index:2}
@@ -363,7 +364,8 @@
       width:8px;height:8px;border-radius:50%;background:var(--heritage);
       box-shadow:0 0 0 0 rgba(201,165,92,.55);
       animation:agpulse 2.4s ease-out infinite;
-    }@keyframes agpulse{
+    }
+    @keyframes agpulse{
       0%{box-shadow:0 0 0 0 rgba(201,165,92,.55)}
       70%{box-shadow:0 0 0 14px rgba(201,165,92,0)}
       100%{box-shadow:0 0 0 0 rgba(201,165,92,0)}
@@ -513,17 +515,20 @@
       background:radial-gradient(circle at 35% 35%, rgba(245,230,211,.4), rgba(201,165,92,.25) 60%, transparent 100%);
       box-shadow:0 0 80px rgba(201,165,92,.25);
       animation:breathInner 19s ease-in-out infinite;
-    }@keyframes breathOuter{
+    }
+    @keyframes breathOuter{
       0%, 100% { transform:translate(-50%,-50%) scale(.85); opacity:.35 }
       20%      { transform:translate(-50%,-50%) scale(1.0);  opacity:.6 }
       55%      { transform:translate(-50%,-50%) scale(1.0);  opacity:.6 }
       85%      { transform:translate(-50%,-50%) scale(.85);  opacity:.35 }
-    }@keyframes breathMid{
+    }
+    @keyframes breathMid{
       0%, 100% { transform:translate(-50%,-50%) scale(.7); opacity:.4 }
       20%      { transform:translate(-50%,-50%) scale(1.0); opacity:.75 }
       55%      { transform:translate(-50%,-50%) scale(1.0); opacity:.75 }
       85%      { transform:translate(-50%,-50%) scale(.7);  opacity:.4 }
-    }@keyframes breathInner{
+    }
+    @keyframes breathInner{
       0%, 100% { transform:translate(-50%,-50%) scale(.6); }
       20%      { transform:translate(-50%,-50%) scale(1.1); }
       55%      { transform:translate(-50%,-50%) scale(1.1); }
@@ -607,7 +612,8 @@
       position:relative;aspect-ratio:1/1;max-width:420px;margin:0 auto;
       display:flex;align-items:center;justify-content:center;
     }
-    .torus-svg{width:100%;height:100%;animation:torusSpin 60s linear infinite}@keyframes torusSpin{
+    .torus-svg{width:100%;height:100%;animation:torusSpin 60s linear infinite}
+    @keyframes torusSpin{
       0%{transform:rotate(0)}
       100%{transform:rotate(360deg)}
     }
@@ -711,7 +717,12 @@
       transition:stroke-dashoffset 2.5s ease;
     }
     .constellation circle{fill:var(--heritage);opacity:.6}
-    .constellation.drawn path{stroke-dashoffset:0}@media (max-width: 980px){
+    .constellation.drawn path{stroke-dashoffset:0}
+
+    /* =========================================================
+       Mobile
+       ========================================================= */
+    @media (max-width: 980px){
       .pillars-grid{grid-template-columns:repeat(2,1fr)}
       .tracks-deck{grid-template-columns:1fr}
       .site-footer .wrap{grid-template-columns:1fr 1fr;gap:32px}
@@ -722,7 +733,8 @@
       .zodiac-cell:nth-child(2n){border-inline-end:0}
       .zodiac-cell:nth-last-child(-n+4){border-bottom:1px solid rgba(201,165,92,.06)}
       .zodiac-cell:nth-last-child(-n+2){border-bottom:0}
-    }@media (max-width: 720px){
+    }
+    @media (max-width: 720px){
       .nav-links{display:none}
       .nav-toggle{display:inline-flex}
       .nav-wrap.is-open .nav-links{
@@ -747,12 +759,14 @@
       .zodiac-ring{grid-template-columns:1fr}
       .zodiac-cell{border-inline-end:0 !important;border-bottom:1px solid rgba(201,165,92,.06) !important}
       .zodiac-cell:last-child{border-bottom:0 !important}
-    }@media (prefers-reduced-motion: reduce){
+    }
+    @media (prefers-reduced-motion: reduce){
       *, *::before, *::after{
         animation-duration:.001ms !important;animation-iteration-count:1 !important;
         transition-duration:.001ms !important;scroll-behavior:auto !important;
       }
-    }</style>
+    }
+  </style>
   <link rel="stylesheet" href="assets/header.css">
   <script defer src="assets/header.js"></script>
 </head>
@@ -773,6 +787,10 @@
     <circle cx="220" cy="540" r="1.3"/><circle cx="420" cy="660" r="1.4"/><circle cx="640" cy="580" r="1.2"/>
     <circle cx="820" cy="700" r="1.3"/><circle cx="1000" cy="620" r="1.4"/><circle cx="1200" cy="740" r="1.2"/>
     <path d="M180,120 L360,80 L520,200 L710,140 L900,220"/>
+    <path d="M900,220 L1080,120 L1250,280 L1420,160"/>
+    <path d="M220,540 L420,660 L640,580 L820,700 L1000,620 L1200,740"/>
+    <path d="M520,200 L640,580"/>
+    <path d="M900,220 L1000,620"/>
   </svg>
 
   <!-- progress bar -->
@@ -807,6 +825,7 @@
           <svg viewBox="0 0 32 32" fill="none">
             <g stroke="#c9a55c" stroke-width="1.1" stroke-linejoin="round">
               <path d="M16 2 L18.1 13.9 L30 16 L18.1 18.1 L16 30 L13.9 18.1 L2 16 L13.9 13.9 Z"/>
+              <path d="M16 5 L23 16 L16 27 L9 16 Z" opacity=".75"/>
               <circle cx="16" cy="16" r="1.4" fill="#c9a55c" stroke="none"/>
             </g>
           </svg>
@@ -1283,6 +1302,7 @@
             <svg viewBox="0 0 32 32" fill="none">
               <g stroke="#c9a55c" stroke-width="1.1" stroke-linejoin="round">
                 <path d="M16 2 L18.1 13.9 L30 16 L18.1 18.1 L16 30 L13.9 18.1 L2 16 L13.9 13.9 Z"/>
+                <path d="M16 5 L23 16 L16 27 L9 16 Z" opacity=".75"/>
                 <circle cx="16" cy="16" r="1.4" fill="#c9a55c" stroke="none"/>
               </g>
             </svg>
@@ -1623,143 +1643,143 @@
         "foot.colophon.right":"VERSION 02 · 2026"
       },
       ckb: {
-        "chap.1":"[KURDISH: Invocation]","chap.2":"[KURDISH: Cosmos]","chap.3":"[KURDISH: Four Pillars]","chap.4":"هەناسە","chap.5":"[KURDISH: Curriculum]","chap.6":"[KURDISH: Initiation]",
-        "ambient.off":"[KURDISH: Ambient off]","ambient.on":"[KURDISH: Ambient on]",
-        "hero.eyebrow":"[KURDISH: Founded 2014 · Mahabad · Online curriculum]",
-        "hero.tagline":"[KURDISH: An academy of breath, language, and cosmos]",
+        "chap.1":"","chap.2":"","chap.3":"","chap.4":"هەناسە","chap.5":"","chap.6":"",
+        "ambient.off":"","ambient.on":"",
+        "hero.eyebrow":"",
+        "hero.tagline":"",
         "hero.title.1":"ئاگیان",
-        "hero.title.2":"[KURDISH: An academy of breath, language, and cosmos.]",
-        "hero.rotator.1":"[KURDISH: An academy of breath, language, and cosmos.]",
-        "hero.rotator.2":"[KURDISH: Twelve lessons. One discipline. A year of slow study.]",
-        "hero.rotator.3":"[KURDISH: Where the inner work meets the outer sky.]",
-        "hero.body.1":"[KURDISH: Agyan is a digital school of contemplative practice. Four study tracks across forty-eight lessons, taught in cohorts over a single year.]",
-        "hero.body.2":"[KURDISH: Five teachings, one practice: breath, language, body, cosmos, intention. The Agyan curriculum walks these one room at a time.]",
-        "hero.meta.tracks":"[KURDISH: Tracks of study]",
-        "hero.meta.lessons":"[KURDISH: Lessons per track]",
-        "hero.meta.year":"[KURDISH: One year of slow study]",
-        "hero.meta.lang":"[KURDISH: Languages]",
-        "hero.cta.primary":"[KURDISH: Begin a lesson]",
-        "hero.cta.secondary":"[KURDISH: About Avin]",
-        "cos.eyebrow":"٠٢ / [KURDISH: HOUSES]",
-        "cos.title.1":"[KURDISH: The twelve]",
-        "cos.title.2":"[KURDISH: houses.]",
-        "cos.lede":"[KURDISH: The astrology track at Agyan does not begin with sun signs. It begins with houses, the twelve domains that map a life: where you stand, what you hold, how you communicate, what you build. Each house is a doorway to a single sustained question. The Agyan astrology curriculum is twelve lessons because the chart is twelve rooms. We walk one room at a time.]",
-        "cos.quote":"[KURDISH: A chart is not a map; it is a language one can listen to.]",
-        "cos.quote.cite":"[KURDISH: ]",
-        "house.1.title":"[KURDISH: The Body You Arrived In]",            "house.1.question":"[KURDISH: How do you appear before you speak?]",                                              "house.1.link":"[KURDISH: Studied in AS-01]",
-        "house.2.title":"[KURDISH: The Things You Carry]",               "house.2.question":"[KURDISH: What do you consider yours, and why?]",                                            "house.2.link":"[KURDISH: Studied in AS-02]",
-        "house.3.title":"[KURDISH: The Voice in the Room]",              "house.3.question":"[KURDISH: What did you learn first, and who taught it?]",                                    "house.3.link":"[KURDISH: Studied in AS-03]",
-        "house.4.title":"[KURDISH: The Roof Over Your Memory]",          "house.4.question":"[KURDISH: Where do you go when you close your eyes and feel safe?]",                         "house.4.link":"[KURDISH: Studied in AS-04]",
-        "house.5.title":"[KURDISH: The Things You Make for Joy]",        "house.5.question":"[KURDISH: What do you do that no one is paying you for?]",                                   "house.5.link":"[KURDISH: Studied in AS-05]",
-        "house.6.title":"[KURDISH: The Hands You Use Every Day]",        "house.6.question":"[KURDISH: What work makes you a craftsman, not a worker?]",                                  "house.6.link":"[KURDISH: Studied in AS-06]",
-        "house.7.title":"[KURDISH: The Mirror Across From You]",         "house.7.question":"[KURDISH: Who do you become in the presence of another?]",                                   "house.7.link":"[KURDISH: Studied in AS-07]",
-        "house.8.title":"[KURDISH: The Door You Have Not Opened]",       "house.8.question":"[KURDISH: What inheritance, debt, or grief are you carrying for someone else?]",             "house.8.link":"[KURDISH: Studied in AS-08]",
-        "house.9.title":"[KURDISH: The Distance You Travel In Your Mind]","house.9.question":"[KURDISH: What belief have you held that turned out to be a doorway?]",                     "house.9.link":"[KURDISH: Studied in AS-09]",
-        "house.10.title":"[KURDISH: The Name You Are Building]",         "house.10.question":"[KURDISH: What would you like written on the door of the room you walk into?]",             "house.10.link":"[KURDISH: Studied in AS-10]",
-        "house.11.title":"[KURDISH: The Circle You Belong To]",          "house.11.question":"[KURDISH: Who would notice if you stopped showing up?]",                                    "house.11.link":"[KURDISH: Studied in AS-11]",
-        "house.12.title":"[KURDISH: The Quiet Behind the Quiet]",        "house.12.question":"[KURDISH: What part of you only speaks when you are alone?]",                               "house.12.link":"[KURDISH: Studied in AS-12]",
-        "pil.eyebrow":"٠٣ / [KURDISH: FOUR DISCIPLINES]",
-        "pil.title.1":"[KURDISH: Four disciplines]",
-        "pil.title.2":"[KURDISH: of practice.]",
-        "pil.lede":"[KURDISH: Four tracks, twelve lessons each, taught in cohorts and drawn from primary sources. First three open to all.]",
-        "curr.m.code":"M · [KURDISH: MEDITATION]",
-        "curr.m.title":"[KURDISH: Meditation]",
-        "curr.m.note":"[KURDISH: Sitting practice through breath, posture, and repetition. The body as antenna.]",
-        "curr.ma.code":"MA · [KURDISH: MANIFESTATION]",
-        "curr.ma.title":"[KURDISH: Manifestation]",
-        "curr.ma.note":"[KURDISH: Manifestation as a discipline of attention, not magical thinking. Intention, embodiment, action, surrender.]",
-        "curr.as.code":"AS · [KURDISH: ASTROLOGY]",
-        "curr.as.title":"[KURDISH: Astrology]",
-        "curr.as.note":"[KURDISH: The chart as a map, not a forecast. Twelve houses as rooms of a life. Sun, Moon, and the Ascendant as the three doors.]",
-        "curr.af.code":"AF · [KURDISH: AFFIRMATION]",
-        "curr.af.title":"[KURDISH: Affirmation]",
-        "curr.af.note":"[KURDISH: Language as ritual. The sentence that does not yet feel true. Zikr, mantra, monologistos compared.]",
-        "curr.meta.lessons":"١٢ [KURDISH: LESSONS]",
-        "curr.meta.open":"٣ [KURDISH: OPEN]",
-        "curr.meta.cta":"› [KURDISH: Begin track]",
-        "bre.eyebrow":"٠٤ / [KURDISH: BREATH]",
-        "bre.title.1":"[KURDISH: Begin]",
-        "bre.title.2":"[KURDISH: with the breath.]",
-        "bre.lede":"[KURDISH: The breath orb is the simplest practice in the curriculum. Anyone can begin here, today, in two minutes.]",
-        "bre.p.478":"٤-٧-٨ · [KURDISH: CALMING]",
-        "bre.p.478.note":"[KURDISH: For sleep or after tension.]",
-        "bre.p.box":"[KURDISH: BOX 4-4-4-4 · STEADY]",
-        "bre.p.box.note":"[KURDISH: For focus and cognitive work.]",
-        "bre.p.hanaseh":"[KURDISH: HANASEH 4-2-6 · AVIN'S METHOD]",
-        "bre.p.hanaseh.note":"[KURDISH: For long sitting and dhikr.]",
-        "bre.cta":"[KURDISH: Full breath instrument]",
-        "bre.phase.in":"[KURDISH: INHALE]",
-        "bre.phase.hold":"[KURDISH: HOLD]",
-        "bre.phase.out":"[KURDISH: EXHALE]",
-        "bre.quote":"[KURDISH: Breath is the only body that comes and goes without being asked.]",
-        "bre.quote.cite":"LAB-01 / [KURDISH: BREATH]",
-        "cur.eyebrow":"٠٥ / [KURDISH: FULL CURRICULUM]",
-        "cur.title.1":"[KURDISH: Forty-eight]",
-        "cur.title.2":"[KURDISH: lessons.]",
-        "cur.lede":"[KURDISH: Open access to the first three lessons of every track; the remaining nine are reserved for enrolled students.]",
-        "m.l1":"[KURDISH: Sitting as non-action]","m.l1.abs":"[KURDISH: Why the chair matters, why posture is a doorway.]",
-        "m.l2":"[KURDISH: Counting]","m.l2.abs":"[KURDISH: Four counts of one to four.]",
-        "m.l3":"[KURDISH: Silence]","m.l3.abs":"[KURDISH: Two kinds of silence: absence of sound, and presence of attention.]",
-        "m.l4":"[KURDISH: Dhikr]","m.l4.abs":"[KURDISH: Repetition of a name as anchor.]",
-        "m.l5":"[KURDISH: Watching]","m.l5.abs":"[KURDISH: Seeing the thought without following it.]",
-        "m.l6":"[KURDISH: Release]","m.l6.abs":"[KURDISH: Opening the body from its quiet contraction.]",
-        "m.l7":"[KURDISH: Witness]","m.l7.abs":"[KURDISH: The one who sees is not the self.]",
-        "m.l8":"[KURDISH: Heart]","m.l8.abs":"[KURDISH: Attending to the chest, not the feeling.]",
-        "m.l9":"[KURDISH: Somatic]","m.l9.abs":"[KURDISH: The body as the object of meditation.]",
-        "m.l10":"[KURDISH: Presence]","m.l10.abs":"[KURDISH: In the middle of work, not only in sitting.]",
-        "m.l11":"[KURDISH: Solitude]","m.l11.abs":"[KURDISH: Forty-eight hours alone with yourself.]",
-        "m.l12":"[KURDISH: Passage]","m.l12.abs":"[KURDISH: The end of a year and the question that remains.]",
-        "ma.l1":"[KURDISH: Attention]","ma.l1.abs":"[KURDISH: Manifestation begins with what you look at.]",
-        "ma.l2":"[KURDISH: Intention]","ma.l2.abs":"[KURDISH: The difference between wish, want, and intention.]",
-        "ma.l3":"[KURDISH: Body]","ma.l3.abs":"[KURDISH: The body knows before the mind does.]",
-        "ma.l4":"[KURDISH: Field]","ma.l4.abs":"[KURDISH: The environment you stand inside.]",
-        "ma.l5":"[KURDISH: Practice]","ma.l5.abs":"[KURDISH: The daily work nobody sees.]",
-        "ma.l6":"[KURDISH: Action]","ma.l6.abs":"[KURDISH: The small move, not the large plan.]",
-        "ma.l7":"[KURDISH: Patience]","ma.l7.abs":"[KURDISH: Time as collaborator.]",
-        "ma.l8":"[KURDISH: Acceptance]","ma.l8.abs":"[KURDISH: What is, before what you want.]",
-        "ma.l9":"[KURDISH: Threshold]","ma.l9.abs":"[KURDISH: The moment when something changes.]",
-        "ma.l10":"[KURDISH: Insight]","ma.l10.abs":"[KURDISH: Knowing without reason.]",
-        "ma.l11":"[KURDISH: Pruning]","ma.l11.abs":"[KURDISH: What must be released.]",
-        "ma.l12":"[KURDISH: Arrival]","ma.l12.abs":"[KURDISH: What has come, and what must not.]",
-        "as.l1":"[KURDISH: The circle]","as.l1.abs":"[KURDISH: Why the chart is a circle, not a line.]",
-        "as.l2":"[KURDISH: Planets]","as.l2.abs":"[KURDISH: Seven planets as seven faces of attention.]",
-        "as.l3":"[KURDISH: Houses]","as.l3.abs":"[KURDISH: Twelve rooms in a single life.]",
-        "as.l4":"[KURDISH: Ascendant]","as.l4.abs":"[KURDISH: The door through which you entered the world.]",
-        "as.l5":"[KURDISH: Moon]","as.l5.abs":"[KURDISH: The feeling that moves below the surface.]",
-        "as.l6":"[KURDISH: Sun]","as.l6.abs":"[KURDISH: What you must become.]",
-        "as.l7":"[KURDISH: Aspects]","as.l7.abs":"[KURDISH: The conversations between planets.]",
-        "as.l8":"[KURDISH: Transits]","as.l8.abs":"[KURDISH: Today's sky inside your chart.]",
-        "as.l9":"[KURDISH: Returns]","as.l9.abs":"[KURDISH: Jupiter, Saturn, and the solar return.]",
-        "as.l10":"[KURDISH: Synastry]","as.l10.abs":"[KURDISH: Two charts in conversation.]",
-        "as.l11":"[KURDISH: The year]","as.l11.abs":"[KURDISH: The natal chart plus one revolution.]",
-        "as.l12":"[KURDISH: Narrative]","as.l12.abs":"[KURDISH: Reading the chart as a story.]",
-        "af.l1":"[KURDISH: Voice]","af.l1.abs":"[KURDISH: Sound acts before meaning does.]",
-        "af.l2":"[KURDISH: Repetition]","af.l2.abs":"[KURDISH: Why repetition is not laziness.]",
-        "af.l3":"[KURDISH: Writing]","af.l3.abs":"[KURDISH: The hand in the ritual of language.]",
-        "af.l4":"[KURDISH: Speaking]","af.l4.abs":"[KURDISH: Hearing yourself say it.]",
-        "af.l5":"[KURDISH: Listening]","af.l5.abs":"[KURDISH: The one who listens also writes the sentence.]",
-        "af.l6":"[KURDISH: Rhythm]","af.l6.abs":"[KURDISH: Pulse as structure.]",
-        "af.l7":"[KURDISH: Prayer]","af.l7.abs":"[KURDISH: A sentence addressed to someone.]",
-        "af.l8":"[KURDISH: Dhikr]","af.l8.abs":"[KURDISH: One word for one month.]",
-        "af.l9":"[KURDISH: Silence]","af.l9.abs":"[KURDISH: Speech without sound.]",
-        "af.l10":"[KURDISH: Field]","af.l10.abs":"[KURDISH: The environment in which you speak.]",
-        "af.l11":"[KURDISH: Sentence]","af.l11.abs":"[KURDISH: The line that does not yet feel true.]",
-        "af.l12":"[KURDISH: Surrender]","af.l12.abs":"[KURDISH: Letting go of the sentence after speaking it.]",
-        "ini.eyebrow":"٠٦ / [KURDISH: BECOME A STUDENT]",
-        "ini.title.1":"[KURDISH: Become]",
-        "ini.title.2":"[KURDISH: a student.]",
-        "ini.lede":"[KURDISH: Enrollment at Agyan is a small commitment to attention. Three letters per month: long reads, no promotions. The first letter arrives within two days. Admitted students gain access to all forty-eight lessons, monthly group sessions, and a private reading list.]",
-        "ini.name.label":"[KURDISH: Name]",
-        "ini.email.label":"[KURDISH: Email address]",
-        "ini.lang.label":"[KURDISH: Primary language]",
-        "ini.why.label":"[KURDISH: What brings you here]",
-        "ini.why.ph":"[KURDISH: One or two sentences. Optional.]",
-        "ini.cta":"[KURDISH: Send the first letter]",
-        "ini.note":"[KURDISH: You can unsubscribe from any letter. We never sell or share addresses.]",
-        "ini.thanks":"[KURDISH: Received. The first letter arrives within two days.]",
-        "foot.about.body":"[KURDISH: An independent institution for research and practice. Founded by Avin Dabaghchimokri.]",
-        "foot.colophon.left":"AGYAN · [KURDISH: MAHABAD] · EST. 2014",
-        "foot.colophon.right":"[KURDISH: VERSION 02 · 2026]"
+        "hero.title.2":"",
+        "hero.rotator.1":"",
+        "hero.rotator.2":"",
+        "hero.rotator.3":"",
+        "hero.body.1":"",
+        "hero.body.2":"",
+        "hero.meta.tracks":"",
+        "hero.meta.lessons":"",
+        "hero.meta.year":"",
+        "hero.meta.lang":"",
+        "hero.cta.primary":"",
+        "hero.cta.secondary":"",
+        "cos.eyebrow":"٠٢ / ",
+        "cos.title.1":"",
+        "cos.title.2":"",
+        "cos.lede":"",
+        "cos.quote":"",
+        "cos.quote.cite":"",
+        "house.1.title":"",            "house.1.question":"",                                              "house.1.link":"",
+        "house.2.title":"",               "house.2.question":"",                                            "house.2.link":"",
+        "house.3.title":"",              "house.3.question":"",                                    "house.3.link":"",
+        "house.4.title":"",          "house.4.question":"",                         "house.4.link":"",
+        "house.5.title":"",        "house.5.question":"",                                   "house.5.link":"",
+        "house.6.title":"",        "house.6.question":"",                                  "house.6.link":"",
+        "house.7.title":"",         "house.7.question":"",                                   "house.7.link":"",
+        "house.8.title":"",       "house.8.question":"",             "house.8.link":"",
+        "house.9.title":"","house.9.question":"",                     "house.9.link":"",
+        "house.10.title":"",         "house.10.question":"",             "house.10.link":"",
+        "house.11.title":"",          "house.11.question":"",                                    "house.11.link":"",
+        "house.12.title":"",        "house.12.question":"",                               "house.12.link":"",
+        "pil.eyebrow":"٠٣ / ",
+        "pil.title.1":"",
+        "pil.title.2":"",
+        "pil.lede":"",
+        "curr.m.code":"M · ",
+        "curr.m.title":"",
+        "curr.m.note":"",
+        "curr.ma.code":"MA · ",
+        "curr.ma.title":"",
+        "curr.ma.note":"",
+        "curr.as.code":"AS · ",
+        "curr.as.title":"",
+        "curr.as.note":"",
+        "curr.af.code":"AF · ",
+        "curr.af.title":"",
+        "curr.af.note":"",
+        "curr.meta.lessons":"١٢ ",
+        "curr.meta.open":"٣ ",
+        "curr.meta.cta":"› ",
+        "bre.eyebrow":"٠٤ / ",
+        "bre.title.1":"",
+        "bre.title.2":"",
+        "bre.lede":"",
+        "bre.p.478":"٤-٧-٨ · ",
+        "bre.p.478.note":"",
+        "bre.p.box":"",
+        "bre.p.box.note":"",
+        "bre.p.hanaseh":"",
+        "bre.p.hanaseh.note":"",
+        "bre.cta":"",
+        "bre.phase.in":"",
+        "bre.phase.hold":"",
+        "bre.phase.out":"",
+        "bre.quote":"",
+        "bre.quote.cite":"LAB-01 / ",
+        "cur.eyebrow":"٠٥ / ",
+        "cur.title.1":"",
+        "cur.title.2":"",
+        "cur.lede":"",
+        "m.l1":"","m.l1.abs":"",
+        "m.l2":"","m.l2.abs":"",
+        "m.l3":"","m.l3.abs":"",
+        "m.l4":"","m.l4.abs":"",
+        "m.l5":"","m.l5.abs":"",
+        "m.l6":"","m.l6.abs":"",
+        "m.l7":"","m.l7.abs":"",
+        "m.l8":"","m.l8.abs":"",
+        "m.l9":"","m.l9.abs":"",
+        "m.l10":"","m.l10.abs":"",
+        "m.l11":"","m.l11.abs":"",
+        "m.l12":"","m.l12.abs":"",
+        "ma.l1":"","ma.l1.abs":"",
+        "ma.l2":"","ma.l2.abs":"",
+        "ma.l3":"","ma.l3.abs":"",
+        "ma.l4":"","ma.l4.abs":"",
+        "ma.l5":"","ma.l5.abs":"",
+        "ma.l6":"","ma.l6.abs":"",
+        "ma.l7":"","ma.l7.abs":"",
+        "ma.l8":"","ma.l8.abs":"",
+        "ma.l9":"","ma.l9.abs":"",
+        "ma.l10":"","ma.l10.abs":"",
+        "ma.l11":"","ma.l11.abs":"",
+        "ma.l12":"","ma.l12.abs":"",
+        "as.l1":"","as.l1.abs":"",
+        "as.l2":"","as.l2.abs":"",
+        "as.l3":"","as.l3.abs":"",
+        "as.l4":"","as.l4.abs":"",
+        "as.l5":"","as.l5.abs":"",
+        "as.l6":"","as.l6.abs":"",
+        "as.l7":"","as.l7.abs":"",
+        "as.l8":"","as.l8.abs":"",
+        "as.l9":"","as.l9.abs":"",
+        "as.l10":"","as.l10.abs":"",
+        "as.l11":"","as.l11.abs":"",
+        "as.l12":"","as.l12.abs":"",
+        "af.l1":"","af.l1.abs":"",
+        "af.l2":"","af.l2.abs":"",
+        "af.l3":"","af.l3.abs":"",
+        "af.l4":"","af.l4.abs":"",
+        "af.l5":"","af.l5.abs":"",
+        "af.l6":"","af.l6.abs":"",
+        "af.l7":"","af.l7.abs":"",
+        "af.l8":"","af.l8.abs":"",
+        "af.l9":"","af.l9.abs":"",
+        "af.l10":"","af.l10.abs":"",
+        "af.l11":"","af.l11.abs":"",
+        "af.l12":"","af.l12.abs":"",
+        "ini.eyebrow":"٠٦ / ",
+        "ini.title.1":"",
+        "ini.title.2":"",
+        "ini.lede":"",
+        "ini.name.label":"",
+        "ini.email.label":"",
+        "ini.lang.label":"",
+        "ini.why.label":"",
+        "ini.why.ph":"",
+        "ini.cta":"",
+        "ini.note":"",
+        "ini.thanks":"",
+        "foot.about.body":"",
+        "foot.colophon.left":"AGYAN ·  · EST. 2014",
+        "foot.colophon.right":""
       }
     };
     for (const lang of ['fa','en','ckb']){
