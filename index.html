@@ -160,8 +160,7 @@
     }
     .cursor-dot{width:8px;height:8px;background:var(--ink);border-radius:50%;mix-blend-mode:difference}
     .cursor-ring{width:32px;height:32px;border:1px solid rgba(245,230,211,.55);border-radius:50%;transition:width .2s ease, height .2s ease, border-color .2s ease}
-    .cursor-ring.is-hover{width:54px;height:54px;border-color:var(--heritage)}
-    @media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{display:none} }
+    .cursor-ring.is-hover{width:54px;height:54px;border-color:var(--heritage)}@media (hover:none), (pointer:coarse){ .cursor-dot,.cursor-ring{display:none} }
 
     /* Layout primitives -------------------------------------- */
     .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative;z-index:2}
@@ -280,7 +279,7 @@
     h1, h2, h3, h4{font-weight:500;line-height:1.15;color:var(--ink);letter-spacing:-.015em}
     h1{
       font-family:var(--display-fa);
-      font-size:clamp(30px, 4.4vw, 60px);
+      font-size:clamp(40px, 6.5vw, 96px);
       letter-spacing:-.02em;
       margin:.4em 0 .35em;
     }
@@ -288,7 +287,7 @@
     html[lang="en"] h1{letter-spacing:-.025em}
     h2{
       font-family:var(--display-fa);
-      font-size:clamp(24px, 3.2vw, 42px);
+      font-size:clamp(28px, 4.2vw, 56px);
       letter-spacing:-.015em;
       margin:.4em 0 .3em;
     }
@@ -364,8 +363,7 @@
       width:8px;height:8px;border-radius:50%;background:var(--heritage);
       box-shadow:0 0 0 0 rgba(201,165,92,.55);
       animation:agpulse 2.4s ease-out infinite;
-    }
-    @keyframes agpulse{
+    }@keyframes agpulse{
       0%{box-shadow:0 0 0 0 rgba(201,165,92,.55)}
       70%{box-shadow:0 0 0 14px rgba(201,165,92,0)}
       100%{box-shadow:0 0 0 0 rgba(201,165,92,0)}
@@ -384,55 +382,45 @@
     .hero-rotator .word.in{opacity:1;transform:translateY(0)}
 
     /* =========================================================
-       CHAPTER 2 - The Cosmos (twelve houses)
+       CHAPTER 2 - The Cosmos (zodiac)
        ========================================================= */
     .chapter-2 .cosmos-grid{display:grid;grid-template-columns:1fr;gap:40px}
     .zodiac-ring{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:0;
+      grid-template-columns:repeat(6,1fr);
+      gap:8px;
       margin-top:48px;
       border-top:1px solid var(--line);
       padding-top:24px;
     }
     .zodiac-cell{
-      padding:24px 20px;
+      padding:18px 12px;
       border-inline-end:1px solid rgba(201,165,92,.12);
-      border-bottom:1px solid rgba(201,165,92,.06);
       transition:background .25s ease, color .25s ease;
       cursor:default;
       position:relative;
-      display:flex;flex-direction:column;gap:10px;
-      min-height:170px;
+      min-height:96px;
     }
-    .zodiac-cell:nth-child(4n){border-inline-end:0}
-    .zodiac-cell:nth-last-child(-n+4){border-bottom:0}
+    .zodiac-cell:last-child{border-inline-end:0}
     .zodiac-cell:hover{background:rgba(201,165,92,.04)}
     .zodiac-cell.current{background:rgba(201,165,92,.08)}
-    .z-num{
-      font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--heritage);display:block;line-height:1;
+    .zodiac-cell.current .z-glyph{color:var(--heritage)}
+    .z-glyph{
+      font-size:24px;color:var(--ink);line-height:1;display:block;margin-bottom:8px;
+      font-family:var(--display-en);
     }
     .z-name{
-      font-family:var(--display-en-italic);font-style:italic;font-weight:500;
-      font-size:clamp(16px,1.4vw,19px);color:var(--ink);line-height:1.3;
-      display:block;
-    }
-    html[lang="fa"] .z-name, html[lang="ckb"] .z-name{
-      font-family:var(--display-fa);font-style:normal;font-weight:500;
-    }
-    .z-question{
-      font-family:var(--display-en-italic);font-style:italic;
-      font-size:13px;color:var(--ink-muted);line-height:1.55;
-      display:block;margin-top:2px;
-    }
-    html[lang="fa"] .z-question, html[lang="ckb"] .z-question{
-      font-family:var(--body-fa, var(--display-fa));font-style:normal;
-    }
-    .z-link{
       font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--ink-faint);margin-top:auto;display:block;padding-top:6px;
+      color:var(--ink-faint);display:block;
     }
+    .z-tip{
+      position:absolute;inset-inline-start:0;inset-inline-end:0;bottom:calc(100% + 6px);
+      padding:10px 12px;background:var(--bg-elev);border:1px solid rgba(201,165,92,.12);
+      font-size:11px;color:var(--ink);line-height:1.5;
+      opacity:0;pointer-events:none;transition:opacity .25s ease;
+      z-index:5;
+    }
+    .zodiac-cell:hover .z-tip{opacity:1}
 
     /* =========================================================
        CHAPTER 3 - The Four Pillars
@@ -515,20 +503,17 @@
       background:radial-gradient(circle at 35% 35%, rgba(245,230,211,.4), rgba(201,165,92,.25) 60%, transparent 100%);
       box-shadow:0 0 80px rgba(201,165,92,.25);
       animation:breathInner 19s ease-in-out infinite;
-    }
-    @keyframes breathOuter{
+    }@keyframes breathOuter{
       0%, 100% { transform:translate(-50%,-50%) scale(.85); opacity:.35 }
       20%      { transform:translate(-50%,-50%) scale(1.0);  opacity:.6 }
       55%      { transform:translate(-50%,-50%) scale(1.0);  opacity:.6 }
       85%      { transform:translate(-50%,-50%) scale(.85);  opacity:.35 }
-    }
-    @keyframes breathMid{
+    }@keyframes breathMid{
       0%, 100% { transform:translate(-50%,-50%) scale(.7); opacity:.4 }
       20%      { transform:translate(-50%,-50%) scale(1.0); opacity:.75 }
       55%      { transform:translate(-50%,-50%) scale(1.0); opacity:.75 }
       85%      { transform:translate(-50%,-50%) scale(.7);  opacity:.4 }
-    }
-    @keyframes breathInner{
+    }@keyframes breathInner{
       0%, 100% { transform:translate(-50%,-50%) scale(.6); }
       20%      { transform:translate(-50%,-50%) scale(1.1); }
       55%      { transform:translate(-50%,-50%) scale(1.1); }
@@ -612,8 +597,7 @@
       position:relative;aspect-ratio:1/1;max-width:420px;margin:0 auto;
       display:flex;align-items:center;justify-content:center;
     }
-    .torus-svg{width:100%;height:100%;animation:torusSpin 60s linear infinite}
-    @keyframes torusSpin{
+    .torus-svg{width:100%;height:100%;animation:torusSpin 60s linear infinite}@keyframes torusSpin{
       0%{transform:rotate(0)}
       100%{transform:rotate(360deg)}
     }
@@ -717,24 +701,14 @@
       transition:stroke-dashoffset 2.5s ease;
     }
     .constellation circle{fill:var(--heritage);opacity:.6}
-    .constellation.drawn path{stroke-dashoffset:0}
-
-    /* =========================================================
-       Mobile
-       ========================================================= */
-    @media (max-width: 980px){
+    .constellation.drawn path{stroke-dashoffset:0}@media (max-width: 980px){
       .pillars-grid{grid-template-columns:repeat(2,1fr)}
       .tracks-deck{grid-template-columns:1fr}
       .site-footer .wrap{grid-template-columns:1fr 1fr;gap:32px}
       .chapter-4 .breath-grid{grid-template-columns:1fr;gap:32px}
       .initiation{grid-template-columns:1fr;gap:48px}
-      .zodiac-ring{grid-template-columns:repeat(2,1fr)}
-      .zodiac-cell:nth-child(4n){border-inline-end:1px solid rgba(201,165,92,.12)}
-      .zodiac-cell:nth-child(2n){border-inline-end:0}
-      .zodiac-cell:nth-last-child(-n+4){border-bottom:1px solid rgba(201,165,92,.06)}
-      .zodiac-cell:nth-last-child(-n+2){border-bottom:0}
-    }
-    @media (max-width: 720px){
+      .zodiac-ring{grid-template-columns:repeat(3,1fr)}
+    }@media (max-width: 720px){
       .nav-links{display:none}
       .nav-toggle{display:inline-flex}
       .nav-wrap.is-open .nav-links{
@@ -756,20 +730,13 @@
       .site-footer .wrap{grid-template-columns:1fr}
       .hero-meta-row{gap:18px}
       .lesson-list{grid-template-columns:1fr}
-      .zodiac-ring{grid-template-columns:1fr}
-      .zodiac-cell{border-inline-end:0 !important;border-bottom:1px solid rgba(201,165,92,.06) !important}
-      .zodiac-cell:last-child{border-bottom:0 !important}
-    }
-    @media (prefers-reduced-motion: reduce){
+      .zodiac-ring{grid-template-columns:repeat(3,1fr)}
+    }@media (prefers-reduced-motion: reduce){
       *, *::before, *::after{
         animation-duration:.001ms !important;animation-iteration-count:1 !important;
         transition-duration:.001ms !important;scroll-behavior:auto !important;
       }
-    }
-  </style>
-  <link rel="stylesheet" href="assets/header.css">
-  <link rel="stylesheet" href="assets/polish.css">
-  <script defer src="assets/header.js"></script>
+    }</style>
 </head>
 <body>
 <!--SHELL:ACCENT:#e6b9a6-->
@@ -788,10 +755,6 @@
     <circle cx="220" cy="540" r="1.3"/><circle cx="420" cy="660" r="1.4"/><circle cx="640" cy="580" r="1.2"/>
     <circle cx="820" cy="700" r="1.3"/><circle cx="1000" cy="620" r="1.4"/><circle cx="1200" cy="740" r="1.2"/>
     <path d="M180,120 L360,80 L520,200 L710,140 L900,220"/>
-    <path d="M900,220 L1080,120 L1250,280 L1420,160"/>
-    <path d="M220,540 L420,660 L640,580 L820,700 L1000,620 L1200,740"/>
-    <path d="M520,200 L640,580"/>
-    <path d="M900,220 L1000,620"/>
   </svg>
 
   <!-- progress bar -->
@@ -820,13 +783,12 @@
 <!--SHELL:HEADER-->
   <header class="site-header">
     <div class="nav-wrap" id="navWrap">
-      <a href="./" class="brand" aria-label="Agyan">
+      <a href="index.html" class="brand" aria-label="Agyan">
         <span class="brand-mark" aria-hidden="true">
           <!-- Eight-pointed star (Najmeh-ye Hashtgūsh) - Persian-Islamic geometric tradition -->
           <svg viewBox="0 0 32 32" fill="none">
             <g stroke="#c9a55c" stroke-width="1.1" stroke-linejoin="round">
               <path d="M16 2 L18.1 13.9 L30 16 L18.1 18.1 L16 30 L13.9 18.1 L2 16 L13.9 13.9 Z"/>
-              <path d="M16 5 L23 16 L16 27 L9 16 Z" opacity=".75"/>
               <circle cx="16" cy="16" r="1.4" fill="#c9a55c" stroke="none"/>
             </g>
           </svg>
@@ -841,12 +803,12 @@
       </button>
       <nav aria-label="Primary">
         <ul class="nav-links">
-          <li><a href="./" aria-current="page" data-i18n="nav.home">Home</a></li>
-          <li><a href="curriculum/" data-i18n="nav.curriculum">Curriculum</a></li>
-          <li><a href="lab/" data-i18n="nav.lab">Lab</a></li>
-          <li><a href="library" data-i18n="nav.library">Library</a></li>
-          <li><a href="about" data-i18n="nav.about">Founder</a></li>
-          <li><a href="admissions" data-i18n="nav.admissions">Admissions</a></li>
+          <li><a href="index.html" aria-current="page" data-i18n="nav.home">Home</a></li>
+          <li><a href="curriculum/index.html" data-i18n="nav.curriculum">Curriculum</a></li>
+          <li><a href="lab/index.html" data-i18n="nav.lab">Lab</a></li>
+          <li><a href="library.html" data-i18n="nav.library">Library</a></li>
+          <li><a href="about.html" data-i18n="nav.about">Founder</a></li>
+          <li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li>
         </ul>
       </nav>
       <div class="lang-switch" role="group" aria-label="Language">
@@ -877,14 +839,14 @@
 
         <div class="hero-rotator reveal" id="heroRotator" aria-live="polite"></div>
 
-        <div class="hero-body reveal" style="margin-top:var(--s4);max-width:54ch;display:flex;flex-direction:column;gap:12px;font-size:14.5px;line-height:1.65;color:var(--ink-muted,#c9bcb0);">
+        <div class="hero-body reveal" style="margin-top:var(--s4);max-width:60ch;display:flex;flex-direction:column;gap:18px;">
           <p data-i18n="hero.body.1">Agyan is a digital school of contemplative practice. Four study tracks across forty-eight lessons, taught in cohorts over a single year, with monthly group sessions and a private reading list.</p>
-          <p data-i18n="hero.body.2">Five teachings, one practice: breath, language, body, cosmos, intention. The Agyan curriculum walks these one room at a time.</p>
+          <p data-i18n="hero.body.2">Founded by Avin Dabaghchimokri after two decades of practice across Sufi, Jungian, and contemplative astrological traditions, with roots in Kurdish-Iranian spiritual heritage.</p>
         </div>
 
         <div class="row-flex reveal" style="margin-top:var(--s5);">
           <a href="#chapter-5" class="btn" data-i18n="hero.cta.primary">Begin a lesson <span class="arrow" aria-hidden="true">&rarr;</span></a>
-          <a href="about" class="btn btn-ghost" data-i18n="hero.cta.secondary">About Avin</a>
+          <a href="about.html" class="btn btn-ghost" data-i18n="hero.cta.secondary">About Avin</a>
         </div>
 
         <dl class="hero-meta-row reveal">
@@ -913,90 +875,78 @@
          ============================================================ -->
     <section class="chapter chapter-2" id="chapter-2" data-chapter="2" aria-labelledby="c2-title">
       <div class="wrap">
-        <span class="eyebrow lav" data-i18n="cos.eyebrow">02 / HOUSES</span>
+        <span class="eyebrow lav" data-i18n="cos.eyebrow">02 / COSMOS</span>
         <h2 id="c2-title" class="reveal" style="margin-top:var(--s2);">
-          <span data-i18n="cos.title.1">The twelve</span>
-          <span class="display-em" data-i18n="cos.title.2">houses.</span>
+          <span data-i18n="cos.title.1">The cosmos</span>
+          <span class="display-em" data-i18n="cos.title.2">as a mirror.</span>
         </h2>
-        <p class="lead reveal" data-i18n="cos.lede">The astrology track at Agyan does not begin with sun signs. It begins with houses, the twelve domains that map a life: where you stand, what you hold, how you communicate, what you build. Each house is a doorway to a single sustained question. The Agyan astrology curriculum is twelve lessons because the chart is twelve rooms. We walk one room at a time.</p>
+        <p class="lead reveal" data-i18n="cos.lede">In the Agyan tradition, astrology is not predictive but contemplative: a mirror for attention. The natal chart is a map of where you live, what you cannot see. From Al-Biruni's Tafhim through Renaissance Latin astrology to contemporary depth psychology, one ancient practice, read by a modern hand.</p>
 
         <aside class="margin-note" data-reveal-once>
           <span data-i18n="cos.quote">A chart is not a map; it is a language one can listen to.</span>
-          <cite data-i18n="cos.quote.cite"></cite>
+          <cite data-i18n="cos.quote.cite">Avin Dabaghchimokri, 2020</cite>
         </aside>
 
         <div class="zodiac-ring reveal">
-          <div class="zodiac-cell" data-h="1">
-            <span class="z-num">House I</span>
-            <span class="z-name" data-i18n="house.1.title">The Body You Arrived In</span>
-            <span class="z-question" data-i18n="house.1.question">How do you appear before you speak?</span>
-            <span class="z-link" data-i18n="house.1.link">Studied in AS-01</span>
+          <div class="zodiac-cell" data-z="aries">
+            <span class="z-glyph">&#9800;</span>
+            <span class="z-name" data-i18n="z.aries">Aries · Mar 21 - Apr 19</span>
+            <span class="z-tip" data-i18n="z.aries.note">The discipline of beginning. Studied in track AS-04.</span>
           </div>
-          <div class="zodiac-cell" data-h="2">
-            <span class="z-num">House II</span>
-            <span class="z-name" data-i18n="house.2.title">The Things You Carry</span>
-            <span class="z-question" data-i18n="house.2.question">What do you consider yours, and why?</span>
-            <span class="z-link" data-i18n="house.2.link">Studied in AS-02</span>
+          <div class="zodiac-cell" data-z="taurus">
+            <span class="z-glyph">&#9801;</span>
+            <span class="z-name" data-i18n="z.taurus">Taurus · Apr 20 - May 20</span>
+            <span class="z-tip" data-i18n="z.taurus.note">The discipline of staying. Studied in AS-05.</span>
           </div>
-          <div class="zodiac-cell" data-h="3">
-            <span class="z-num">House III</span>
-            <span class="z-name" data-i18n="house.3.title">The Voice in the Room</span>
-            <span class="z-question" data-i18n="house.3.question">What did you learn first, and who taught it?</span>
-            <span class="z-link" data-i18n="house.3.link">Studied in AS-03</span>
+          <div class="zodiac-cell" data-z="gemini">
+            <span class="z-glyph">&#9802;</span>
+            <span class="z-name" data-i18n="z.gemini">Gemini · May 21 - Jun 20</span>
+            <span class="z-tip" data-i18n="z.gemini.note">Language as inquiry. Studied in AS-06.</span>
           </div>
-          <div class="zodiac-cell" data-h="4">
-            <span class="z-num">House IV</span>
-            <span class="z-name" data-i18n="house.4.title">The Roof Over Your Memory</span>
-            <span class="z-question" data-i18n="house.4.question">Where do you go when you close your eyes and feel safe?</span>
-            <span class="z-link" data-i18n="house.4.link">Studied in AS-04</span>
+          <div class="zodiac-cell" data-z="cancer">
+            <span class="z-glyph">&#9803;</span>
+            <span class="z-name" data-i18n="z.cancer">Cancer · Jun 21 - Jul 22</span>
+            <span class="z-tip" data-i18n="z.cancer.note">Home as boundary. Studied in AS-07.</span>
           </div>
-          <div class="zodiac-cell" data-h="5">
-            <span class="z-num">House V</span>
-            <span class="z-name" data-i18n="house.5.title">The Things You Make for Joy</span>
-            <span class="z-question" data-i18n="house.5.question">What do you do that no one is paying you for?</span>
-            <span class="z-link" data-i18n="house.5.link">Studied in AS-05</span>
+          <div class="zodiac-cell" data-z="leo">
+            <span class="z-glyph">&#9804;</span>
+            <span class="z-name" data-i18n="z.leo">Leo · Jul 23 - Aug 22</span>
+            <span class="z-tip" data-i18n="z.leo.note">The appearance of self. Studied in AS-08.</span>
           </div>
-          <div class="zodiac-cell" data-h="6">
-            <span class="z-num">House VI</span>
-            <span class="z-name" data-i18n="house.6.title">The Hands You Use Every Day</span>
-            <span class="z-question" data-i18n="house.6.question">What work makes you a craftsman, not a worker?</span>
-            <span class="z-link" data-i18n="house.6.link">Studied in AS-06</span>
+          <div class="zodiac-cell" data-z="virgo">
+            <span class="z-glyph">&#9805;</span>
+            <span class="z-name" data-i18n="z.virgo">Virgo · Aug 23 - Sep 22</span>
+            <span class="z-tip" data-i18n="z.virgo.note">Precision and service. Studied in AS-09.</span>
           </div>
-          <div class="zodiac-cell" data-h="7">
-            <span class="z-num">House VII</span>
-            <span class="z-name" data-i18n="house.7.title">The Mirror Across From You</span>
-            <span class="z-question" data-i18n="house.7.question">Who do you become in the presence of another?</span>
-            <span class="z-link" data-i18n="house.7.link">Studied in AS-07</span>
+          <div class="zodiac-cell" data-z="libra">
+            <span class="z-glyph">&#9806;</span>
+            <span class="z-name" data-i18n="z.libra">Libra · Sep 23 - Oct 22</span>
+            <span class="z-tip" data-i18n="z.libra.note">The discipline of relation. Studied in AS-10.</span>
           </div>
-          <div class="zodiac-cell" data-h="8">
-            <span class="z-num">House VIII</span>
-            <span class="z-name" data-i18n="house.8.title">The Door You Have Not Opened</span>
-            <span class="z-question" data-i18n="house.8.question">What inheritance, debt, or grief are you carrying for someone else?</span>
-            <span class="z-link" data-i18n="house.8.link">Studied in AS-08</span>
+          <div class="zodiac-cell" data-z="scorpio">
+            <span class="z-glyph">&#9807;</span>
+            <span class="z-name" data-i18n="z.scorpio">Scorpio · Oct 23 - Nov 21</span>
+            <span class="z-tip" data-i18n="z.scorpio.note">The courage of depth. Studied in AS-11.</span>
           </div>
-          <div class="zodiac-cell" data-h="9">
-            <span class="z-num">House IX</span>
-            <span class="z-name" data-i18n="house.9.title">The Distance You Travel In Your Mind</span>
-            <span class="z-question" data-i18n="house.9.question">What belief have you held that turned out to be a doorway?</span>
-            <span class="z-link" data-i18n="house.9.link">Studied in AS-09</span>
+          <div class="zodiac-cell" data-z="sagittarius">
+            <span class="z-glyph">&#9808;</span>
+            <span class="z-name" data-i18n="z.sagit">Sagittarius · Nov 22 - Dec 21</span>
+            <span class="z-tip" data-i18n="z.sagit.note">Horizon and philosophy. Studied in AS-12.</span>
           </div>
-          <div class="zodiac-cell" data-h="10">
-            <span class="z-num">House X</span>
-            <span class="z-name" data-i18n="house.10.title">The Name You Are Building</span>
-            <span class="z-question" data-i18n="house.10.question">What would you like written on the door of the room you walk into?</span>
-            <span class="z-link" data-i18n="house.10.link">Studied in AS-10</span>
+          <div class="zodiac-cell" data-z="capricorn">
+            <span class="z-glyph">&#9809;</span>
+            <span class="z-name" data-i18n="z.cap">Capricorn · Dec 22 - Jan 19</span>
+            <span class="z-tip" data-i18n="z.cap.note">Building in time. Studied in AS-01.</span>
           </div>
-          <div class="zodiac-cell" data-h="11">
-            <span class="z-num">House XI</span>
-            <span class="z-name" data-i18n="house.11.title">The Circle You Belong To</span>
-            <span class="z-question" data-i18n="house.11.question">Who would notice if you stopped showing up?</span>
-            <span class="z-link" data-i18n="house.11.link">Studied in AS-11</span>
+          <div class="zodiac-cell" data-z="aquarius">
+            <span class="z-glyph">&#9810;</span>
+            <span class="z-name" data-i18n="z.aqua">Aquarius · Jan 20 - Feb 18</span>
+            <span class="z-tip" data-i18n="z.aqua.note">Impersonal belonging. Studied in AS-02.</span>
           </div>
-          <div class="zodiac-cell" data-h="12">
-            <span class="z-num">House XII</span>
-            <span class="z-name" data-i18n="house.12.title">The Quiet Behind the Quiet</span>
-            <span class="z-question" data-i18n="house.12.question">What part of you only speaks when you are alone?</span>
-            <span class="z-link" data-i18n="house.12.link">Studied in AS-12</span>
+          <div class="zodiac-cell" data-z="pisces">
+            <span class="z-glyph">&#9811;</span>
+            <span class="z-name" data-i18n="z.pisc">Pisces · Feb 19 - Mar 20</span>
+            <span class="z-tip" data-i18n="z.pisc.note">Release and dream. Studied in AS-03.</span>
           </div>
         </div>
       </div>
@@ -1015,19 +965,19 @@
         <p class="lead pillars-intro reveal" data-i18n="pil.lede">Four tracks, twelve lessons each, taught in cohorts and drawn from primary sources. The first three lessons of every track are open to all; lessons four through twelve are reserved for admitted students of the annual program.</p>
 
         <div class="pillars-grid reveal">
-          <a class="pillar m" href="curriculum/meditation">
+          <a class="pillar m" href="curriculum/meditation.html">
             <span class="orb" aria-hidden="true"></span>
             <div>
               <span class="code" data-i18n="curr.m.code">M · MEDITATION</span>
               <h3 data-i18n="curr.m.title">Meditation</h3>
-              <p class="note" data-i18n="curr.m.note">Sitting practice through breath, posture, and repetition. Twelve lessons on the body as antenna and silence as technique.</p>
+              <p class="note" data-i18n="curr.m.note">Sitting practice drawn from the Qadiri Sufi tradition, refracted through contemporary somatic literacy. Twelve lessons on posture, breath, the names of God in repetition, and the body as the antenna.</p>
             </div>
             <div class="meta">
               <span class="mono" data-i18n="curr.meta.lessons">12 LESSONS</span>
               <span class="mono" data-i18n="curr.meta.cta">&rsaquo; Begin track</span>
             </div>
           </a>
-          <a class="pillar ma" href="curriculum/manifestation">
+          <a class="pillar ma" href="curriculum/manifestation.html">
             <span class="orb" aria-hidden="true"></span>
             <div>
               <span class="code" data-i18n="curr.ma.code">MA · MANIFESTATION</span>
@@ -1039,19 +989,19 @@
               <span class="mono" data-i18n="curr.meta.cta">&rsaquo; Begin track</span>
             </div>
           </a>
-          <a class="pillar as" href="curriculum/astrology">
+          <a class="pillar as" href="curriculum/astrology.html">
             <span class="orb" aria-hidden="true"></span>
             <div>
               <span class="code" data-i18n="curr.as.code">AS · ASTROLOGY</span>
               <h3 data-i18n="curr.as.title">Astrology</h3>
-              <p class="note" data-i18n="curr.as.note">The chart as a map, not a forecast. Twelve houses as rooms of a life. Sun, Moon, and the Ascendant as the three doors.</p>
+              <p class="note" data-i18n="curr.as.note">The chart as a map, not a forecast. Twelve houses as rooms of a life. Sun, Moon, and the Ascendant as the three doors. Lineage from Al-Biruni to Demetra George.</p>
             </div>
             <div class="meta">
               <span class="mono" data-i18n="curr.meta.lessons">12 LESSONS</span>
               <span class="mono" data-i18n="curr.meta.cta">&rsaquo; Begin track</span>
             </div>
           </a>
-          <a class="pillar af" href="curriculum/affirmation">
+          <a class="pillar af" href="curriculum/affirmation.html">
             <span class="orb" aria-hidden="true"></span>
             <div>
               <span class="code" data-i18n="curr.af.code">AF · AFFIRMATION</span>
@@ -1100,7 +1050,7 @@
                 <span class="ink-faint" style="font-size:11px;padding-inline-start:14px;" data-i18n="bre.p.hanaseh.note">For long sitting and dhikr.</span>
               </div>
             </div>
-            <a href="lab/breath" class="btn btn-ghost btn-mini" style="margin-top:8px;"><span class="arrow" aria-hidden="true">&rsaquo;</span> <span data-i18n="bre.cta">Full breath instrument</span></a>
+            <a href="lab/breath.html" class="btn btn-ghost btn-mini" style="margin-top:8px;"><span class="arrow" aria-hidden="true">&rsaquo;</span> <span data-i18n="bre.cta">Full breath instrument</span></a>
           </div>
         </div>
 
@@ -1133,9 +1083,9 @@
               <span class="code">M / 01-12</span>
             </div>
             <ol class="lesson-list">
-              <li class="open"><span class="ln">M-01</span> <span><a href="curriculum/m-01-sitting"><span data-i18n="m.l1">Sitting as non-action</span></a><span class="lesson-abstract" data-i18n="m.l1.abs">Why the chair matters, why posture is a doorway, and the difference between sitting still and sitting in stillness.</span></span></li>
-              <li class="open"><span class="ln">M-02</span> <span><a href="curriculum/m-02-counting"><span data-i18n="m.l2">Counting</span></a><span class="lesson-abstract" data-i18n="m.l2.abs">Four counts of one to four, and what happens in the spaces between them.</span></span></li>
-              <li class="open"><span class="ln">M-03</span> <span><a href="curriculum/m-03-silence"><span data-i18n="m.l3">Silence</span></a><span class="lesson-abstract" data-i18n="m.l3.abs">Two kinds of silence: the absence of sound, and the presence of attention.</span></span></li>
+              <li class="open"><span class="ln">M-01</span> <span><a href="curriculum/m-01-sitting.html"><span data-i18n="m.l1">Sitting as non-action</span></a><span class="lesson-abstract" data-i18n="m.l1.abs">Why the chair matters, why posture is a doorway, and the difference between sitting still and sitting in stillness.</span></span></li>
+              <li class="open"><span class="ln">M-02</span> <span><a href="curriculum/m-02-counting.html"><span data-i18n="m.l2">Counting</span></a><span class="lesson-abstract" data-i18n="m.l2.abs">Four counts of one to four, and what happens in the spaces between them.</span></span></li>
+              <li class="open"><span class="ln">M-03</span> <span><a href="curriculum/m-03-silence.html"><span data-i18n="m.l3">Silence</span></a><span class="lesson-abstract" data-i18n="m.l3.abs">Two kinds of silence: the absence of sound, and the presence of attention.</span></span></li>
               <li class="coming"><span class="ln">M-04</span> <span><span data-i18n="m.l4">Dhikr</span><span class="lesson-abstract" data-i18n="m.l4.abs">Repetition of a name as anchor, not as charm.</span></span></li>
               <li class="coming"><span class="ln">M-05</span> <span><span data-i18n="m.l5">Watching</span><span class="lesson-abstract" data-i18n="m.l5.abs">Seeing the thought without following it.</span></span></li>
               <li class="coming"><span class="ln">M-06</span> <span><span data-i18n="m.l6">Release</span><span class="lesson-abstract" data-i18n="m.l6.abs">Opening the body from its quiet contraction.</span></span></li>
@@ -1157,9 +1107,9 @@
               <span class="code">MA / 01-12</span>
             </div>
             <ol class="lesson-list">
-              <li class="open"><span class="ln">MA-01</span> <span><a href="curriculum/ma-01-attention"><span data-i18n="ma.l1">Attention</span></a><span class="lesson-abstract" data-i18n="ma.l1.abs">Manifestation begins with what you look at.</span></span></li>
-              <li class="open"><span class="ln">MA-02</span> <span><a href="curriculum/ma-02-intention"><span data-i18n="ma.l2">Intention</span></a><span class="lesson-abstract" data-i18n="ma.l2.abs">The difference between wish, want, and intention.</span></span></li>
-              <li class="open"><span class="ln">MA-03</span> <span><a href="curriculum/ma-03-body"><span data-i18n="ma.l3">Body</span></a><span class="lesson-abstract" data-i18n="ma.l3.abs">The body knows before the mind does.</span></span></li>
+              <li class="open"><span class="ln">MA-01</span> <span><a href="curriculum/ma-01-attention.html"><span data-i18n="ma.l1">Attention</span></a><span class="lesson-abstract" data-i18n="ma.l1.abs">Manifestation begins with what you look at.</span></span></li>
+              <li class="open"><span class="ln">MA-02</span> <span><a href="curriculum/ma-02-intention.html"><span data-i18n="ma.l2">Intention</span></a><span class="lesson-abstract" data-i18n="ma.l2.abs">The difference between wish, want, and intention.</span></span></li>
+              <li class="open"><span class="ln">MA-03</span> <span><a href="curriculum/ma-03-body.html"><span data-i18n="ma.l3">Body</span></a><span class="lesson-abstract" data-i18n="ma.l3.abs">The body knows before the mind does.</span></span></li>
               <li class="coming"><span class="ln">MA-04</span> <span><span data-i18n="ma.l4">Field</span><span class="lesson-abstract" data-i18n="ma.l4.abs">The environment you stand inside.</span></span></li>
               <li class="coming"><span class="ln">MA-05</span> <span><span data-i18n="ma.l5">Practice</span><span class="lesson-abstract" data-i18n="ma.l5.abs">The daily work nobody sees.</span></span></li>
               <li class="coming"><span class="ln">MA-06</span> <span><span data-i18n="ma.l6">Action</span><span class="lesson-abstract" data-i18n="ma.l6.abs">The small move, not the large plan.</span></span></li>
@@ -1181,9 +1131,9 @@
               <span class="code">AS / 01-12</span>
             </div>
             <ol class="lesson-list">
-              <li class="open"><span class="ln">AS-01</span> <span><a href="curriculum/as-01-circle"><span data-i18n="as.l1">The circle</span></a><span class="lesson-abstract" data-i18n="as.l1.abs">Why the chart is a circle, not a line.</span></span></li>
-              <li class="open"><span class="ln">AS-02</span> <span><a href="curriculum/as-02-planets"><span data-i18n="as.l2">Planets</span></a><span class="lesson-abstract" data-i18n="as.l2.abs">Seven planets as seven faces of attention.</span></span></li>
-              <li class="open"><span class="ln">AS-03</span> <span><a href="curriculum/as-03-houses"><span data-i18n="as.l3">Houses</span></a><span class="lesson-abstract" data-i18n="as.l3.abs">Twelve rooms in a single life.</span></span></li>
+              <li class="open"><span class="ln">AS-01</span> <span><a href="curriculum/as-01-circle.html"><span data-i18n="as.l1">The circle</span></a><span class="lesson-abstract" data-i18n="as.l1.abs">Why the chart is a circle, not a line.</span></span></li>
+              <li class="open"><span class="ln">AS-02</span> <span><a href="curriculum/as-02-planets.html"><span data-i18n="as.l2">Planets</span></a><span class="lesson-abstract" data-i18n="as.l2.abs">Seven planets as seven faces of attention.</span></span></li>
+              <li class="open"><span class="ln">AS-03</span> <span><a href="curriculum/as-03-houses.html"><span data-i18n="as.l3">Houses</span></a><span class="lesson-abstract" data-i18n="as.l3.abs">Twelve rooms in a single life.</span></span></li>
               <li class="coming"><span class="ln">AS-04</span> <span><span data-i18n="as.l4">Ascendant</span><span class="lesson-abstract" data-i18n="as.l4.abs">The door through which you entered the world.</span></span></li>
               <li class="coming"><span class="ln">AS-05</span> <span><span data-i18n="as.l5">Moon</span><span class="lesson-abstract" data-i18n="as.l5.abs">The feeling that moves below the surface.</span></span></li>
               <li class="coming"><span class="ln">AS-06</span> <span><span data-i18n="as.l6">Sun</span><span class="lesson-abstract" data-i18n="as.l6.abs">What you must become.</span></span></li>
@@ -1205,9 +1155,9 @@
               <span class="code">AF / 01-12</span>
             </div>
             <ol class="lesson-list">
-              <li class="open"><span class="ln">AF-01</span> <span><a href="curriculum/af-01-voice"><span data-i18n="af.l1">Voice</span></a><span class="lesson-abstract" data-i18n="af.l1.abs">Sound acts before meaning does.</span></span></li>
-              <li class="open"><span class="ln">AF-02</span> <span><a href="curriculum/af-02-repetition"><span data-i18n="af.l2">Repetition</span></a><span class="lesson-abstract" data-i18n="af.l2.abs">Why repetition is not laziness.</span></span></li>
-              <li class="open"><span class="ln">AF-03</span> <span><a href="curriculum/af-03-writing"><span data-i18n="af.l3">Writing</span></a><span class="lesson-abstract" data-i18n="af.l3.abs">The hand in the ritual of language.</span></span></li>
+              <li class="open"><span class="ln">AF-01</span> <span><a href="curriculum/af-01-voice.html"><span data-i18n="af.l1">Voice</span></a><span class="lesson-abstract" data-i18n="af.l1.abs">Sound acts before meaning does.</span></span></li>
+              <li class="open"><span class="ln">AF-02</span> <span><a href="curriculum/af-02-repetition.html"><span data-i18n="af.l2">Repetition</span></a><span class="lesson-abstract" data-i18n="af.l2.abs">Why repetition is not laziness.</span></span></li>
+              <li class="open"><span class="ln">AF-03</span> <span><a href="curriculum/af-03-writing.html"><span data-i18n="af.l3">Writing</span></a><span class="lesson-abstract" data-i18n="af.l3.abs">The hand in the ritual of language.</span></span></li>
               <li class="coming"><span class="ln">AF-04</span> <span><span data-i18n="af.l4">Speaking</span><span class="lesson-abstract" data-i18n="af.l4.abs">Hearing yourself say it.</span></span></li>
               <li class="coming"><span class="ln">AF-05</span> <span><span data-i18n="af.l5">Listening</span><span class="lesson-abstract" data-i18n="af.l5.abs">The one who listens also writes the sentence.</span></span></li>
               <li class="coming"><span class="ln">AF-06</span> <span><span data-i18n="af.l6">Rhythm</span><span class="lesson-abstract" data-i18n="af.l6.abs">Pulse as structure.</span></span></li>
@@ -1303,7 +1253,6 @@
             <svg viewBox="0 0 32 32" fill="none">
               <g stroke="#c9a55c" stroke-width="1.1" stroke-linejoin="round">
                 <path d="M16 2 L18.1 13.9 L30 16 L18.1 18.1 L16 30 L13.9 18.1 L2 16 L13.9 13.9 Z"/>
-                <path d="M16 5 L23 16 L16 27 L9 16 Z" opacity=".75"/>
                 <circle cx="16" cy="16" r="1.4" fill="#c9a55c" stroke="none"/>
               </g>
             </svg>
@@ -1318,27 +1267,27 @@
       <div>
         <h4 data-i18n="foot.curr.h">Curriculum</h4>
         <ul>
-          <li><a href="curriculum/meditation" data-i18n="curr.m.title">Meditation</a></li>
-          <li><a href="curriculum/manifestation" data-i18n="curr.ma.title">Manifestation</a></li>
-          <li><a href="curriculum/astrology" data-i18n="curr.as.title">Astrology</a></li>
-          <li><a href="curriculum/affirmation" data-i18n="curr.af.title">Affirmation</a></li>
+          <li><a href="curriculum/meditation.html" data-i18n="curr.m.title">Meditation</a></li>
+          <li><a href="curriculum/manifestation.html" data-i18n="curr.ma.title">Manifestation</a></li>
+          <li><a href="curriculum/astrology.html" data-i18n="curr.as.title">Astrology</a></li>
+          <li><a href="curriculum/affirmation.html" data-i18n="curr.af.title">Affirmation</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.lab.h">Lab</h4>
         <ul>
-          <li><a href="lab/breath" data-i18n="lab.breath.title">Hanaseh / breath</a></li>
-          <li><a href="lab/chart" data-i18n="lab.chart.title">Chart wheel</a></li>
-          <li><a href="lab/journal" data-i18n="lab.journal.title">Manifestation journal</a></li>
-          <li><a href="lab/mood" data-i18n="lab.mood.pagetitle">Mood log</a></li>
+          <li><a href="lab/breath.html" data-i18n="lab.breath.title">Hanaseh / breath</a></li>
+          <li><a href="lab/chart.html" data-i18n="lab.chart.title">Chart wheel</a></li>
+          <li><a href="lab/journal.html" data-i18n="lab.journal.title">Manifestation journal</a></li>
+          <li><a href="lab/mood.html" data-i18n="lab.mood.pagetitle">Mood log</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="foot.contact.h">Contact</h4>
         <ul>
-          <li><a href="admissions" data-i18n="nav.admissions">Admissions</a></li>
-          <li><a href="about" data-i18n="nav.about">Founder</a></li>
-          <li><a href="library" data-i18n="nav.library">Library</a></li>
+          <li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li>
+          <li><a href="about.html" data-i18n="nav.about">Founder</a></li>
+          <li><a href="library.html" data-i18n="nav.library">Library</a></li>
           <li class="quiet">hello@agyan.com</li>
         </ul>
       </div>
@@ -1376,31 +1325,31 @@
         "hero.rotator.2":"دوازده درس. یک دیسیپلین. یک سال مطالعهٔ آهسته.",
         "hero.rotator.3":"آنجا که کار درونی به آسمانِ بیرون می‌پیوندد.",
         "hero.body.1":"آگیان یک مدرسهٔ دیجیتالِ تمرینِ تأملی است. چهار شاخهٔ مطالعه، چهل‌وهشت درس، در طول یک سال؛ کارگاه‌های هم‌زمان و خواندنی‌های آرام.",
-        "hero.body.2":"پنج آموزه، یک تمرین: نَفَس، زبان، بدن، کیهان، نیت. برنامهٔ آگیان این پنج را یک به یک می‌پیماید.",
+        "hero.body.2":"بنیان‌گذار: آوین دباغ‌چی‌مکری، پس از دو دهه تمرین در سنت‌های صوفیانه، روان‌شناسی یونگی، و اخترشناسیِ تأملی؛ با ریشه در میراثِ معنویِ کُرد - ایرانی.",
         "hero.meta.tracks":"شاخه‌های مطالعه",
         "hero.meta.lessons":"درس در هر شاخه",
         "hero.meta.year":"یک سال مطالعه",
         "hero.meta.lang":"زبان‌های آکادمی",
         "hero.cta.primary":"آغازِ یک درس",
         "hero.cta.secondary":"دربارهٔ آوین",
-        "cos.eyebrow":"۰۲ · خانه‌ها",
-        "cos.title.1":"دوازده",
-        "cos.title.2":"خانه.",
-        "cos.lede":"شاخهٔ اخترشناسیِ آگیان با برج‌های خورشیدی آغاز نمی‌شود؛ با خانه‌ها آغاز می‌کند. دوازده قلمرویی که یک زندگی را نقشه‌برداری می‌کنند: کجا ایستاده‌ای، چه چیزی را در دست داری، چگونه سخن می‌گویی، چه می‌سازی. هر خانه دروازه‌ای است به یک پرسشِ پایدار. برنامهٔ اخترشناسیِ آگیان دوازده درس است، زیرا زایچه دوازده اتاق دارد. ما هر بار یک اتاق را آرام می‌پیماییم.",
+        "cos.eyebrow":"۰۲ · کیهان",
+        "cos.title.1":"آسمان",
+        "cos.title.2":"به‌مثابهٔ آینه.",
+        "cos.lede":"در سنتِ آگیان، اخترشناسی پیش‌گویی نیست؛ آینه‌ای است برای تأمل. زایچه نقشهٔ توجه است: کجا سکنا گزیده‌ای، چه چیزی را نمی‌بینی. از «تفهیمِ» بیرونی تا روان‌شناسیِ عمقِ معاصر؛ یک خوانش کهن، خوانده شده با دستِ امروز.",
         "cos.quote":"«زایچه نقشه نیست؛ زبانی است که می‌توان به آن گوش داد.»",
-        "cos.quote.cite":"",
-        "house.1.title":"بدنی که با آن آمدی",        "house.1.question":"پیش از آن‌که سخن بگویی، چگونه پدیدار می‌شوی؟",       "house.1.link":"درس AS-01",
-        "house.2.title":"آنچه با خود حمل می‌کنی",     "house.2.question":"چه چیزی را از آنِ خود می‌دانی، و چرا؟",              "house.2.link":"درس AS-02",
-        "house.3.title":"صدا در اتاق",                "house.3.question":"نخست چه آموختی، و چه کسی آموخت؟",                   "house.3.link":"درس AS-03",
-        "house.4.title":"سقفِ بالای خاطرهٔ تو",       "house.4.question":"وقتی چشم می‌بندی و احساسِ ایمنی می‌کنی، کجا می‌روی؟", "house.4.link":"درس AS-04",
-        "house.5.title":"آنچه برای شادی می‌سازی",     "house.5.question":"چه کاری انجام می‌دهی که هیچ‌کس بابتش به تو پولی نمی‌دهد؟", "house.5.link":"درس AS-05",
-        "house.6.title":"دست‌هایی که هر روز به کار می‌بری","house.6.question":"کدام کار تو را پیشه‌ور می‌کند، نه کارگر؟",        "house.6.link":"درس AS-06",
-        "house.7.title":"آینهٔ روبه‌رویِ تو",         "house.7.question":"در حضورِ دیگری، تو چه می‌شوی؟",                       "house.7.link":"درس AS-07",
-        "house.8.title":"دری که هنوز نگشوده‌ای",      "house.8.question":"چه میراث، چه دِین، یا چه سوگی را به دوش می‌کشی که از آنِ دیگری بوده است؟", "house.8.link":"درس AS-08",
-        "house.9.title":"مسافتی که در ذهن می‌پیمایی","house.9.question":"کدام باور را داشتی که سرانجام دروازه‌ای از کار درآمد؟", "house.9.link":"درس AS-09",
-        "house.10.title":"نامی که می‌سازی",           "house.10.question":"دوست داری بر درِ اتاقی که وارد می‌شوی چه نوشته شود؟", "house.10.link":"درس AS-10",
-        "house.11.title":"حلقه‌ای که به آن تعلق داری","house.11.question":"اگر دیگر سر نزنی، چه کسی متوجه می‌شود؟",            "house.11.link":"درس AS-11",
-        "house.12.title":"سکوتِ پشتِ سکوت",           "house.12.question":"کدام بخشِ تو فقط وقتی تنهایی سخن می‌گوید؟",         "house.12.link":"درس AS-12",
+        "cos.quote.cite":"آوین دباغ‌چی‌مکری · ۱۳۹۹",
+        "z.aries":"حَمَل · ۲۱ فروردین تا ۱۹ اردیبهشت",   "z.aries.note":"دیسیپلینِ آغاز. درس AS-04.",
+        "z.taurus":"ثور · ۲۰ اردیبهشت تا ۲۰ خرداد",     "z.taurus.note":"تمرینِ ماندن. درس AS-05.",
+        "z.gemini":"جوزا · ۲۱ خرداد تا ۲۱ تیر",        "z.gemini.note":"کلام به‌مثابهٔ پرسش. درس AS-06.",
+        "z.cancer":"سرطان · ۲۲ تیر تا ۲۲ مرداد",       "z.cancer.note":"خانه به‌مثابهٔ مرز. درس AS-07.",
+        "z.leo":"اسد · ۲۳ مرداد تا ۲۲ شهریور",          "z.leo.note":"پدیداریِ خود. درس AS-08.",
+        "z.virgo":"سنبله · ۲۳ شهریور تا ۲۲ مهر",        "z.virgo.note":"دقت و خدمت. درس AS-09.",
+        "z.libra":"میزان · ۲۳ مهر تا ۲۱ آبان",         "z.libra.note":"تمرینِ نسبت. درس AS-10.",
+        "z.scorpio":"عقرب · ۲۲ آبان تا ۲۱ آذر",        "z.scorpio.note":"شجاعتِ عمق. درس AS-11.",
+        "z.sagit":"قوس · ۲۲ آذر تا ۲۱ دی",            "z.sagit.note":"افق و فلسفه. درس AS-12.",
+        "z.cap":"جدی · ۲۲ دی تا ۲۰ بهمن",              "z.cap.note":"ساخت در زمان. درس AS-01.",
+        "z.aqua":"دلو · ۲۱ بهمن تا ۱۹ اسفند",         "z.aqua.note":"تعلقِ غیرشخصی. درس AS-02.",
+        "z.pisc":"حوت · ۲۰ اسفند تا ۲۰ فروردین",        "z.pisc.note":"رهاسازی و رویا. درس AS-03.",
         "pil.eyebrow":"۰۳ · چهار ستون",
         "pil.title.1":"چهار",
         "pil.title.2":"دیسیپلینِ تمرین.",
@@ -1515,44 +1464,44 @@
         "hero.rotator.2":"Twelve lessons. One discipline. A year of slow study.",
         "hero.rotator.3":"Where the inner work meets the outer sky.",
         "hero.body.1":"Agyan is a digital school of contemplative practice. Four study tracks across forty-eight lessons, taught in cohorts over a single year, with monthly group sessions and a private reading list.",
-        "hero.body.2":"Five teachings, one practice: breath, language, body, cosmos, intention. The Agyan curriculum walks these one room at a time.",
+        "hero.body.2":"Founded by Avin Dabaghchimokri after two decades of practice across Sufi, Jungian, and contemplative astrological traditions, with roots in Kurdish-Iranian spiritual heritage.",
         "hero.meta.tracks":"Tracks of study",
         "hero.meta.lessons":"Lessons per track",
         "hero.meta.year":"One year of slow study",
         "hero.meta.lang":"Languages",
         "hero.cta.primary":"Begin a lesson",
         "hero.cta.secondary":"About Avin",
-        "cos.eyebrow":"02 / HOUSES",
-        "cos.title.1":"The twelve",
-        "cos.title.2":"houses.",
-        "cos.lede":"The astrology track at Agyan does not begin with sun signs. It begins with houses, the twelve domains that map a life: where you stand, what you hold, how you communicate, what you build. Each house is a doorway to a single sustained question. The Agyan astrology curriculum is twelve lessons because the chart is twelve rooms. We walk one room at a time.",
+        "cos.eyebrow":"02 / COSMOS",
+        "cos.title.1":"The cosmos",
+        "cos.title.2":"as a mirror.",
+        "cos.lede":"In the Agyan tradition, astrology is not predictive but contemplative: a mirror for attention. The natal chart is a map of where you live, what you cannot see. From Al-Biruni's Tafhim through Renaissance Latin astrology to contemporary depth psychology, one ancient practice, read by a modern hand.",
         "cos.quote":"A chart is not a map; it is a language one can listen to.",
-        "cos.quote.cite":"",
-        "house.1.title":"The Body You Arrived In",            "house.1.question":"How do you appear before you speak?",                                              "house.1.link":"Studied in AS-01",
-        "house.2.title":"The Things You Carry",               "house.2.question":"What do you consider yours, and why?",                                            "house.2.link":"Studied in AS-02",
-        "house.3.title":"The Voice in the Room",              "house.3.question":"What did you learn first, and who taught it?",                                    "house.3.link":"Studied in AS-03",
-        "house.4.title":"The Roof Over Your Memory",          "house.4.question":"Where do you go when you close your eyes and feel safe?",                         "house.4.link":"Studied in AS-04",
-        "house.5.title":"The Things You Make for Joy",        "house.5.question":"What do you do that no one is paying you for?",                                   "house.5.link":"Studied in AS-05",
-        "house.6.title":"The Hands You Use Every Day",        "house.6.question":"What work makes you a craftsman, not a worker?",                                  "house.6.link":"Studied in AS-06",
-        "house.7.title":"The Mirror Across From You",         "house.7.question":"Who do you become in the presence of another?",                                   "house.7.link":"Studied in AS-07",
-        "house.8.title":"The Door You Have Not Opened",       "house.8.question":"What inheritance, debt, or grief are you carrying for someone else?",             "house.8.link":"Studied in AS-08",
-        "house.9.title":"The Distance You Travel In Your Mind","house.9.question":"What belief have you held that turned out to be a doorway?",                     "house.9.link":"Studied in AS-09",
-        "house.10.title":"The Name You Are Building",         "house.10.question":"What would you like written on the door of the room you walk into?",             "house.10.link":"Studied in AS-10",
-        "house.11.title":"The Circle You Belong To",          "house.11.question":"Who would notice if you stopped showing up?",                                    "house.11.link":"Studied in AS-11",
-        "house.12.title":"The Quiet Behind the Quiet",        "house.12.question":"What part of you only speaks when you are alone?",                               "house.12.link":"Studied in AS-12",
+        "cos.quote.cite":"Avin Dabaghchimokri, 2020",
+        "z.aries":"Aries · Mar 21 - Apr 19",         "z.aries.note":"The discipline of beginning. Studied in track AS-04.",
+        "z.taurus":"Taurus · Apr 20 - May 20",       "z.taurus.note":"The discipline of staying. Studied in AS-05.",
+        "z.gemini":"Gemini · May 21 - Jun 20",       "z.gemini.note":"Language as inquiry. Studied in AS-06.",
+        "z.cancer":"Cancer · Jun 21 - Jul 22",       "z.cancer.note":"Home as boundary. Studied in AS-07.",
+        "z.leo":"Leo · Jul 23 - Aug 22",             "z.leo.note":"The appearance of self. Studied in AS-08.",
+        "z.virgo":"Virgo · Aug 23 - Sep 22",         "z.virgo.note":"Precision and service. Studied in AS-09.",
+        "z.libra":"Libra · Sep 23 - Oct 22",         "z.libra.note":"The discipline of relation. Studied in AS-10.",
+        "z.scorpio":"Scorpio · Oct 23 - Nov 21",     "z.scorpio.note":"The courage of depth. Studied in AS-11.",
+        "z.sagit":"Sagittarius · Nov 22 - Dec 21",   "z.sagit.note":"Horizon and philosophy. Studied in AS-12.",
+        "z.cap":"Capricorn · Dec 22 - Jan 19",       "z.cap.note":"Building in time. Studied in AS-01.",
+        "z.aqua":"Aquarius · Jan 20 - Feb 18",       "z.aqua.note":"Impersonal belonging. Studied in AS-02.",
+        "z.pisc":"Pisces · Feb 19 - Mar 20",         "z.pisc.note":"Release and dream. Studied in AS-03.",
         "pil.eyebrow":"03 / FOUR DISCIPLINES",
         "pil.title.1":"Four disciplines",
         "pil.title.2":"of practice.",
         "pil.lede":"Four tracks, twelve lessons each, taught in cohorts and drawn from primary sources. The first three lessons of every track are open to all; lessons four through twelve are reserved for admitted students of the annual program.",
         "curr.m.code":"M · MEDITATION",
         "curr.m.title":"Meditation",
-        "curr.m.note":"Sitting practice through breath, posture, and repetition. Twelve lessons on the body as antenna and silence as technique.",
+        "curr.m.note":"Sitting practice drawn from the Qadiri Sufi tradition, refracted through contemporary somatic literacy. Twelve lessons on posture, breath, the names of God in repetition, and the body as the antenna.",
         "curr.ma.code":"MA · MANIFESTATION",
         "curr.ma.title":"Manifestation",
         "curr.ma.note":"Manifestation as a discipline of attention, not magical thinking. Intention, embodiment, action, surrender. Twelve lessons on what desire actually is, and the gravity of what you tend.",
         "curr.as.code":"AS · ASTROLOGY",
         "curr.as.title":"Astrology",
-        "curr.as.note":"The chart as a map, not a forecast. Twelve houses as rooms of a life. Sun, Moon, and the Ascendant as the three doors.",
+        "curr.as.note":"The chart as a map, not a forecast. Twelve houses as rooms of a life. Sun, Moon, and the Ascendant as the three doors. Lineage from Al-Biruni to Demetra George.",
         "curr.af.code":"AF · AFFIRMATION",
         "curr.af.title":"Affirmation",
         "curr.af.note":"Language as ritual. The sentence that does not yet feel true. Zikr, mantra, monologistos compared. Twelve lessons on how words actually shape the body.",
@@ -1644,143 +1593,143 @@
         "foot.colophon.right":"VERSION 02 · 2026"
       },
       ckb: {
-        "chap.1":"","chap.2":"","chap.3":"","chap.4":"هەناسە","chap.5":"","chap.6":"",
-        "ambient.off":"","ambient.on":"",
-        "hero.eyebrow":"",
-        "hero.tagline":"",
+        "chap.1":"[KURDISH: Invocation]","chap.2":"[KURDISH: Cosmos]","chap.3":"[KURDISH: Four Pillars]","chap.4":"هەناسە","chap.5":"[KURDISH: Curriculum]","chap.6":"[KURDISH: Initiation]",
+        "ambient.off":"[KURDISH: Ambient off]","ambient.on":"[KURDISH: Ambient on]",
+        "hero.eyebrow":"[KURDISH: Founded 2014 · Mahabad · Online curriculum]",
+        "hero.tagline":"[KURDISH: An academy of breath, language, and cosmos]",
         "hero.title.1":"ئاگیان",
-        "hero.title.2":"",
-        "hero.rotator.1":"",
-        "hero.rotator.2":"",
-        "hero.rotator.3":"",
-        "hero.body.1":"",
-        "hero.body.2":"",
-        "hero.meta.tracks":"",
-        "hero.meta.lessons":"",
-        "hero.meta.year":"",
-        "hero.meta.lang":"",
-        "hero.cta.primary":"",
-        "hero.cta.secondary":"",
-        "cos.eyebrow":"٠٢ / ",
-        "cos.title.1":"",
-        "cos.title.2":"",
-        "cos.lede":"",
-        "cos.quote":"",
-        "cos.quote.cite":"",
-        "house.1.title":"",            "house.1.question":"",                                              "house.1.link":"",
-        "house.2.title":"",               "house.2.question":"",                                            "house.2.link":"",
-        "house.3.title":"",              "house.3.question":"",                                    "house.3.link":"",
-        "house.4.title":"",          "house.4.question":"",                         "house.4.link":"",
-        "house.5.title":"",        "house.5.question":"",                                   "house.5.link":"",
-        "house.6.title":"",        "house.6.question":"",                                  "house.6.link":"",
-        "house.7.title":"",         "house.7.question":"",                                   "house.7.link":"",
-        "house.8.title":"",       "house.8.question":"",             "house.8.link":"",
-        "house.9.title":"","house.9.question":"",                     "house.9.link":"",
-        "house.10.title":"",         "house.10.question":"",             "house.10.link":"",
-        "house.11.title":"",          "house.11.question":"",                                    "house.11.link":"",
-        "house.12.title":"",        "house.12.question":"",                               "house.12.link":"",
-        "pil.eyebrow":"٠٣ / ",
-        "pil.title.1":"",
-        "pil.title.2":"",
-        "pil.lede":"",
-        "curr.m.code":"M · ",
-        "curr.m.title":"",
-        "curr.m.note":"",
-        "curr.ma.code":"MA · ",
-        "curr.ma.title":"",
-        "curr.ma.note":"",
-        "curr.as.code":"AS · ",
-        "curr.as.title":"",
-        "curr.as.note":"",
-        "curr.af.code":"AF · ",
-        "curr.af.title":"",
-        "curr.af.note":"",
-        "curr.meta.lessons":"١٢ ",
-        "curr.meta.open":"٣ ",
-        "curr.meta.cta":"› ",
-        "bre.eyebrow":"٠٤ / ",
-        "bre.title.1":"",
-        "bre.title.2":"",
-        "bre.lede":"",
-        "bre.p.478":"٤-٧-٨ · ",
-        "bre.p.478.note":"",
-        "bre.p.box":"",
-        "bre.p.box.note":"",
-        "bre.p.hanaseh":"",
-        "bre.p.hanaseh.note":"",
-        "bre.cta":"",
-        "bre.phase.in":"",
-        "bre.phase.hold":"",
-        "bre.phase.out":"",
-        "bre.quote":"",
-        "bre.quote.cite":"LAB-01 / ",
-        "cur.eyebrow":"٠٥ / ",
-        "cur.title.1":"",
-        "cur.title.2":"",
-        "cur.lede":"",
-        "m.l1":"","m.l1.abs":"",
-        "m.l2":"","m.l2.abs":"",
-        "m.l3":"","m.l3.abs":"",
-        "m.l4":"","m.l4.abs":"",
-        "m.l5":"","m.l5.abs":"",
-        "m.l6":"","m.l6.abs":"",
-        "m.l7":"","m.l7.abs":"",
-        "m.l8":"","m.l8.abs":"",
-        "m.l9":"","m.l9.abs":"",
-        "m.l10":"","m.l10.abs":"",
-        "m.l11":"","m.l11.abs":"",
-        "m.l12":"","m.l12.abs":"",
-        "ma.l1":"","ma.l1.abs":"",
-        "ma.l2":"","ma.l2.abs":"",
-        "ma.l3":"","ma.l3.abs":"",
-        "ma.l4":"","ma.l4.abs":"",
-        "ma.l5":"","ma.l5.abs":"",
-        "ma.l6":"","ma.l6.abs":"",
-        "ma.l7":"","ma.l7.abs":"",
-        "ma.l8":"","ma.l8.abs":"",
-        "ma.l9":"","ma.l9.abs":"",
-        "ma.l10":"","ma.l10.abs":"",
-        "ma.l11":"","ma.l11.abs":"",
-        "ma.l12":"","ma.l12.abs":"",
-        "as.l1":"","as.l1.abs":"",
-        "as.l2":"","as.l2.abs":"",
-        "as.l3":"","as.l3.abs":"",
-        "as.l4":"","as.l4.abs":"",
-        "as.l5":"","as.l5.abs":"",
-        "as.l6":"","as.l6.abs":"",
-        "as.l7":"","as.l7.abs":"",
-        "as.l8":"","as.l8.abs":"",
-        "as.l9":"","as.l9.abs":"",
-        "as.l10":"","as.l10.abs":"",
-        "as.l11":"","as.l11.abs":"",
-        "as.l12":"","as.l12.abs":"",
-        "af.l1":"","af.l1.abs":"",
-        "af.l2":"","af.l2.abs":"",
-        "af.l3":"","af.l3.abs":"",
-        "af.l4":"","af.l4.abs":"",
-        "af.l5":"","af.l5.abs":"",
-        "af.l6":"","af.l6.abs":"",
-        "af.l7":"","af.l7.abs":"",
-        "af.l8":"","af.l8.abs":"",
-        "af.l9":"","af.l9.abs":"",
-        "af.l10":"","af.l10.abs":"",
-        "af.l11":"","af.l11.abs":"",
-        "af.l12":"","af.l12.abs":"",
-        "ini.eyebrow":"٠٦ / ",
-        "ini.title.1":"",
-        "ini.title.2":"",
-        "ini.lede":"",
-        "ini.name.label":"",
-        "ini.email.label":"",
-        "ini.lang.label":"",
-        "ini.why.label":"",
-        "ini.why.ph":"",
-        "ini.cta":"",
-        "ini.note":"",
-        "ini.thanks":"",
-        "foot.about.body":"",
-        "foot.colophon.left":"AGYAN ·  · EST. 2014",
-        "foot.colophon.right":""
+        "hero.title.2":"[KURDISH: An academy of breath, language, and cosmos.]",
+        "hero.rotator.1":"[KURDISH: An academy of breath, language, and cosmos.]",
+        "hero.rotator.2":"[KURDISH: Twelve lessons. One discipline. A year of slow study.]",
+        "hero.rotator.3":"[KURDISH: Where the inner work meets the outer sky.]",
+        "hero.body.1":"[KURDISH: Agyan is a digital school of contemplative practice. Four study tracks across forty-eight lessons, taught in cohorts over a single year.]",
+        "hero.body.2":"[KURDISH: Founded by Avin Dabaghchimokri after two decades of practice across Sufi, Jungian, and contemplative astrological traditions, with roots in Kurdish-Iranian spiritual heritage.]",
+        "hero.meta.tracks":"[KURDISH: Tracks of study]",
+        "hero.meta.lessons":"[KURDISH: Lessons per track]",
+        "hero.meta.year":"[KURDISH: One year of slow study]",
+        "hero.meta.lang":"[KURDISH: Languages]",
+        "hero.cta.primary":"[KURDISH: Begin a lesson]",
+        "hero.cta.secondary":"[KURDISH: About Avin]",
+        "cos.eyebrow":"٠٢ / [KURDISH: COSMOS]",
+        "cos.title.1":"[KURDISH: The cosmos]",
+        "cos.title.2":"[KURDISH: as a mirror.]",
+        "cos.lede":"[KURDISH: In the Agyan tradition, astrology is not predictive but contemplative: a mirror for attention. The natal chart is a map of where you live. From Al-Biruni's Tafhim through to contemporary depth psychology.]",
+        "cos.quote":"[KURDISH: A chart is not a map; it is a language one can listen to.]",
+        "cos.quote.cite":"[KURDISH: Avin Dabaghchimokri, 2020]",
+        "z.aries":"[KURDISH: Aries · Mar 21 - Apr 19]",       "z.aries.note":"[KURDISH: The discipline of beginning. AS-04.]",
+        "z.taurus":"[KURDISH: Taurus · Apr 20 - May 20]",     "z.taurus.note":"[KURDISH: The discipline of staying. AS-05.]",
+        "z.gemini":"[KURDISH: Gemini · May 21 - Jun 20]",     "z.gemini.note":"[KURDISH: Language as inquiry. AS-06.]",
+        "z.cancer":"[KURDISH: Cancer · Jun 21 - Jul 22]",     "z.cancer.note":"[KURDISH: Home as boundary. AS-07.]",
+        "z.leo":"[KURDISH: Leo · Jul 23 - Aug 22]",           "z.leo.note":"[KURDISH: The appearance of self. AS-08.]",
+        "z.virgo":"[KURDISH: Virgo · Aug 23 - Sep 22]",       "z.virgo.note":"[KURDISH: Precision and service. AS-09.]",
+        "z.libra":"[KURDISH: Libra · Sep 23 - Oct 22]",       "z.libra.note":"[KURDISH: The discipline of relation. AS-10.]",
+        "z.scorpio":"[KURDISH: Scorpio · Oct 23 - Nov 21]",   "z.scorpio.note":"[KURDISH: The courage of depth. AS-11.]",
+        "z.sagit":"[KURDISH: Sagittarius · Nov 22 - Dec 21]", "z.sagit.note":"[KURDISH: Horizon and philosophy. AS-12.]",
+        "z.cap":"[KURDISH: Capricorn · Dec 22 - Jan 19]",     "z.cap.note":"[KURDISH: Building in time. AS-01.]",
+        "z.aqua":"[KURDISH: Aquarius · Jan 20 - Feb 18]",     "z.aqua.note":"[KURDISH: Impersonal belonging. AS-02.]",
+        "z.pisc":"[KURDISH: Pisces · Feb 19 - Mar 20]",       "z.pisc.note":"[KURDISH: Release and dream. AS-03.]",
+        "pil.eyebrow":"٠٣ / [KURDISH: FOUR DISCIPLINES]",
+        "pil.title.1":"[KURDISH: Four disciplines]",
+        "pil.title.2":"[KURDISH: of practice.]",
+        "pil.lede":"[KURDISH: Four tracks, twelve lessons each, taught in cohorts and drawn from primary sources. First three open to all.]",
+        "curr.m.code":"M · [KURDISH: MEDITATION]",
+        "curr.m.title":"[KURDISH: Meditation]",
+        "curr.m.note":"[KURDISH: Sitting practice drawn from the Qadiri Sufi tradition, refracted through contemporary somatic literacy. Twelve lessons on posture, breath, and the body as the antenna.]",
+        "curr.ma.code":"MA · [KURDISH: MANIFESTATION]",
+        "curr.ma.title":"[KURDISH: Manifestation]",
+        "curr.ma.note":"[KURDISH: Manifestation as a discipline of attention, not magical thinking. Intention, embodiment, action, surrender.]",
+        "curr.as.code":"AS · [KURDISH: ASTROLOGY]",
+        "curr.as.title":"[KURDISH: Astrology]",
+        "curr.as.note":"[KURDISH: The chart as a map, not a forecast. Twelve houses as rooms of a life. Sun, Moon, and the Ascendant as the three doors.]",
+        "curr.af.code":"AF · [KURDISH: AFFIRMATION]",
+        "curr.af.title":"[KURDISH: Affirmation]",
+        "curr.af.note":"[KURDISH: Language as ritual. The sentence that does not yet feel true. Zikr, mantra, monologistos compared.]",
+        "curr.meta.lessons":"١٢ [KURDISH: LESSONS]",
+        "curr.meta.open":"٣ [KURDISH: OPEN]",
+        "curr.meta.cta":"› [KURDISH: Begin track]",
+        "bre.eyebrow":"٠٤ / [KURDISH: BREATH]",
+        "bre.title.1":"[KURDISH: Begin]",
+        "bre.title.2":"[KURDISH: with the breath.]",
+        "bre.lede":"[KURDISH: The breath orb is the simplest practice in the curriculum. Anyone can begin here, today, in two minutes.]",
+        "bre.p.478":"٤-٧-٨ · [KURDISH: CALMING]",
+        "bre.p.478.note":"[KURDISH: For sleep or after tension.]",
+        "bre.p.box":"[KURDISH: BOX 4-4-4-4 · STEADY]",
+        "bre.p.box.note":"[KURDISH: For focus and cognitive work.]",
+        "bre.p.hanaseh":"[KURDISH: HANASEH 4-2-6 · AVIN'S METHOD]",
+        "bre.p.hanaseh.note":"[KURDISH: For long sitting and dhikr.]",
+        "bre.cta":"[KURDISH: Full breath instrument]",
+        "bre.phase.in":"[KURDISH: INHALE]",
+        "bre.phase.hold":"[KURDISH: HOLD]",
+        "bre.phase.out":"[KURDISH: EXHALE]",
+        "bre.quote":"[KURDISH: Breath is the only body that comes and goes without being asked.]",
+        "bre.quote.cite":"LAB-01 / [KURDISH: BREATH]",
+        "cur.eyebrow":"٠٥ / [KURDISH: FULL CURRICULUM]",
+        "cur.title.1":"[KURDISH: Forty-eight]",
+        "cur.title.2":"[KURDISH: lessons.]",
+        "cur.lede":"[KURDISH: Open access to the first three lessons of every track; the remaining nine are reserved for enrolled students.]",
+        "m.l1":"[KURDISH: Sitting as non-action]","m.l1.abs":"[KURDISH: Why the chair matters, why posture is a doorway.]",
+        "m.l2":"[KURDISH: Counting]","m.l2.abs":"[KURDISH: Four counts of one to four.]",
+        "m.l3":"[KURDISH: Silence]","m.l3.abs":"[KURDISH: Two kinds of silence: absence of sound, and presence of attention.]",
+        "m.l4":"[KURDISH: Dhikr]","m.l4.abs":"[KURDISH: Repetition of a name as anchor.]",
+        "m.l5":"[KURDISH: Watching]","m.l5.abs":"[KURDISH: Seeing the thought without following it.]",
+        "m.l6":"[KURDISH: Release]","m.l6.abs":"[KURDISH: Opening the body from its quiet contraction.]",
+        "m.l7":"[KURDISH: Witness]","m.l7.abs":"[KURDISH: The one who sees is not the self.]",
+        "m.l8":"[KURDISH: Heart]","m.l8.abs":"[KURDISH: Attending to the chest, not the feeling.]",
+        "m.l9":"[KURDISH: Somatic]","m.l9.abs":"[KURDISH: The body as the object of meditation.]",
+        "m.l10":"[KURDISH: Presence]","m.l10.abs":"[KURDISH: In the middle of work, not only in sitting.]",
+        "m.l11":"[KURDISH: Solitude]","m.l11.abs":"[KURDISH: Forty-eight hours alone with yourself.]",
+        "m.l12":"[KURDISH: Passage]","m.l12.abs":"[KURDISH: The end of a year and the question that remains.]",
+        "ma.l1":"[KURDISH: Attention]","ma.l1.abs":"[KURDISH: Manifestation begins with what you look at.]",
+        "ma.l2":"[KURDISH: Intention]","ma.l2.abs":"[KURDISH: The difference between wish, want, and intention.]",
+        "ma.l3":"[KURDISH: Body]","ma.l3.abs":"[KURDISH: The body knows before the mind does.]",
+        "ma.l4":"[KURDISH: Field]","ma.l4.abs":"[KURDISH: The environment you stand inside.]",
+        "ma.l5":"[KURDISH: Practice]","ma.l5.abs":"[KURDISH: The daily work nobody sees.]",
+        "ma.l6":"[KURDISH: Action]","ma.l6.abs":"[KURDISH: The small move, not the large plan.]",
+        "ma.l7":"[KURDISH: Patience]","ma.l7.abs":"[KURDISH: Time as collaborator.]",
+        "ma.l8":"[KURDISH: Acceptance]","ma.l8.abs":"[KURDISH: What is, before what you want.]",
+        "ma.l9":"[KURDISH: Threshold]","ma.l9.abs":"[KURDISH: The moment when something changes.]",
+        "ma.l10":"[KURDISH: Insight]","ma.l10.abs":"[KURDISH: Knowing without reason.]",
+        "ma.l11":"[KURDISH: Pruning]","ma.l11.abs":"[KURDISH: What must be released.]",
+        "ma.l12":"[KURDISH: Arrival]","ma.l12.abs":"[KURDISH: What has come, and what must not.]",
+        "as.l1":"[KURDISH: The circle]","as.l1.abs":"[KURDISH: Why the chart is a circle, not a line.]",
+        "as.l2":"[KURDISH: Planets]","as.l2.abs":"[KURDISH: Seven planets as seven faces of attention.]",
+        "as.l3":"[KURDISH: Houses]","as.l3.abs":"[KURDISH: Twelve rooms in a single life.]",
+        "as.l4":"[KURDISH: Ascendant]","as.l4.abs":"[KURDISH: The door through which you entered the world.]",
+        "as.l5":"[KURDISH: Moon]","as.l5.abs":"[KURDISH: The feeling that moves below the surface.]",
+        "as.l6":"[KURDISH: Sun]","as.l6.abs":"[KURDISH: What you must become.]",
+        "as.l7":"[KURDISH: Aspects]","as.l7.abs":"[KURDISH: The conversations between planets.]",
+        "as.l8":"[KURDISH: Transits]","as.l8.abs":"[KURDISH: Today's sky inside your chart.]",
+        "as.l9":"[KURDISH: Returns]","as.l9.abs":"[KURDISH: Jupiter, Saturn, and the solar return.]",
+        "as.l10":"[KURDISH: Synastry]","as.l10.abs":"[KURDISH: Two charts in conversation.]",
+        "as.l11":"[KURDISH: The year]","as.l11.abs":"[KURDISH: The natal chart plus one revolution.]",
+        "as.l12":"[KURDISH: Narrative]","as.l12.abs":"[KURDISH: Reading the chart as a story.]",
+        "af.l1":"[KURDISH: Voice]","af.l1.abs":"[KURDISH: Sound acts before meaning does.]",
+        "af.l2":"[KURDISH: Repetition]","af.l2.abs":"[KURDISH: Why repetition is not laziness.]",
+        "af.l3":"[KURDISH: Writing]","af.l3.abs":"[KURDISH: The hand in the ritual of language.]",
+        "af.l4":"[KURDISH: Speaking]","af.l4.abs":"[KURDISH: Hearing yourself say it.]",
+        "af.l5":"[KURDISH: Listening]","af.l5.abs":"[KURDISH: The one who listens also writes the sentence.]",
+        "af.l6":"[KURDISH: Rhythm]","af.l6.abs":"[KURDISH: Pulse as structure.]",
+        "af.l7":"[KURDISH: Prayer]","af.l7.abs":"[KURDISH: A sentence addressed to someone.]",
+        "af.l8":"[KURDISH: Dhikr]","af.l8.abs":"[KURDISH: One word for one month.]",
+        "af.l9":"[KURDISH: Silence]","af.l9.abs":"[KURDISH: Speech without sound.]",
+        "af.l10":"[KURDISH: Field]","af.l10.abs":"[KURDISH: The environment in which you speak.]",
+        "af.l11":"[KURDISH: Sentence]","af.l11.abs":"[KURDISH: The line that does not yet feel true.]",
+        "af.l12":"[KURDISH: Surrender]","af.l12.abs":"[KURDISH: Letting go of the sentence after speaking it.]",
+        "ini.eyebrow":"٠٦ / [KURDISH: BECOME A STUDENT]",
+        "ini.title.1":"[KURDISH: Become]",
+        "ini.title.2":"[KURDISH: a student.]",
+        "ini.lede":"[KURDISH: Enrollment at Agyan is a small commitment to attention. Three letters per month: long reads, no promotions. The first letter arrives within two days. Admitted students gain access to all forty-eight lessons, monthly group sessions, and a private reading list.]",
+        "ini.name.label":"[KURDISH: Name]",
+        "ini.email.label":"[KURDISH: Email address]",
+        "ini.lang.label":"[KURDISH: Primary language]",
+        "ini.why.label":"[KURDISH: What brings you here]",
+        "ini.why.ph":"[KURDISH: One or two sentences. Optional.]",
+        "ini.cta":"[KURDISH: Send the first letter]",
+        "ini.note":"[KURDISH: You can unsubscribe from any letter. We never sell or share addresses.]",
+        "ini.thanks":"[KURDISH: Received. The first letter arrives within two days.]",
+        "foot.about.body":"[KURDISH: An independent institution for research and practice. Founded by Avin Dabaghchimokri.]",
+        "foot.colophon.left":"AGYAN · [KURDISH: MAHABAD] · EST. 2014",
+        "foot.colophon.right":"[KURDISH: VERSION 02 · 2026]"
       }
     };
     for (const lang of ['fa','en','ckb']){
@@ -1953,9 +1902,21 @@
     else window.addEventListener('load', startRotator, { once: true });
 
     /* =================================================================
-       7) Houses - no month-based highlight (houses are domains of inquiry,
-          not seasonal). Reserved for future reader-personalized state.
+       7) Zodiac - highlight current month
        ================================================================= */
+    const zMap = ['cap','aqua','pisc','aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagit'];
+    // approximate by month for Western tropical (used by Avin)
+    const mIdx = new Date().getMonth();
+    // shift: Capricorn ~ late Dec to mid Jan; pick based on day too
+    const day = new Date().getDate();
+    let zIdx = mIdx;
+    // crude: after day 20, advance
+    if (day >= 20) zIdx = (zIdx + 1) % 12;
+    const zSlug = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
+    const currentSlug = zSlug[zIdx];
+    document.querySelectorAll('.zodiac-cell').forEach(c => {
+      if (c.dataset.z === currentSlug) c.classList.add('current');
+    });
 
     /* =================================================================
        8) Breath pattern selector + phase label
