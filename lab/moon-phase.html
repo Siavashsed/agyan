@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0a13">
+  <title>Moon Phase - The Lab - Agyan</title>
+  <meta name="description" content="Current lunar phase computed client side. Manifestation timing notes for each phase.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/header.css">
+  <script defer src="../assets/header.js"></script>
+  <style>
+    :root{--phase-bg:#14101c;--phase-ink:#f4ebe1;--phase-rose:#e6b9a6;--phase-muted:rgba(244,235,225,.6);--phase-rule:rgba(230,185,166,.18)}
+    .moon-shell{max-width:900px;margin:0 auto;padding:64px 24px 96px;color:var(--phase-ink)}
+    .moon-eyebrow{font-family:'JetBrains Mono','Vazirmatn',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--phase-rose);margin-bottom:18px}
+    .moon-h1{font-family:'Estedad','Newsreader',serif;font-size:clamp(38px,5.5vw,68px);font-weight:500;line-height:1;letter-spacing:-.025em;margin:0 0 18px}
+    .moon-lede{font-size:17px;line-height:1.55;color:var(--phase-muted);max-width:54ch;margin:0 0 48px}
+    .moon-display{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:center;padding:36px 0;border-top:1px solid var(--phase-rule);border-bottom:1px solid var(--phase-rule);margin-bottom:36px}
+    @media(max-width:640px){.moon-display{grid-template-columns:1fr;text-align:center;gap:32px}}
+    .moon-svg{width:200px;height:200px;margin:0 auto;filter:drop-shadow(0 8px 32px rgba(230,185,166,.12))}
+    .moon-name{font-family:'Estedad','Newsreader',serif;font-size:32px;font-weight:500;letter-spacing:-.02em;margin:0 0 8px}
+    .moon-pct{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--phase-rose);letter-spacing:.08em;margin:0 0 24px}
+    .moon-meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;font-size:13px;color:var(--phase-muted)}
+    .moon-meta strong{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--phase-rose);font-weight:500;margin-bottom:4px}
+    .moon-note{padding:28px 32px;background:rgba(230,185,166,.04);border:1px solid var(--phase-rule);border-radius:8px;margin-bottom:28px}
+    .moon-note-eye{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--phase-rose);margin-bottom:12px;font-weight:500}
+    .moon-note h2{font-family:'Estedad','Newsreader',serif;font-size:22px;font-weight:500;letter-spacing:-.015em;margin:0 0 12px;color:var(--phase-ink)}
+    .moon-note p{font-size:15px;line-height:1.7;color:var(--phase-ink);margin:0 0 12px;max-width:60ch}
+    .moon-note p:last-child{margin-bottom:0}
+    .moon-disclaim{font-size:12px;color:var(--phase-muted);text-align:center;padding-top:18px;border-top:1px solid var(--phase-rule);font-style:italic}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="moon-shell">
+      <div class="moon-eyebrow">LAB / MOON PHASE</div>
+      <h1 class="moon-h1">Lunar phase, now.</h1>
+      <p class="moon-lede">Computed in your browser from today's date. Pair the phase with your manifestation timing: new moon for seeding intention, full moon for completion and release.</p>
+
+      <div class="moon-display">
+        <svg class="moon-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="moonG" cx="35%" cy="32%"><stop offset="0%" stop-color="#fff8ed"/><stop offset="100%" stop-color="#e6b9a6"/></radialGradient>
+            <clipPath id="moonClip"><circle cx="100" cy="100" r="80"/></clipPath>
+          </defs>
+          <circle cx="100" cy="100" r="80" fill="#1a1422"/>
+          <g clip-path="url(#moonClip)"><path id="moonShape" d="" fill="url(#moonG)"/></g>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(230,185,166,.3)" stroke-width="1"/>
+        </svg>
+        <div>
+          <div class="moon-name" id="phaseName">...</div>
+          <div class="moon-pct" id="phasePct">...</div>
+          <div class="moon-meta">
+            <div><strong>Phase day</strong><span id="phaseDay">...</span></div>
+            <div><strong>Cycle</strong><span id="phaseCycle">29.53 days</span></div>
+            <div><strong>Next new moon</strong><span id="nextNew">...</span></div>
+            <div><strong>Next full moon</strong><span id="nextFull">...</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="moon-note">
+        <div class="moon-note-eye" id="timingEye">TIMING NOTE</div>
+        <h2 id="timingTitle">...</h2>
+        <p id="timingBody">...</p>
+      </div>
+
+      <div class="moon-disclaim">This tool is reflective, not prescriptive.</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  // Conway's approximate moon phase calculation. Synodic month = 29.53059 days.
+  // Reference: 2000-01-06 18:14 UTC was a new moon.
+  var SYNODIC = 29.530588853;
+  var REF_NEW_MOON = Date.UTC(2000,0,6,18,14)/86400000;
+  var now = Date.now()/86400000;
+  var age = ((now - REF_NEW_MOON) % SYNODIC + SYNODIC) % SYNODIC;
+  var illum = (1 - Math.cos(age/SYNODIC*2*Math.PI)) / 2;
+  var pct = Math.round(illum * 100);
+  var waxing = age < SYNODIC/2;
+  var phases = [
+    [0, 1.5, 'New Moon', 'Seed', 'A clean slate. Plant the intention small enough to carry through the cycle. Write it, name it, let it rest.'],
+    [1.5, 7.4, 'Waxing Crescent', 'Tend', 'The work of beginning is unglamorous. Repeat the practice that holds the intention without staring at it.'],
+    [7.4, 8.9, 'First Quarter', 'Decide', 'A pressure point. Something resists. Choose the harder thing once. The cycle responds to that single decision.'],
+    [8.9, 14.8, 'Waxing Gibbous', 'Refine', 'You can see what is taking shape. Edit the intention if needed. Cut what was sentimental, keep what is true.'],
+    [14.8, 16.3, 'Full Moon', 'Reveal', 'Completion and visibility. What you set at the new moon is now visible. Receive the result, even if it is partial.'],
+    [16.3, 22.1, 'Waning Gibbous', 'Share', 'The cycle turns outward. Speak the result to one person. The witnessing matters more than the polishing.'],
+    [22.1, 23.6, 'Last Quarter', 'Release', 'Let go of the part that did not work. Not all of it - just the part. Forgive the version of you who began.'],
+    [23.6, 29.53, 'Waning Crescent', 'Rest', 'The dark before the seed. No new beginnings here. Sleep, walk, write nothing. The next intention is forming under the surface.']
+  ];
+  var match = phases.find(function(p){ return age >= p[0] && age < p[1]; }) || phases[0];
+
+  document.getElementById('phaseName').textContent = match[2];
+  document.getElementById('phasePct').textContent = pct + '% illuminated  /  ' + (waxing ? 'waxing' : 'waning');
+  document.getElementById('phaseDay').textContent = age.toFixed(1) + ' / 29.5';
+  document.getElementById('timingTitle').textContent = match[3];
+  document.getElementById('timingBody').textContent = match[4];
+
+  function fmtNext(targetIllum, wantWaxing){
+    for (var i = 0; i < 30; i++){
+      var t = now + i;
+      var a = ((t - REF_NEW_MOON) % SYNODIC + SYNODIC) % SYNODIC;
+      var ill = (1 - Math.cos(a/SYNODIC*2*Math.PI)) / 2;
+      var wx = a < SYNODIC/2;
+      if (Math.abs(ill - targetIllum) < 0.04 && wx === wantWaxing) {
+        var d = new Date(t*86400000);
+        return d.toLocaleDateString('en', {month:'short', day:'numeric'});
+      }
+    }
+    return '-';
+  }
+  document.getElementById('nextNew').textContent  = fmtNext(0, true);
+  document.getElementById('nextFull').textContent = fmtNext(1, true);
+
+  // Draw the crescent / gibbous shape via clip-path on an ellipse.
+  var shape = document.getElementById('moonShape');
+  var r = 80;
+  // For phase angle theta (0=new, pi=full), the terminator x-offset is r * cos(theta).
+  var theta = age/SYNODIC * 2 * Math.PI;
+  var termX = r * Math.cos(theta);
+  // Build the lit area as a path: half-circle on the bright side + ellipse cap on terminator.
+  // Simpler: draw a full filled circle then overlay shadow with svg arcs.
+  // Use a path that approximates the lit area.
+  var litRight = waxing; // waxing: lit on right (visible from northern hemisphere)
+  var d;
+  if (illum > 0.99) {
+    d = 'M ' + (100-r) + ' 100 a ' + r + ' ' + r + ' 0 1 0 ' + (2*r) + ' 0 a ' + r + ' ' + r + ' 0 1 0 ' + (-2*r) + ' 0';
+  } else if (illum < 0.01) {
+    d = '';
+  } else {
+    var sweep = illum < 0.5 ? 0 : 1;
+    var dir = litRight ? 1 : 0;
+    var ellipseRx = Math.abs(termX);
+    // Outline: from top, half-circle on lit side, then half-ellipse for terminator.
+    if (litRight) {
+      d = 'M 100 20 A ' + r + ' ' + r + ' 0 0 1 100 180 A ' + ellipseRx + ' ' + r + ' 0 0 ' + (illum<0.5?0:1) + ' 100 20 Z';
+    } else {
+      d = 'M 100 20 A ' + r + ' ' + r + ' 0 0 0 100 180 A ' + ellipseRx + ' ' + r + ' 0 0 ' + (illum<0.5?1:0) + ' 100 20 Z';
+    }
+  }
+  shape.setAttribute('d', d);
+})();
+</script>
+</body>
+</html>
