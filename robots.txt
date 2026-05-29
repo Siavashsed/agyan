@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /articles.json
+Disallow: /_state.json
+Disallow: /.posted-tracker.json
+Sitemap: https://siavashsed.github.io/agyan/sitemap.xml
