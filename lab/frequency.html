@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0a13">
+  <title>Sound Frequency Player - The Lab - Agyan</title>
+  <meta name="description" content="Solfeggio frequency tone player with binaural option. Twelve frequencies, headphone-aware, single button play.">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/header.css">
+  <script defer src="../assets/header.js"></script>
+  <style>
+    :root{--fq-bg:#0d0a13;--fq-ink:#f4ebe1;--fq-rose:#e6b9a6;--fq-deep:#b07c69;--fq-muted:rgba(244,235,225,.55);--fq-rule:rgba(230,185,166,.16);--fq-glow:rgba(230,185,166,.18)}
+    body{background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(230,185,166,.06) 0%,transparent 55%),#0d0a13}
+    .fq{max-width:920px;margin:0 auto;padding:80px 24px 96px;color:var(--fq-ink)}
+    .fq-eye{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--fq-rose);margin-bottom:20px}
+    .fq-h1{font-family:'Cormorant Garamond','Newsreader',serif;font-size:clamp(46px,7vw,96px);font-weight:400;line-height:.96;letter-spacing:-.025em;margin:0 0 22px;text-wrap:balance}
+    .fq-h1 em{font-style:italic;color:var(--fq-rose);font-weight:400}
+    .fq-lede{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.7vw,22px);line-height:1.55;color:var(--fq-muted);max-width:58ch;margin:0 0 56px;font-style:italic}
+    .fq-stage{position:relative;padding:48px 32px;background:rgba(230,185,166,.03);border:1px solid var(--fq-rule);border-radius:14px;margin-bottom:48px;overflow:hidden}
+    .fq-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,var(--fq-glow) 0%,transparent 60%);pointer-events:none;opacity:0;transition:opacity .5s ease}
+    .fq-stage.is-playing::before{opacity:1}
+    .fq-now{position:relative;display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+    .fq-hz{font-family:'Cormorant Garamond',serif;font-size:clamp(72px,12vw,140px);font-weight:400;line-height:1;letter-spacing:-.04em;color:var(--fq-ink)}
+    .fq-unit{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--fq-rose)}
+    .fq-label{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--fq-rose);margin-bottom:8px}
+    .fq-arche{text-align:center;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--fq-muted);margin-bottom:32px}
+    .fq-canvas-wrap{position:relative;width:100%;height:80px;margin-bottom:32px;border-top:1px solid var(--fq-rule);border-bottom:1px solid var(--fq-rule)}
+    canvas#fqCanvas{display:block;width:100%;height:100%}
+    .fq-controls{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+    .fq-play{appearance:none;background:transparent;border:1.5px solid var(--fq-rose);color:var(--fq-rose);width:78px;height:78px;border-radius:50%;cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .15s}
+    .fq-play:hover{background:var(--fq-rose);color:var(--fq-bg)}
+    .fq-play svg{width:24px;height:24px;fill:currentColor}
+    .fq-play .pause-icon{display:none}
+    .fq-stage.is-playing .fq-play .play-icon{display:none}
+    .fq-stage.is-playing .fq-play .pause-icon{display:block}
+    .fq-vol{display:flex;flex-direction:column;gap:6px}
+    .fq-vol-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--fq-muted);display:flex;justify-content:space-between}
+    .fq-vol input{width:100%;accent-color:var(--fq-rose);min-height:32px}
+    .fq-bb{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .fq-bb-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--fq-muted)}
+    .fq-bb-toggle{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--fq-rule);color:var(--fq-ink);padding:8px 14px;border-radius:24px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;min-height:38px}
+    .fq-bb-toggle.is-on{background:rgba(230,185,166,.08);border-color:var(--fq-rose);color:var(--fq-rose)}
+    .fq-bb-dot{width:8px;height:8px;border-radius:50%;background:var(--fq-muted)}
+    .fq-bb-toggle.is-on .fq-bb-dot{background:var(--fq-rose);box-shadow:0 0 8px var(--fq-rose)}
+    .fq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:48px 0 36px}
+    .fq-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 14px;background:transparent;border:1px solid var(--fq-rule);color:var(--fq-ink);text-align:center;cursor:pointer;border-radius:8px;transition:background .2s,border-color .2s,transform .15s}
+    .fq-card:hover{background:rgba(230,185,166,.04);border-color:var(--fq-deep);transform:translateY(-1px)}
+    .fq-card.is-on{background:rgba(230,185,166,.08);border-color:var(--fq-rose)}
+    .fq-card-hz{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--fq-rose);line-height:1;letter-spacing:-.015em}
+    .fq-card-name{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--fq-muted)}
+    .fq-desc{padding:24px 28px;background:rgba(230,185,166,.04);border-left:2px solid var(--fq-rose);border-radius:0 8px 8px 0;font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.65;color:var(--fq-ink);font-style:italic;max-width:62ch}
+    .fq-headphones{margin-top:36px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;background:rgba(230,185,166,.04);border-radius:8px;font-size:13px;line-height:1.5;color:var(--fq-muted);font-family:'Cormorant Garamond',serif;font-style:italic}
+    .fq-headphones svg{flex-shrink:0;margin-top:2px;color:var(--fq-rose)}
+    .fq-disclaim{font-size:12px;color:var(--fq-muted);text-align:center;padding-top:18px;border-top:1px solid var(--fq-rule);margin-top:36px;font-style:italic;font-family:'Cormorant Garamond',serif}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="fq">
+      <div class="fq-eye">LAB / SOUND FREQUENCY</div>
+      <h1 class="fq-h1">A single tone, <em>held.</em></h1>
+      <p class="fq-lede">Twelve frequencies, drawn from the Solfeggio set and a few classical anchors. Choose one. Listen for ten minutes. Notice nothing in particular. The work is in the staying.</p>
+
+      <div class="fq-stage" id="stage">
+        <div class="fq-now">
+          <span class="fq-hz" id="hzVal">432</span>
+          <span class="fq-unit">Hz</span>
+        </div>
+        <div class="fq-label" id="fqLabel">The Earth tone</div>
+        <div class="fq-arche" id="fqArche">CLASSICAL  /  EQUILIBRIUM</div>
+        <div class="fq-canvas-wrap"><canvas id="fqCanvas"></canvas></div>
+        <div class="fq-controls">
+          <button class="fq-play" id="playBtn" aria-label="Play or pause">
+            <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+          </button>
+          <div class="fq-vol">
+            <div class="fq-vol-label"><span>Volume</span><span id="volPct">50%</span></div>
+            <input type="range" id="vol" min="0" max="100" value="50">
+          </div>
+          <div class="fq-bb">
+            <span class="fq-bb-label">Binaural</span>
+            <button class="fq-bb-toggle" id="bbBtn" type="button"><span class="fq-bb-dot"></span><span id="bbTxt">Off</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fq-grid" id="grid"></div>
+
+      <div class="fq-desc" id="desc">A natural reference. Older instruments, choirs and tuning forks were often pitched here. Many find it soft in the body in a way 440 Hz is not. Useful as a baseline before exploring the rest.</div>
+
+      <div class="fq-headphones">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M5 14h2v6H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2zM17 14h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2v-6z"/></svg>
+        <span>For binaural mode, wear headphones - the offset between left and right channels is what creates the beat. Without headphones it sounds like a single tone, which still works as a focus signal.</span>
+      </div>
+
+      <div class="fq-disclaim">This tool is reflective, not prescriptive. Lower the volume before pressing play.</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  var FREQS = [
+    { hz: 174, name: 'Foundation',        arche: 'SOLFEGGIO  /  GROUND',
+      desc: 'The lowest of the Solfeggio set. Slow, anchoring. Useful at the start of a longer practice or after travel - a way of telling the body it has arrived somewhere.' },
+    { hz: 285, name: 'Field',             arche: 'SOLFEGGIO  /  REPAIR',
+      desc: 'Traditionally associated with tissue regeneration. Whether you believe the framing, it pulls attention to the body in a way that is hard to ignore - useful after illness or strain.' },
+    { hz: 396, name: 'Release',           arche: 'SOLFEGGIO  /  LIBERATION',
+      desc: 'Liberation from fear, in the framing. In practice, a frequency to sit with when you are carrying something specific that does not belong to you. Let it stay until you forget it is playing.' },
+    { hz: 417, name: 'Change',            arche: 'SOLFEGGIO  /  TURNING',
+      desc: 'Facilitates change. Use at the beginning of a new chapter - a move, a separation, a new project. Less about the sound, more about the marking of a threshold.' },
+    { hz: 432, name: 'The Earth tone',    arche: 'CLASSICAL  /  EQUILIBRIUM',
+      desc: 'A natural reference. Older instruments, choirs and tuning forks were often pitched here. Many find it soft in the body in a way 440 Hz is not. Useful as a baseline before exploring the rest.' },
+    { hz: 440, name: 'Concert pitch',     arche: 'CLASSICAL  /  STANDARD',
+      desc: 'The international standard since 1939. Crisper, brighter than 432. Included so you can compare them yourself - the difference is small, but the perception is real.' },
+    { hz: 528, name: 'Repair',            arche: 'SOLFEGGIO  /  LOVE',
+      desc: 'The most discussed of the Solfeggio frequencies. Used widely in healing traditions. The framing is DNA repair; the actual experience is a softening behind the sternum. Sit with it for a full ten minutes if you can.' },
+    { hz: 639, name: 'Connection',        arche: 'SOLFEGGIO  /  RELATIONSHIP',
+      desc: 'Connection and relationship. Useful before a difficult conversation, or in the aftermath of one. The frequency itself does no work - but it holds the room while you do.' },
+    { hz: 741, name: 'Awakening',         arche: 'SOLFEGGIO  /  INTUITION',
+      desc: 'Awakening intuition. A frequency to play while writing, drawing, or sitting with a question that does not yet have a shape. Do not force the listening.' },
+    { hz: 852, name: 'Order',             arche: 'SOLFEGGIO  /  RETURN',
+      desc: 'Returning to spiritual order. Useful at the close of a longer day, or before sleep, as a way of putting the mind back on its hook.' },
+    { hz: 963, name: 'Crown',             arche: 'SOLFEGGIO  /  CONSCIOUSNESS',
+      desc: 'The highest Solfeggio. Less practical, more punctuation - a frequency to mark a finish, a long retreat ending, a chapter close. Many find it bright at first. Stay with it.' },
+    { hz: 7.83, name: 'Schumann',         arche: 'CLASSICAL  /  RESONANCE',
+      desc: 'The Schumann resonance - the natural electromagnetic frequency of the Earth itself. Audible only when modulated against another tone (binaural mode), which is how this tool serves it.' }
+  ];
+
+  var ctx = null, oscL = null, oscR = null, gain = null, panL = null, panR = null;
+  var playing = false, current = FREQS.find(function(f){ return f.hz === 432; });
+  var binaural = false;
+
+  // Render grid
+  var grid = document.getElementById('grid');
+  FREQS.forEach(function(f, i){
+    var btn = document.createElement('button');
+    btn.className = 'fq-card' + (f === current ? ' is-on' : '');
+    btn.type = 'button';
+    btn.innerHTML = '<span class="fq-card-hz">' + (f.hz < 10 ? f.hz.toFixed(2) : f.hz) + '</span><span class="fq-card-name">' + f.name + '</span>';
+    btn.addEventListener('click', function(){
+      current = f;
+      document.querySelectorAll('.fq-card').forEach(function(c){ c.classList.remove('is-on'); });
+      btn.classList.add('is-on');
+      updateDisplay();
+      if (playing) { stop(); play(); }
+    });
+    grid.appendChild(btn);
+  });
+
+  function updateDisplay(){
+    document.getElementById('hzVal').textContent = current.hz < 10 ? current.hz.toFixed(2) : current.hz;
+    document.getElementById('fqLabel').textContent = current.name;
+    document.getElementById('fqArche').textContent = current.arche;
+    document.getElementById('desc').textContent = current.desc;
+  }
+
+  function ensureCtx(){
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+
+  function play(){
+    ensureCtx();
+    if (ctx.state === 'suspended') ctx.resume();
+    var v = parseInt(document.getElementById('vol').value, 10) / 100;
+    gain = ctx.createGain();
+    gain.gain.value = 0;
+    gain.gain.linearRampToValueAtTime(v * 0.18, ctx.currentTime + 0.6);
+    gain.connect(ctx.destination);
+    if (binaural) {
+      panL = ctx.createStereoPanner(); panL.pan.value = -1;
+      panR = ctx.createStereoPanner(); panR.pan.value = 1;
+      oscL = ctx.createOscillator();
+      oscR = ctx.createOscillator();
+      oscL.type = 'sine'; oscR.type = 'sine';
+      oscL.frequency.value = current.hz;
+      // Standard binaural offset: 7 Hz (theta range) for meditation
+      oscR.frequency.value = current.hz + 7;
+      oscL.connect(panL); panL.connect(gain);
+      oscR.connect(panR); panR.connect(gain);
+      oscL.start(); oscR.start();
+    } else {
+      oscL = ctx.createOscillator();
+      oscL.type = 'sine';
+      oscL.frequency.value = current.hz;
+      oscL.connect(gain);
+      oscL.start();
+    }
+    playing = true;
+    document.getElementById('stage').classList.add('is-playing');
+    drawWave();
+  }
+  function stop(){
+    if (!playing) return;
+    var now = ctx.currentTime;
+    gain.gain.cancelScheduledValues(now);
+    gain.gain.setValueAtTime(gain.gain.value, now);
+    gain.gain.linearRampToValueAtTime(0, now + 0.4);
+    setTimeout(function(){
+      try { oscL && oscL.stop(); oscR && oscR.stop(); } catch(e){}
+      oscL = oscR = null;
+    }, 450);
+    playing = false;
+    document.getElementById('stage').classList.remove('is-playing');
+  }
+
+  document.getElementById('playBtn').addEventListener('click', function(){
+    if (playing) stop(); else play();
+  });
+  document.getElementById('vol').addEventListener('input', function(e){
+    var v = parseInt(e.target.value, 10);
+    document.getElementById('volPct').textContent = v + '%';
+    if (gain && playing) {
+      gain.gain.cancelScheduledValues(ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(v / 100 * 0.18, ctx.currentTime + 0.1);
+    }
+  });
+  document.getElementById('bbBtn').addEventListener('click', function(){
+    binaural = !binaural;
+    var btn = document.getElementById('bbBtn');
+    btn.classList.toggle('is-on', binaural);
+    document.getElementById('bbTxt').textContent = binaural ? 'On' : 'Off';
+    if (playing) { stop(); setTimeout(play, 500); }
+  });
+
+  // Subtle wave visualisation
+  var canvas = document.getElementById('fqCanvas');
+  var ctx2d = canvas.getContext('2d');
+  function size(){ canvas.width = canvas.clientWidth * (window.devicePixelRatio || 1); canvas.height = canvas.clientHeight * (window.devicePixelRatio || 1); }
+  size(); window.addEventListener('resize', size);
+  var t0 = performance.now();
+  function drawWave(){
+    if (!playing) {
+      ctx2d.clearRect(0,0,canvas.width,canvas.height);
+      // Resting line
+      ctx2d.beginPath();
+      ctx2d.strokeStyle = 'rgba(230,185,166,.18)';
+      ctx2d.lineWidth = 1 * (window.devicePixelRatio || 1);
+      ctx2d.moveTo(0, canvas.height/2);
+      ctx2d.lineTo(canvas.width, canvas.height/2);
+      ctx2d.stroke();
+      return;
+    }
+    var w = canvas.width, h = canvas.height;
+    ctx2d.clearRect(0,0,w,h);
+    ctx2d.beginPath();
+    ctx2d.strokeStyle = 'rgba(230,185,166,.6)';
+    ctx2d.lineWidth = 1.4 * (window.devicePixelRatio || 1);
+    var t = (performance.now() - t0) / 1000;
+    var cycles = Math.max(3, Math.min(40, current.hz / 18));
+    for (var x = 0; x < w; x++) {
+      var nx = x / w;
+      var amp = h * 0.32 * (0.85 + 0.15 * Math.sin(t * 0.6 + nx * 4));
+      var y = h/2 + Math.sin((nx * cycles * Math.PI * 2) + t * 4) * amp;
+      if (x === 0) ctx2d.moveTo(x, y); else ctx2d.lineTo(x, y);
+    }
+    ctx2d.stroke();
+    requestAnimationFrame(drawWave);
+  }
+  drawWave();
+  updateDisplay();
+})();
+</script>
+</body>
+</html>
