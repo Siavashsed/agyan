@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0a13">
+  <title>Numerology - The Lab - Agyan</title>
+  <meta name="description" content="Birth date life-path number with brief archetype framing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/header.css">
+  <script defer src="../assets/header.js"></script>
+  <style>
+    .num-shell{max-width:780px;margin:0 auto;padding:64px 24px 96px;color:#f4ebe1}
+    .num-eye{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#e6b9a6;margin-bottom:18px}
+    .num-h1{font-family:'Estedad','Newsreader',serif;font-size:clamp(38px,5.5vw,68px);font-weight:500;line-height:1;letter-spacing:-.025em;margin:0 0 18px}
+    .num-lede{font-size:17px;line-height:1.55;color:rgba(244,235,225,.6);max-width:54ch;margin:0 0 48px}
+    .num-form{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+    .num-form label{display:block}
+    .num-form .lbl{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#e6b9a6;margin-bottom:6px;display:block}
+    .num-form input{width:100%;background:rgba(230,185,166,.04);border:1px solid rgba(230,185,166,.18);color:#f4ebe1;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:.04em;border-radius:6px;text-align:center;min-height:48px}
+    .num-form input:focus{outline:none;border-color:#e6b9a6}
+    .num-btn{appearance:none;background:#e6b9a6;color:#0d0a13;border:0;padding:14px 26px;font-family:'Estedad','Newsreader',serif;font-size:15px;font-weight:500;letter-spacing:-.005em;border-radius:6px;cursor:pointer;width:100%;min-height:48px;margin-bottom:32px}
+    .num-btn:hover{background:#f0c8b5}
+    .num-result{display:none;padding:36px;background:rgba(230,185,166,.06);border:1px solid rgba(230,185,166,.18);border-radius:10px;text-align:center;margin-bottom:24px}
+    .num-result.show{display:block}
+    .num-big{font-family:'Estedad','Newsreader',serif;font-size:clamp(72px,12vw,140px);font-weight:500;color:#e6b9a6;line-height:1;letter-spacing:-.04em;margin:0 0 8px}
+    .num-arche{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#e6b9a6;margin-bottom:18px}
+    .num-name{font-family:'Estedad','Newsreader',serif;font-size:28px;font-weight:500;margin-bottom:14px;letter-spacing:-.015em}
+    .num-desc{font-size:15px;line-height:1.7;color:rgba(244,235,225,.85);max-width:52ch;margin:0 auto}
+    .num-disclaim{font-size:12px;color:rgba(244,235,225,.5);text-align:center;padding-top:18px;border-top:1px solid rgba(230,185,166,.18);font-style:italic}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="num-shell">
+      <div class="num-eye">LAB / NUMEROLOGY</div>
+      <h1 class="num-h1">Life path.</h1>
+      <p class="num-lede">Your birth date reduced to a single digit (or one of the master numbers 11, 22, 33). Not destiny. A reading of one of the rooms you live in.</p>
+
+      <form class="num-form" id="numForm" novalidate>
+        <label><span class="lbl">Year</span><input type="number" id="y" placeholder="1971" min="1900" max="2100" required></label>
+        <label><span class="lbl">Month</span><input type="number" id="m" placeholder="04" min="1" max="12" required></label>
+        <label><span class="lbl">Day</span><input type="number" id="d" placeholder="21" min="1" max="31" required></label>
+      </form>
+      <button class="num-btn" id="calcBtn">Calculate</button>
+
+      <div class="num-result" id="result">
+        <div class="num-arche" id="archeLabel">YOUR LIFE PATH</div>
+        <div class="num-big" id="numOut">-</div>
+        <div class="num-name" id="numName">-</div>
+        <p class="num-desc" id="numDesc">-</p>
+      </div>
+
+      <div class="num-disclaim">This tool is reflective, not prescriptive.</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  var MEANINGS = {
+    1: ['The Initiator',    'A first-mover. Comfort in setting direction, less in the followup. Watch for impatience with people who need to plan twice. The work is finishing what you start.'],
+    2: ['The Peacemaker',   'You read rooms before you enter them. Useful and exhausting. The work is choosing your own preference over the room\'s sometimes.'],
+    3: ['The Voice',        'Words come easy. So does scattering. The discipline is to make a thing rather than only describe one.'],
+    4: ['The Builder',      'Steady, methodical, undervalued. Without you the things that work would not work. The work is to ask for what you are owed.'],
+    5: ['The Wanderer',     'You need change like other people need food. The trick is keeping one promise long enough to see what is on the other side of it.'],
+    6: ['The Tender',       'You carry. Often quietly. Often without being asked. The work is naming the cost out loud, even to yourself.'],
+    7: ['The Reader',       'A deep observer. You will read four books on a thing before you act. The work is to stop reading at some point and act.'],
+    8: ['The Architect',    'Capable of building large things. Power comes easy; ethics around power do not. The work is to choose carefully who benefits.'],
+    9: ['The Witness',      'You have seen many things. The work is offering what you have seen without making it the centre of the story.'],
+    11:['The Channel',      'A master number. You feel more than you can explain. The work is in trusting the signal without performing it.'],
+    22:['The Master Builder','A master number. Vision plus capacity to execute. The work is in pacing - the size of the vision will outrun the body that carries it.'],
+    33:['The Master Teacher','A master number. Service at scale. The work is choosing who to serve before service consumes you.']
+  };
+  function digitSum(n){
+    var s = 0;
+    String(n).split('').forEach(function(c){ s += parseInt(c, 10) || 0; });
+    return s;
+  }
+  function reduce(n){
+    while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+      n = digitSum(n);
+    }
+    return n;
+  }
+  document.getElementById('calcBtn').addEventListener('click', function(){
+    var y = parseInt(document.getElementById('y').value, 10);
+    var m = parseInt(document.getElementById('m').value, 10);
+    var d = parseInt(document.getElementById('d').value, 10);
+    if (!y || !m || !d || m < 1 || m > 12 || d < 1 || d > 31) {
+      alert('Please enter a complete birth date.');
+      return;
+    }
+    var n = reduce(digitSum(y) + digitSum(m) + digitSum(d));
+    var meaning = MEANINGS[n] || ['Unknown', '-'];
+    document.getElementById('numOut').textContent  = n;
+    document.getElementById('numName').textContent = meaning[0];
+    document.getElementById('numDesc').textContent = meaning[1];
+    document.getElementById('result').classList.add('show');
+    try { localStorage.setItem('agyan_life_path', JSON.stringify({n:n, ymd:[y,m,d]})); } catch(e){}
+  });
+  // Restore previous if user comes back
+  try {
+    var saved = JSON.parse(localStorage.getItem('agyan_life_path') || 'null');
+    if (saved && saved.ymd) {
+      document.getElementById('y').value = saved.ymd[0];
+      document.getElementById('m').value = saved.ymd[1];
+      document.getElementById('d').value = saved.ymd[2];
+    }
+  } catch(e){}
+})();
+</script>
+</body>
+</html>
