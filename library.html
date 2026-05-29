@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0a13">
+  <title>Library - Agyan</title>
+  <meta name="description" content="Twenty-four annotated books across five categories: Sufi practice, depth psychology, history of cosmography, somatics, and manifestation as discipline.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Amiri:wght@400;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23e6b9a6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/header.css">
+  <script defer src="assets/header.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to content</a>
+  <canvas id="cosmography" class="cosmography" aria-hidden="true"></canvas>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="read-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a href="./" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-stack"><span><span class="brand-wordmark" data-i18n="brand.full">آگیان</span> <span class="brand-code" data-i18n="brand.code">آ / AG</span></span><span class="brand-tagline" data-i18n="brand.tagline">آکادمی نَفَس، زبان، و کیهان</span></span></a>
+      <button class="nav-toggle" aria-expanded="false" data-i18n-attr="aria-label:nav.menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="./" data-i18n="nav.home">خانه</a></li>
+          <li><a href="curriculum/" data-i18n="nav.curriculum">برنامهٔ آموزشی</a></li>
+          <li><a href="lab/" data-i18n="nav.lab">آزمایشگاه</a></li>
+          <li><a href="library" aria-current="page" data-i18n="nav.library">کتابخانه</a></li>
+          <li><a href="about" data-i18n="nav.about">بنیان‌گذار</a></li>
+          <li><a href="admissions" data-i18n="nav.admissions">پذیرش</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="fa" aria-pressed="true">FA</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" data-lang="ckb" aria-pressed="false">CKB</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap" style="padding-top: var(--s6);">
+      <span class="eyebrow" data-i18n="lib.section.eyebrow">۰۳. کتابخانه</span>
+      <h1 style="margin-top: var(--s2);" data-i18n="lib.title">کتابخانه</h1>
+      <p class="lead" data-i18n="lib.lede">بیست و چهار کتاب در پنج طبقه.</p>
+    </section>
+
+    <section class="wrap mt-s5">
+      <h2 style="display:inline-block;"><span class="section-num">01.</span> <span data-i18n="lib.cat.sufi">تمرین صوفی</span></h2>
+      <div class="library-grid">
+        <div class="entry">
+          <div>
+            <div class="cite">Mystical Dimensions of Islam</div>
+            <div class="author">Annemarie Schimmel · 1975</div>
+            <div class="badge">REF / SUFI-01</div>
+          </div>
+          <div class="note">Still the most useful single-volume introduction to Sufi history and thought in English. Read chapters 6 and 7 for the technical vocabulary of zikr and sama.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">The Way of the Sufi</div>
+            <div class="author">Idries Shah · 1968</div>
+            <div class="badge">REF / SUFI-02</div>
+          </div>
+          <div class="note">Contested in academic circles, indispensable in working ones. Read the teaching-stories before the prefaces.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">The Light of Faith and the Search for Truth</div>
+            <div class="author">Sheikh Muzaffer Ozak · 1988</div>
+            <div class="badge">REF / SUFI-03</div>
+          </div>
+          <div class="note">A Halveti-Jerrahi teacher writing in plain Turkish-inflected English. The chapter on breath and dhikr underlies our M-03.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Discourses of Rumi (Fihi Ma Fihi)</div>
+            <div class="author">Jalal al-Din Rumi · A.J. Arberry tr. · 1961</div>
+            <div class="badge">REF / SUFI-04</div>
+          </div>
+          <div class="note">Not the Masnavi. The kitchen Rumi, in talking voice. For students who have read too much Coleman Barks.</div>
+        </div>
+      </div>
+
+      <h2 class="mt-s6" style="display:inline-block;"><span class="section-num">02.</span> <span data-i18n="lib.cat.psych">روان‌شناسیِ ژرف</span></h2>
+      <div class="library-grid">
+        <div class="entry">
+          <div>
+            <div class="cite">Memories, Dreams, Reflections</div>
+            <div class="author">C. G. Jung · 1962</div>
+            <div class="badge">REF / PSY-01</div>
+          </div>
+          <div class="note">Begin here. Jung in his own first-person voice, ghostwritten with Aniela Jaffe. Read the chapter on Bollingen twice.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">The Soul's Code</div>
+            <div class="author">James Hillman · 1996</div>
+            <div class="badge">REF / PSY-02</div>
+          </div>
+          <div class="note">The acorn theory of character. Listed under astrology background in our AS-01.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">On Divination and Synchronicity</div>
+            <div class="author">Marie-Louise von Franz · 1980</div>
+            <div class="badge">REF / PSY-03</div>
+          </div>
+          <div class="note">A working scholar's sober reading of phenomena that most disciplines refuse to name. For MA-08.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Women Who Run With the Wolves</div>
+            <div class="author">Clarissa Pinkola Estes · 1992</div>
+            <div class="badge">REF / PSY-04</div>
+          </div>
+          <div class="note">Folktale and depth psychology, read together. The Bluebeard chapter is required reading before any forty-day vow.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Re-Visioning Psychology</div>
+            <div class="author">James Hillman · 1975</div>
+            <div class="badge">REF / PSY-05</div>
+          </div>
+          <div class="note">The book that announced the archetypal turn. Difficult prose; read twice, slowly.</div>
+        </div>
+      </div>
+
+      <h2 class="mt-s6" style="display:inline-block;"><span class="section-num">03.</span> <span data-i18n="lib.cat.astro">تاریخِ کیهان‌نگاری</span></h2>
+      <div class="library-grid">
+        <div class="entry">
+          <div>
+            <div class="cite">Ancient Astrology in Theory and Practice</div>
+            <div class="author">Demetra George · 2019</div>
+            <div class="badge">REF / AST-01</div>
+          </div>
+          <div class="note">A two-volume rigorous treatment of Hellenistic astrology in its own terms. The vocabulary appendix is worth the price.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Saturn: A New Look at an Old Devil</div>
+            <div class="author">Liz Greene · 1976</div>
+            <div class="badge">REF / AST-02</div>
+          </div>
+          <div class="note">Still the most psychologically literate book on a single planet. Read before AS-05.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Cosmos and Psyche</div>
+            <div class="author">Richard Tarnas · 2006</div>
+            <div class="badge">REF / AST-03</div>
+          </div>
+          <div class="note">Ambitious archetypal reading of outer-planet transits against modern history. Take with salt; take seriously.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">The Stars Down to Earth</div>
+            <div class="author">Theodor Adorno · 1957 / 1994</div>
+            <div class="badge">REF / AST-04</div>
+          </div>
+          <div class="note">The critique of newspaper astrology, sharper now than then. We include it for honesty. The chart is not a forecast.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Tetrabiblos</div>
+            <div class="author">Ptolemy · 2nd century CE · F.E. Robbins tr. · 1940</div>
+            <div class="badge">REF / AST-05</div>
+          </div>
+          <div class="note">The classical source. Read for prose-quality and historical scope, not for technique.</div>
+        </div>
+      </div>
+
+      <h2 class="mt-s6" style="display:inline-block;"><span class="section-num">04.</span> <span data-i18n="lib.cat.soma">سوماتیکس</span></h2>
+      <div class="library-grid">
+        <div class="entry">
+          <div>
+            <div class="cite">The Body Keeps the Score</div>
+            <div class="author">Bessel van der Kolk · 2014</div>
+            <div class="badge">REF / SOM-01</div>
+          </div>
+          <div class="note">The trauma literature's standard. Read the chapters on yoga and IFS with care; skim the EMDR chapter.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">In an Unspoken Voice</div>
+            <div class="author">Peter Levine · 2010</div>
+            <div class="badge">REF / SOM-02</div>
+          </div>
+          <div class="note">The somatic experiencing canon. Background for our M-04 (postural geometry).</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Wisdom of the Body Moving</div>
+            <div class="author">Linda Hartley · 1995</div>
+            <div class="badge">REF / SOM-03</div>
+          </div>
+          <div class="note">Body-Mind Centering as a method. For students whose practice has become too cerebral.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Body and Earth</div>
+            <div class="author">Andrea Olsen · 2002</div>
+            <div class="badge">REF / SOM-04</div>
+          </div>
+          <div class="note">Anatomy and ecology, taught together. The chapter on the spine is especially good.</div>
+        </div>
+      </div>
+
+      <h2 class="mt-s6" style="display:inline-block;"><span class="section-num">05.</span> <span data-i18n="lib.cat.manif">تجلی به مثابهٔ دیسیپلین</span></h2>
+      <div class="library-grid">
+        <div class="entry">
+          <div>
+            <div class="cite">The War of Art</div>
+            <div class="author">Steven Pressfield · 2002</div>
+            <div class="badge">REF / MAN-01</div>
+          </div>
+          <div class="note">The clearest naming of internal resistance in modern English. Read before MA-07.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Atomic Habits</div>
+            <div class="author">James Clear · 2018</div>
+            <div class="badge">REF / MAN-02</div>
+          </div>
+          <div class="note">A toolkit for MA-06. Use the methods; ignore the success-mythology framing.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">The Soul of Money</div>
+            <div class="author">Lynne Twist · 2003</div>
+            <div class="badge">REF / MAN-03</div>
+          </div>
+          <div class="note">An ethics of asking that does not flatten into hustle-talk. For MA-10.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Braiding Sweetgrass</div>
+            <div class="author">Robin Wall Kimmerer · 2013</div>
+            <div class="badge">REF / MAN-04</div>
+          </div>
+          <div class="note">Indigenous reciprocity as a model for desire that does not extract. Closes our AF track.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">The Practice of Adaptive Leadership</div>
+            <div class="author">Heifetz, Linsky, Grashow · 2009</div>
+            <div class="badge">REF / MAN-05</div>
+          </div>
+          <div class="note">Organisational frame, but useful for the question: what change requires which act? Background for MA-04.</div>
+        </div>
+        <div class="entry">
+          <div>
+            <div class="cite">Bird by Bird</div>
+            <div class="author">Anne Lamott · 1994</div>
+            <div class="badge">REF / MAN-06</div>
+          </div>
+          <div class="note">A book on writing, smuggled in here. The single best treatment of beginning when you do not believe in your project.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap mt-s6 reveal maxw-prose">
+      <div class="margin-note">
+        "A library is not a list of books. It is a sequence of arguments the books have with one another, in the order in which you happen to read them." From Avin's commonplace book, undated.
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div><h4 data-i18n="foot.about.h">آگیان</h4><p class="muted" style="font-size:.82rem;line-height:1.55;" data-i18n="hero.subtitle">.</p></div>
+      <div><h4 data-i18n="foot.curr.h">برنامه</h4><ul><li><a href="curriculum/meditation" data-i18n="curr.m.title">.</a></li><li><a href="curriculum/manifestation" data-i18n="curr.ma.title">.</a></li><li><a href="curriculum/astrology" data-i18n="curr.as.title">.</a></li><li><a href="curriculum/affirmation" data-i18n="curr.af.title">.</a></li></ul></div>
+      <div><h4 data-i18n="foot.lab.h">آزمایشگاه</h4><ul><li><a href="lab/breath" data-i18n="lab.breath.title">.</a></li><li><a href="lab/chart" data-i18n="lab.chart.title">.</a></li></ul></div>
+      <div class="colophon"><span data-i18n="foot.colophon.left">.</span><span data-i18n="foot.colophon.right">.</span></div>
+    </div>
+  </footer>
+
+  <script src="assets/i18n.js"></script>
+  <script src="assets/i18n-academy.js"></script>
+  <script src="assets/cosmography.js"></script>
+  <script src="assets/motion.js"></script>
+</body>
+</html>
