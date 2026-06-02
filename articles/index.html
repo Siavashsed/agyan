@@ -714,10 +714,9 @@
       }
     }
 /* page */
-.aa{max-width:1040px;margin:0 auto;padding:18px 24px 96px;font-family:inherit}
-.aa-hero{display:grid;grid-template-columns:1fr minmax(220px,420px) auto;gap:16px;align-items:center;min-height:56px;max-height:80px;padding:10px 0 14px;border-bottom:1px solid rgba(245,230,211,.10)}
-.aa-kicker{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:#e6b9a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.aa-search{width:100%;background:#1a0e1d;border:1px solid rgba(245,230,211,.10);border-radius:8px;padding:9px 12px;font-size:13px;color:#f5e6d3;font-family:inherit;outline:none}
+.aa{max-width:1040px;margin:0 auto;padding:18px 24px 96px;font-family:inherit;color:#f5e6d3}
+.aa-hero{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:16px;align-items:center;min-height:56px;max-height:80px;padding:14px 0 18px;border-bottom:1px solid rgba(245,230,211,.10)}
+.aa-search{width:100%;background:#1a0e1d;border:1px solid rgba(245,230,211,.10);border-radius:8px;padding:11px 14px;font-size:14px;color:#f5e6d3;font-family:inherit;outline:none}
 .aa-search:focus{border-color:#e6b9a6}
 .aa-count{display:inline-block;background:#e6b9a6;color:#0d0a13;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap}
 .aa-latest{margin:22px 0 28px}
@@ -758,7 +757,11 @@
 .aa-pager{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:32px}
 .aa-pager button{background:#1a0e1d;border:1px solid rgba(245,230,211,.10);color:#f5e6d3;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:8px 16px;border-radius:999px;cursor:pointer;font-family:inherit}
 .aa-pager button:disabled{opacity:.4;cursor:not-allowed}
-.aa-pager .aa-page-num{font-size:12px;color:#a89aa6;font-weight:700}@media(max-width:760px){.aa-latest-grid{grid-template-columns:1fr;gap:14px}.aa-lead-img{height:200px}.aa-sec{grid-template-columns:1fr 60px;gap:10px;padding:8px}.aa-sec-img{order:2;width:60px;height:60px}.aa-sec-body{order:1}}@media(max-width:640px){.aa-hero{grid-template-columns:1fr;max-height:140px;gap:8px;padding:8px 0 10px}.aa-kicker{font-size:10px;letter-spacing:1.6px}.aa-count{justify-self:start}}@media(max-width:560px){.aa-card{grid-template-columns:96px 1fr;gap:12px;padding:10px}.aa-thumb{height:88px}.aa-h{font-size:15px}}</style>
+.aa-pager .aa-page-num{font-size:12px;color:#a89aa6;font-weight:700}
+.aa-footer-kicker{margin-top:48px;padding-top:24px;border-top:1px solid rgba(245,230,211,.10);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.aa-kicker-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2.2px;color:#e6b9a6}
+.aa-back-home{font-size:12px;font-weight:600;color:#a89aa6;text-decoration:none;letter-spacing:.3px;transition:color .15s}
+.aa-back-home:hover{color:#e6b9a6}@media(max-width:760px){.aa-latest-grid{grid-template-columns:1fr;gap:14px}.aa-lead-img{height:200px}.aa-sec{grid-template-columns:1fr 60px;gap:10px;padding:8px}.aa-sec-img{order:2;width:60px;height:60px}.aa-sec-body{order:1}}@media(max-width:640px){.aa-hero{grid-template-columns:1fr;max-height:none;gap:10px;padding:12px 0 14px}.aa-count{justify-self:start}}@media(max-width:560px){.aa-card{grid-template-columns:96px 1fr;gap:12px;padding:10px}.aa-thumb{height:88px}.aa-h{font-size:15px}}</style>
 </head>
 <body data-page-depth="0">
 <header class="site-header">
@@ -800,7 +803,6 @@
   </header>
 <main class="aa">
   <div class="aa-hero">
-    <div class="aa-kicker">ALL ARTICLES - Agyan</div>
     <input id="aa-search" class="aa-search" type="search" placeholder="Search by title..." aria-label="Search articles">
     <span class="aa-count" id="aa-count">0 published</span>
   </div>
@@ -827,6 +829,10 @@
     <span class="aa-page-num" id="aa-page-num">Page 1</span>
     <button id="aa-next" type="button">Next</button>
   </div>
+  <div class="aa-footer-kicker">
+    <span class="aa-kicker-label">ALL ARTICLES &middot; Agyan</span>
+    <a href="./" class="aa-back-home">&larr; Back to home</a>
+  </div>
 </main>
 <script>
 (function(){
@@ -846,13 +852,27 @@
   var latestEl=document.getElementById('aa-latest');
   var leadEl=document.getElementById('aa-lead');
   var secCol=document.getElementById('aa-sec-col');
-  var all=[],activeCat='__all__',query='',page=1;
+  // Honor ?cat=... and ?q=... query params so cards/links elsewhere
+  // on the site can deep-link to a filtered or searched view.
+  var _params=new URLSearchParams(window.location.search);
+  var _initialCat=_params.get('cat')||'__all__';
+  var _initialQ=_params.get('q')||'';
+  var all=[],activeCat=_initialCat,query=_initialQ,page=1;
+  if(_initialQ){searchEl.value=_initialQ;}
   function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
   function slugHref(p){return './'+encodeURIComponent(p.slug||'').replace(/%2F/g,'/')+'/';}
+  // Fuzzy match: a card category like "Europe" should match articles
+  // tagged "Europe", "European Travel", or any cat containing the token.
+  function catMatches(articleCat, filterCat){
+    if(filterCat==='__all__')return true;
+    if(!articleCat)return false;
+    var a=String(articleCat).toLowerCase(), f=String(filterCat).toLowerCase();
+    return a===f||a.indexOf(f)!==-1||f.indexOf(a)!==-1;
+  }
   function filtered(){
     var q=query.trim().toLowerCase();
     return all.filter(function(p){
-      if(activeCat!=='__all__'&&(p.category||SITE_CAT)!==activeCat)return false;
+      if(!catMatches(p.category||SITE_CAT, activeCat))return false;
       if(q&&String(p.title||'').toLowerCase().indexOf(q)===-1)return false;
       return true;
     });
@@ -907,6 +927,8 @@
     metaEl.textContent='Showing '+slice.length+' of '+all.length;
   }
   function setCat(c){activeCat=c;page=1;Array.prototype.forEach.call(chipsEl.querySelectorAll('.aa-chip'),function(b){b.classList.toggle('active',b.getAttribute('data-cat')===c);});render();}
+  // Apply the chip-active styling for the initial cat from URL ?cat=
+  if(_initialCat!=='__all__'){Array.prototype.forEach.call(chipsEl.querySelectorAll('.aa-chip'),function(b){var dc=b.getAttribute('data-cat');b.classList.toggle('active', dc===_initialCat||(dc&&_initialCat&&(dc.toLowerCase().indexOf(_initialCat.toLowerCase())!==-1||_initialCat.toLowerCase().indexOf(dc.toLowerCase())!==-1)));});}
   chipsEl.addEventListener('click',function(e){var b=e.target.closest('.aa-chip');if(!b)return;setCat(b.getAttribute('data-cat'));});
   var deb;
   searchEl.addEventListener('input',function(){clearTimeout(deb);deb=setTimeout(function(){query=searchEl.value;page=1;render();},200);});
