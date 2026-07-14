@@ -881,18 +881,23 @@
   if(_initialQ){searchEl.value=_initialQ;}
   function escapeHtml(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
   function slugHref(p){return '../'+encodeURIComponent(p.slug||'').replace(/%2F/g,'/')+'/';}
-  // Fuzzy match: a card category like "Europe" should match articles
-  // tagged "Europe", "European Travel", or any cat containing the token.
-  function catMatches(articleCat, filterCat){
+  // Geographic destinations (Europe, Asia, Americas, Africa, Caribbean) are not
+  // article categories, so match them against the whole article (title, meta,
+  // category, region/tags) via a continent -> places map. Topic filters keep the
+  // simple fuzzy match. Stops destination tiles landing on empty pages.
+  var GEO={europe:['europe','european','portugal','lisbon','porto','algarve','italy','italian','rome','spain','spanish','barcelona','france','french','paris','greece','greek','croatia','iceland','balkan','amsterdam','prague','vienna'],asia:['asia','asian','japan','japanese','tokyo','kyoto','vietnam','thailand','thai','bangkok','bali','indonesia','india','indian','nepal','korea','seoul','singapore','cambodia','laos','philippines','sri lanka'],americas:['americas','america','usa','united states','canada','mexico','mexican','patagonia','argentina','peru','cusco','chile','brazil','colombia','costa rica','andes','california','new york'],africa:['africa','african','morocco','moroccan','marrakech','medina','riad','safari','kenya','tanzania','egypt','south africa','namibia','zanzibar'],caribbean:['caribbean','island','islands','coast','coastal','bahamas','jamaica','cuba','barbados','beach','tropical','reef']};
+  function _hay(p){return ((p.category||'')+' '+(p.title||'')+' '+(p.meta_description||'')+' '+(p.region||'')+' '+((p.tags||[]).join(' '))).toLowerCase();}
+  function catMatches(p, filterCat){
     if(filterCat==='__all__')return true;
-    if(!articleCat)return false;
-    var a=String(articleCat).toLowerCase(), f=String(filterCat).toLowerCase();
-    return a===f||a.indexOf(f)!==-1||f.indexOf(a)!==-1;
+    var f=String(filterCat).toLowerCase(), hay=_hay(p), g=GEO[f];
+    if(g){for(var i=0;i<g.length;i++){if(hay.indexOf(g[i])!==-1)return true;}return false;}
+    var a=String(p.category||SITE_CAT).toLowerCase();
+    return a===f||a.indexOf(f)!==-1||f.indexOf(a)!==-1||hay.indexOf(f)!==-1;
   }
   function filtered(){
     var q=query.trim().toLowerCase();
     return all.filter(function(p){
-      if(!catMatches(p.category||SITE_CAT, activeCat))return false;
+      if(!catMatches(p, activeCat))return false;
       if(q&&String(p.title||'').toLowerCase().indexOf(q)===-1)return false;
       return true;
     });
